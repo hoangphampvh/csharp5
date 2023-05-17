@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BILL", "BILL\BILL.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIServer", "APIService\APIServer.csproj", "{AA438C52-1385-48BB-842C-C0CF00EEF9E0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{E1E651D1-B00B-445E-B5B2-F9DF4C59F0C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5BF24C8E-4DB8-449F-9FAA-9FC49FBCAA0A} = {E1E651D1-B00B-445E-B5B2-F9DF4C59F0C8}
+		{AA438C52-1385-48BB-842C-C0CF00EEF9E0} = {E1E651D1-B00B-445E-B5B2-F9DF4C59F0C8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7552CA0C-CA31-496C-A3F9-AB856A3C40D4}
