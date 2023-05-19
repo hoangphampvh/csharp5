@@ -8,10 +8,10 @@ namespace APIServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly IUserServiece _userServiece;
-        public ProductsController(IUserServiece userServiece)
+        public UsersController(IUserServiece userServiece)
         {
             _userServiece = userServiece;
         }

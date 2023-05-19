@@ -15,6 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IUserServiece, UserServiece>();
+
 builder.Services.AddIdentity<User, Position>()
                 .AddEntityFrameworkStores<ASMDBContext>();
 builder.Services.AddDbContext<ASMDBContext>(options =>
