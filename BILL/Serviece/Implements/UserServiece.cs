@@ -1,5 +1,6 @@
 ﻿using ASMC5.data;
 using ASMC5.Models;
+using ASMC5.ViewModel;
 using BILL.Serviece.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,32 +12,32 @@ namespace BILL.Serviece.Implements
         private readonly ASMDBContext _context;
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
-        public UserServiece(ASMDBContext context, UserManager<User> userManager, SignInManager<User> signInManager)
+        public UserServiece(UserManager<User> userManager, SignInManager<User> signInManager)
         {
-            _context = context;
+            _context = new ASMDBContext();
             _userManager = userManager;
             _signInManager = signInManager;
         }
-        public async Task<bool> CreatUser(User p)
+        public async Task<bool> CreatUser(SignUpVM p)
         {
             try
             {
                 var user = new User()
                 {
-                    Id = new Guid(),
+                    Id = Guid.NewGuid(),
                     UserName = p.UserName,
-                    Password = p.Password,
                     PhoneNumber = p.PhoneNumber,
                     Dateofbirth = p.Dateofbirth,
                     Status = 0,   // quy uoc 0 có nghĩa là đang hđ
                     DiaChi = p.DiaChi,
                     Email = p.Email,
+                    Password = p.Password,
 
                 };
-                var result = await _userManager.CreateAsync(user,p.Password);
+                var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user,"client");
+                //    await _userManager.AddToRoleAsync(user,"client");
                     return true;
                 }
                 return false;
@@ -91,7 +92,10 @@ namespace BILL.Serviece.Implements
         {
             return await _context.Users.ToListAsync();
         }
-
+        public async Task<List<User>> GetAllUserActive()
+        {
+            return await _context.Users.Where(p=>p.Status!=0).ToListAsync();
+        }
         public async Task<User> GetUserById(Guid id)
         {
             var list = await _context.Users.AsQueryable().ToListAsync();

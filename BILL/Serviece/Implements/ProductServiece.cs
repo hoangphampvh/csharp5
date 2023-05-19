@@ -1,6 +1,7 @@
 ﻿using ASMC5.data;
 using ASMC5.Models;
 using BILL.Serviece.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,12 @@ namespace BILL.Serviece.Implements
     public class ProductServiece : IProductServiece
     {
         private readonly ASMDBContext _context;
-        public ProductServiece(ASMDBContext aSMDBContext)
+        public ProductServiece()
         {
-            _context = aSMDBContext;
+            _context = new ASMDBContext();
         }
-        public bool CreatProduct(Product p)
+        // task , async await là bất đồng bộ 
+        public async Task<bool> CreatProduct(Product p)
         {
             try
             {
@@ -31,11 +33,13 @@ namespace BILL.Serviece.Implements
                     Supplier = p.Supplier,
                     Quantity = p.Quantity,
                     UrlImage = p.UrlImage,
-                    
+                    // nếu 1 bảng có khóa ngoại chả hạn như productdetail thì ta chỉ cần gán IdProduct = p.IdProduct
+                    // mấy cái thuộc tính có từ khóa virual thì kh cần cho vào đây 
                 };
-                p.ID = Guid.NewGuid();
-                context.Add(p);
-                context.SaveChanges();
+
+                // hàm AddAsync như này là 1 phương thức bất đồng bộ và có từ khóa await ở đầu và phương thức có Async ở cuối
+                await _context.AddAsync(product);
+                await _context.SaveChangesAsync();
                 return true;
             }
             catch (Exception)
@@ -45,14 +49,15 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public bool DelProduct(Guid id)
+        public async Task<bool> DelProduct(Guid id)
         {
             try
             {
-                var list = context.Products.ToList();
+                var list = await _context.Products.ToListAsync();
                 var obj = list.FirstOrDefault(c => c.ID == id);
-                context.Products.Remove(obj);
-                context.SaveChanges();
+                obj.Status = 1; // ta sẽ kh xóa mà thay đổi trạng thái từ hđ sang kh hđ
+                _context.Products.Update(obj);
+                await _context.SaveChangesAsync();
                 return true;
             }
             catch (Exception)
@@ -62,11 +67,11 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public bool EditProduct(Guid id, Product p)
+        public async Task<bool> EditProduct(Guid id, Product p)
         {
             try
             {
-                var listobj = context.Products.ToList();
+                var listobj = await _context.Products.ToListAsync();
                 var obj = listobj.FirstOrDefault(c => c.ID == id);
                 obj.Name = p.Name;
                 obj.Price = p.Price;
@@ -75,8 +80,8 @@ namespace BILL.Serviece.Implements
                 obj.Supplier = p.Supplier;
                 obj.Description = p.Description;
                 obj.UrlImage = p.UrlImage;
-                context.Products.Update(obj);
-                context.SaveChanges();
+                _context.Products.Update(obj);
+                await _context.SaveChangesAsync();
                 return true;
 
             }
@@ -87,14 +92,17 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public List<Product> GetAllProduct()
+        public async Task<List<Product>> GetAllProduct()
         {
-            return context.Products.ToList();
+            return await _context.Products.ToListAsync();
         }
-
-        public Product GetProductById(Guid id)
+        public async Task<List<Product>> GetAllProductActive()
         {
-            var list = context.Products.AsQueryable().ToList();
+            return await _context.Products.Where(p=>p.Status !=0).ToListAsync();
+        }
+        public async Task<Product> GetProductById(Guid id)
+        {
+            var list =await _context.Products.AsQueryable().ToListAsync();
             return list.FirstOrDefault(c => c.ID == id);
         }
     }

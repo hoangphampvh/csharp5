@@ -1,3 +1,11 @@
+using ASMC5.data;
+using ASMC5.Models;
+using BILL.Serviece.Implements;
+using BILL.Serviece.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,7 +14,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddTransient<IUserServiece, UserServiece>();
+builder.Services.AddIdentity<User, Position>()
+                .AddEntityFrameworkStores<ASMDBContext>();
+builder.Services.AddDbContext<ASMDBContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MyCS"));
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
