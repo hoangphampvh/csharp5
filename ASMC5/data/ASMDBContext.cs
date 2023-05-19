@@ -20,9 +20,7 @@ namespace ASMC5.data
         public DbSet<BillDetail> billDetails { get; set; }
         public DbSet<Cart> carts { get; set; }
         public DbSet<CartDetail> cartDetails { get; set; }
-        public DbSet<Position> positions { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<User> users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,28 +1,62 @@
 ﻿using ASMC5.data;
 using ASMC5.Models;
 using BILL.Serviece.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace BILL.Serviece.Implements
 {
-    internal class UserServiece : IUserServiece
+    public class UserServiece : IUserServiece
     {
-        ASMDBContext context;
-        public UserServiece()
+        private readonly ASMDBContext _context;
+        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
+        public UserServiece(ASMDBContext context, UserManager<User> userManager, SignInManager<User> signInManager)
         {
-            this.context = new ASMDBContext();
+            _context = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
-        public bool CreatUser(User p)
+        public async Task<bool> CreatUser(User p)
         {
             try
             {
-                p.Id = Guid.NewGuid();
-                context.Add(p);
-                context.SaveChanges();
+                var user = new User()
+                {
+                    Id = new Guid(),
+                    UserName = p.UserName,
+                    Password = p.Password,
+                    PhoneNumber = p.PhoneNumber,
+                    Dateofbirth = p.Dateofbirth,
+                    Status = 0,   // quy uoc 0 có nghĩa là đang hđ
+                    DiaChi = p.DiaChi,
+                    Email = p.Email,
+
+                };
+                var result = await _userManager.CreateAsync(user,p.Password);
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user,"client");
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
+
+        public async Task <bool> DelUser(Guid id)
+        {
+            try
+            {
+                var obj = await _context.Users.ToListAsync();
+                var user = obj.FirstOrDefault(c=>c.Id == id);
+                user.Status = 1;
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
                 return true;
             }
             catch (Exception)
@@ -32,34 +66,17 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public bool DelUser(Guid id)
+        public async Task<bool> EditUser(Guid id, User p)
         {
             try
             {
-                var list = context.users.ToList();
-                var obj = list.FirstOrDefault(c => c.Id == id);
-                context.users.Remove(obj);
-                context.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-
-                return false;
-            }
-        }
-
-        public bool EditUser(Guid id, User p)
-        {
-            try
-            {
-                var listobj = context.users.ToList();
+                var listobj = _context.Users.ToList();
                 var obj = listobj.FirstOrDefault(c => c.Id == id);
                 obj.DiaChi = p.DiaChi;
                 obj.Password = p.Password;               
                 obj.Status = p.Status;
-                context.users.Update(obj);
-                context.SaveChanges();
+                _context.Users.Update(obj);
+                await _context.SaveChangesAsync();
                 return true;
 
             }
@@ -70,14 +87,14 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public List<User> GetAllUser()
+        public async Task<List<User>> GetAllUser()
         {
-            return context.users.ToList();
+            return await _context.Users.ToListAsync();
         }
 
-        public User GetUserById(Guid id)
+        public async Task<User> GetUserById(Guid id)
         {
-            var list = context.users.AsQueryable().ToList();
+            var list = await _context.Users.AsQueryable().ToListAsync();
             return list.FirstOrDefault(c => c.Id == id);
         }
     }

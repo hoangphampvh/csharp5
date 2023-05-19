@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace BILL.Serviece.Interfaces
 {
-    internal interface IProductServiece
+    public interface IProductServiece
     {
-        public bool CreatProduct(Product p);
-        public bool EditProduct(Guid id, Product p);
-        public bool DelProduct(Guid id);
-        public List<Product> GetAllProduct();
+        public Task<bool> CreatProduct(Product p);
+        public Task <bool> EditProduct(Guid id, Product p);
+        public Task<bool> DelProduct(Guid id);
+        public Task<List<Product>> GetAllProduct();
 
-        public Product GetProductById(Guid id);
+        public Task<Product> GetProductById(Guid id);
     }
 }

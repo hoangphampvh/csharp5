@@ -9,7 +9,7 @@ namespace ASMC5.Models
         public string? DiaChi { get; set; }
         public string? Password { get; set; }
         public DateTime Dateofbirth { get; set; }
-        public bool Status { get; set; }
+        public int Status { get; set; }
       
         public virtual Cart CartNavigation { get; set; }
         public virtual ICollection<Bill> Bill { get; set; } 

@@ -9,17 +9,30 @@ using System.Threading.Tasks;
 
 namespace BILL.Serviece.Implements
 {
-    internal class ProductServiece : IProductServiece
+    public class ProductServiece : IProductServiece
     {
-        ASMDBContext context;
-        public ProductServiece()
+        private readonly ASMDBContext _context;
+        public ProductServiece(ASMDBContext aSMDBContext)
         {
-            this.context = new ASMDBContext();
+            _context = aSMDBContext;
         }
         public bool CreatProduct(Product p)
         {
             try
             {
+                var product = new Product()
+                {
+                    ID = Guid.NewGuid(),
+                    Name = p.Name,
+                    Price = p.Price,
+                    Description = p.Description,
+                    CreateDate = DateTime.Now,
+                    Status = 0, // 0 quy ước là kh đh
+                    Supplier = p.Supplier,
+                    Quantity = p.Quantity,
+                    UrlImage = p.UrlImage,
+                    
+                };
                 p.ID = Guid.NewGuid();
                 context.Add(p);
                 context.SaveChanges();

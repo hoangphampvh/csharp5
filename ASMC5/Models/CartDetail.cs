@@ -12,7 +12,7 @@ namespace ASMC5.Models
 
         public Guid CartID { get; set; }
         public Cart Cart { get; set; } 
-
+        public int Status { get; set; }
         public Guid ProductID { get; set; }
         public virtual Product Product { get; set; }
     }

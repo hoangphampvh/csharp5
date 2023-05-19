@@ -11,6 +11,7 @@ namespace ASMC5.Models
         public decimal Price { get; set; }
         public int Quantity { get; set; }
         public Guid BillID { get; set; }
+        public int Status { get; set; }
         public virtual Bill Bill { get; set; }
         public Guid ProductID { get; set; }
         public virtual Product Product { get; set; }

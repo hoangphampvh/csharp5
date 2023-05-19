@@ -9,7 +9,7 @@ namespace ASMC5.Models
         public Guid ID { get; set; }
         public DateTime DateCreatBill { get; set; }
         public DateTime DateOfPayment { get; set; }
-        public bool Status { get; set; }
+        public int Status { get; set; }
         
         public Guid UserID { get; set; }
         public User User { get; set; }

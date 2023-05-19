@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace BILL.Serviece.Interfaces
 {
-    internal interface IUserServiece
+    public interface IUserServiece
     {
-        public bool CreatUser(User p);
-        public bool EditUser(Guid id, User p);
-        public bool DelUser(Guid id);
-        public List<User> GetAllUser();
+        public Task<bool> CreatUser(User p);
+        public Task<bool> EditUser(Guid id, User p);
+        public Task<bool> DelUser(Guid id);
+        public Task<List<User>> GetAllUser();
 
-        public User GetUserById(Guid id);
+        public Task<User> GetUserById(Guid id);
     }
 }

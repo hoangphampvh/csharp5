@@ -5,6 +5,6 @@ namespace ASMC5.Models
 {
     public class Position : IdentityRole<Guid>
     {
-        public bool status { get; set; }
+        public int status { get; set; }
     }
 }

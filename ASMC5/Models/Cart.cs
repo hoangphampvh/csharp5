@@ -7,7 +7,7 @@ namespace ASMC5.Models
     {
         public Guid UserId { get; set; }
         public string? Description { get; set; }
-        public bool Status {get; set; }
+        public int Status {get; set; }
         
         public virtual User User { get; set; }
         public virtual ICollection<CartDetail> CartDetails { get; set; }

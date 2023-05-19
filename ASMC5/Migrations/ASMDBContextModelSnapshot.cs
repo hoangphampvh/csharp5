@@ -70,6 +70,9 @@ namespace ASMC5.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
                     b.HasIndex("BillID");
@@ -87,8 +90,8 @@ namespace ASMC5.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.HasKey("UserId");
 
@@ -112,6 +115,9 @@ namespace ASMC5.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValueSql("1");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
