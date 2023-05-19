@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\C#\\gif\\BILL\\BILL.csproj": {}
+    "C:\\Users\\NDCT\\Desktop\\Net105\\ASM\\BILL\\BILL.csproj": {}
   },
   "projects": {
-    "D:\\C#\\gif\\ASMC5\\ASMC5.csproj": {
+    "C:\\Users\\NDCT\\Desktop\\Net105\\ASM\\ASMC5\\ASMC5.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\C#\\gif\\ASMC5\\ASMC5.csproj",
+        "projectUniqueName": "C:\\Users\\NDCT\\Desktop\\Net105\\ASM\\ASMC5\\ASMC5.csproj",
         "projectName": "ASMC5",
-        "projectPath": "D:\\C#\\gif\\ASMC5\\ASMC5.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\C#\\gif\\ASMC5\\obj\\",
+        "projectPath": "C:\\Users\\NDCT\\Desktop\\Net105\\ASM\\ASMC5\\ASMC5.csproj",
+        "packagesPath": "C:\\Users\\NDCT\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\NDCT\\Desktop\\Net105\\ASM\\ASMC5\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\NDCT\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -76,24 +80,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.12, 6.0.12]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[6.0.12, 6.0.12]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.12, 6.0.12]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.12, 6.0.12]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -102,21 +88,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\C#\\gif\\BILL\\BILL.csproj": {
+    "C:\\Users\\NDCT\\Desktop\\Net105\\ASM\\BILL\\BILL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\C#\\gif\\BILL\\BILL.csproj",
+        "projectUniqueName": "C:\\Users\\NDCT\\Desktop\\Net105\\ASM\\BILL\\BILL.csproj",
         "projectName": "BILL",
-        "projectPath": "D:\\C#\\gif\\BILL\\BILL.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\C#\\gif\\BILL\\obj\\",
+        "projectPath": "C:\\Users\\NDCT\\Desktop\\Net105\\ASM\\BILL\\BILL.csproj",
+        "packagesPath": "C:\\Users\\NDCT\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\NDCT\\Desktop\\Net105\\ASM\\BILL\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\NDCT\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -130,8 +120,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\C#\\gif\\ASMC5\\ASMC5.csproj": {
-                "projectPath": "D:\\C#\\gif\\ASMC5\\ASMC5.csproj"
+              "C:\\Users\\NDCT\\Desktop\\Net105\\ASM\\ASMC5\\ASMC5.csproj": {
+                "projectPath": "C:\\Users\\NDCT\\Desktop\\Net105\\ASM\\ASMC5\\ASMC5.csproj"
               }
             }
           }
@@ -156,26 +146,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.12, 6.0.12]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.12, 6.0.12]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.12, 6.0.12]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
