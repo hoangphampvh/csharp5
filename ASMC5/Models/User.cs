@@ -10,7 +10,7 @@ namespace ASMC5.Models
         public string? Password { get; set; }
         public DateTime Dateofbirth { get; set; }
         public int Status { get; set; }
-      
+        public string? UrlImage { get; set; }
         public virtual Cart? CartNavigation { get; set; }
         public virtual ICollection<Bill>? Bill { get; set; } 
         

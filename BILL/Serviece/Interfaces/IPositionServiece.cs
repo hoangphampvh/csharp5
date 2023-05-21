@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace BILL.Serviece.Interfaces
 {
-    internal interface IPositionServiece
+    public interface IPositionServiece
     {
-        public bool CreatPosition(Position p);
-        public bool EditPosition(Guid id, Position p);
-        public bool DelPosition(Guid id);
-        public List<Position> GetAllPosition();
-
-        public Position GetPositionById(Guid id);
+        public Task<bool> CreatPosition(Position p);
+        public Task<bool> EditPosition(Guid id, Position p);
+        public Task<bool> DelPosition(Guid id);
+        public Task<List<Position>> GetAllPosition();
+        public Task<List<Position>> GetAllPositionActive();
+        public Task<Position> GetPositionById(Guid id);
     }
 }

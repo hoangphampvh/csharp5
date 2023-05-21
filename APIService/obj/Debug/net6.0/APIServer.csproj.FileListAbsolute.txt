@@ -71,3 +71,4 @@ D:\C#\gif\APIService\obj\Debug\net6.0\refint\APIServer.dll
 D:\C#\gif\APIService\obj\Debug\net6.0\APIServer.pdb
 D:\C#\gif\APIService\obj\Debug\net6.0\APIServer.genruntimeconfig.cache
 D:\C#\gif\APIService\obj\Debug\net6.0\ref\APIServer.dll
+D:\C#\gif\APIService\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

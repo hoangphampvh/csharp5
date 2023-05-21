@@ -98,7 +98,7 @@ namespace BILL.Serviece.Implements
         }
         public async Task<List<Product>> GetAllProductActive()
         {
-            return await _context.Products.Where(p=>p.Status !=0).ToListAsync();
+            return await _context.Products.Where(p=>p.Status !=1).ToListAsync();
         }
         public async Task<Product> GetProductById(Guid id)
         {
