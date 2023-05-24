@@ -1,0 +1,11 @@
+﻿@page "/testUser"
+@using System.Text.Json
+@using ASMC5.Models;
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    const string key = "User";
+    var userJson = HttpContextAccessor.HttpContext.Session.GetString(key);
+    var user = JsonSerializer.Deserialize<User>(userJson);
+}
+<h>@user.UserName<h>

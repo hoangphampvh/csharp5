@@ -10,6 +10,8 @@ D:\C#\gif\APIService\bin\Debug\net6.0\APIServer.deps.json
 D:\C#\gif\APIService\bin\Debug\net6.0\APIServer.runtimeconfig.json
 D:\C#\gif\APIService\bin\Debug\net6.0\APIServer.dll
 D:\C#\gif\APIService\bin\Debug\net6.0\APIServer.pdb
+D:\C#\gif\APIService\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Google.dll
+D:\C#\gif\APIService\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\C#\gif\APIService\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 D:\C#\gif\APIService\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
 D:\C#\gif\APIService\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
@@ -71,4 +73,3 @@ D:\C#\gif\APIService\obj\Debug\net6.0\refint\APIServer.dll
 D:\C#\gif\APIService\obj\Debug\net6.0\APIServer.pdb
 D:\C#\gif\APIService\obj\Debug\net6.0\APIServer.genruntimeconfig.cache
 D:\C#\gif\APIService\obj\Debug\net6.0\ref\APIServer.dll
-D:\C#\gif\APIService\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "Sw40IZe/02TbReY4qj3+XVYBmG0TPkOWgtOy3yYffDMet+5WVk7P0TmgNqtgv9s9d+gIOlQdnF4FV5lFh56KTA==",
+  "dgSpecHash": "2QjW2BWLGWR4Ox32vkBKAHWLma7CHftdr1eEWQ5PaTyIw336RRqT7Rx3sOfmE6EANOQvSNApsfZTJT0cXG5Pcg==",
   "success": true,
   "projectFilePath": "D:\\C#\\gif\\ASMC5\\ASMC5.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\6.0.0\\microsoft.aspnetcore.authentication.google.6.0.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.0\\microsoft.aspnetcore.cryptography.internal.6.0.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.0\\microsoft.aspnetcore.cryptography.keyderivation.6.0.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\6.0.0\\microsoft.aspnetcore.identity.entityframeworkcore.6.0.0.nupkg.sha512",
