@@ -11,6 +11,7 @@ namespace BILL.Serviece.Interfaces
 {
     public interface IUserServiece
     {
+        public Task<bool> DelUsers(List<Guid> Ids);
         public Task<bool> CreatUser(UserCreateVM p);
         public Task<bool> EditUser(Guid id, UserEditVM p);
         public Task<bool> DelUser(Guid id);

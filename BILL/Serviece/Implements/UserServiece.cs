@@ -35,7 +35,7 @@ namespace BILL.Serviece.Implements
                 Error = "Người dùng không tồn tại trong hệ thống."
             };
             var login = await _signInManager.PasswordSignInAsync(user, user.Password, false, false);
-            if(!login.Succeeded) return new LoginResponesVM
+            if (!login.Succeeded) return new LoginResponesVM
             {
                 Successful = false,
                 Error = "Người dùng không tồn tại trong hệ thống."
@@ -65,7 +65,7 @@ namespace BILL.Serviece.Implements
             {
                 var user = new User()
                 {
-                    Id = Guid.NewGuid(),               
+                    Id = Guid.NewGuid(),
                     UserName = p.UserName,
                     PhoneNumber = p.PhoneNumber,
                     Dateofbirth = p.Dateofbirth,
@@ -90,6 +90,33 @@ namespace BILL.Serviece.Implements
                 return false;
             }
         }
+        public async Task<bool> DelUsers(List<Guid> Ids)
+        {
+            try
+            {
+                List<User> Users = new List<User>();
+                foreach (var id in Ids)
+                {
+                    Users = await _context.Users.Where(p => p.Id == id).ToListAsync();
+                }
+
+
+                foreach (var item in Users)
+                {
+                    item.Status = 1;
+                }
+                _context.Users.UpdateRange(Users);
+                await _context.SaveChangesAsync();
+
+                //obj.Status = 1; // ta sẽ kh xóa mà thay đổi trạng thái từ hđ sang kh hđ
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
         public async Task<bool> CreatUser(UserCreateVM p)
         {
             try
@@ -104,10 +131,10 @@ namespace BILL.Serviece.Implements
                     Status = 0,   // quy uoc 0 có nghĩa là đang hđ
                     DiaChi = p.DiaChi,
                     Email = p.Email,
-                    Password = p.Password,                
+                    Password = p.Password,
 
                 };
-                var result = await _userManager.CreateAsync(user,p.Password);
+                var result = await _userManager.CreateAsync(user, p.Password);
                 if (result.Succeeded)
                 {
 
@@ -127,7 +154,7 @@ namespace BILL.Serviece.Implements
         {
             try
             {
-                var user = await _userManager.FindByIdAsync(id.ToString());              
+                var user = await _userManager.FindByIdAsync(id.ToString());
                 user.Status = 1;
                 _context.Users.Update(user);
                 var result = await _userManager.UpdateAsync(user);
@@ -148,7 +175,7 @@ namespace BILL.Serviece.Implements
         {
             try
             {
-                var user =await _userManager.FindByIdAsync(id.ToString());
+                var user = await _userManager.FindByIdAsync(id.ToString());
                 user.UserName = p.UserName;
                 user.DiaChi = p.DiaChi;
                 user.Password = p.Password;
@@ -157,13 +184,13 @@ namespace BILL.Serviece.Implements
                 user.Dateofbirth = p.Dateofbirth;
                 user.PhoneNumber = p.PhoneNumber;
                 user.Email = p.Email;
-                var result =await _userManager.UpdateAsync(user);
+                var result = await _userManager.UpdateAsync(user);
                 if (result.Succeeded)
                 {
-                     return true;
+                    return true;
                 }
                 return false;
-               
+
 
             }
             catch (Exception)

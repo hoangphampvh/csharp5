@@ -94,7 +94,15 @@ builder.Services.AddAuthentication().AddGoogle(option =>
     option.CallbackPath = "/LoginFromGoogle";
 
 });
-builder.Services.AddAuthorization();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ADMIN", policy => { policy.RequireAuthenticatedUser(); policy.RequireRole("ADMIN"); });
+    options.AddPolicy("Clinet", policy => { policy.RequireAuthenticatedUser(); policy.RequireRole("Clinet"); });
+    options.AddPolicy("ClinetOld", policy => { policy.RequireAuthenticatedUser(); policy.RequireRole("ClientOld"); });
+
+});
+
 
 var app = builder.Build();
 

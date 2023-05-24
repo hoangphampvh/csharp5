@@ -1,8 +1,9 @@
 ﻿@page "/testUser"
 @using System.Text.Json
 @using ASMC5.Models;
+@using Microsoft.AspNetCore.Authorization
 @inject IHttpContextAccessor HttpContextAccessor
-
+@attribute [Authorize(Roles = "ADMIN")]
 @{
     const string key = "User";
     var userJson = HttpContextAccessor.HttpContext.Session.GetString(key);

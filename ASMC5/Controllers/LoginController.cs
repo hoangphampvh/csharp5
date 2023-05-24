@@ -113,6 +113,7 @@ namespace ASMC5.Controllers
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             return identity;
         }
+        [Authorize]
         public IActionResult NotNulls()
         {
             return View();
