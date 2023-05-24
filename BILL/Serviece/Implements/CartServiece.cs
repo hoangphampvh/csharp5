@@ -16,7 +16,7 @@ namespace BILL.Serviece.Implements
         {
             this.context = new ASMDBContext();
         }
-        public bool CreatCart(Cart p)
+        public async Task< bool> CreatCart(Cart p)
         {
             try
             {
@@ -32,7 +32,7 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public bool DelCart(Guid id)
+        public async Task <bool> DelCart(Guid id)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public bool EditCart(Guid id, Cart p)
+        public async Task< bool> EditCart(Guid id, Cart p)
         {
             try
             {
@@ -69,12 +69,12 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public List<Cart> GetAllCart()
+        public async Task< List<Cart>> GetAllCart()
         {
             return context.carts.ToList();
         }
 
-        public Cart GetCartById(Guid id)
+        public async Task <Cart> GetCartById(Guid id)
         {
             var list = context.carts.AsQueryable().ToList();
             return list.FirstOrDefault(c => c.UserId == id);

@@ -17,7 +17,7 @@ namespace BILL.Serviece.Implements
             this.context = new ASMDBContext();
         }
 
-        public bool CreatBillDetail(BillDetail p)
+        public async Task<bool> CreatBillDetail(BillDetail p)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public bool DelBillDetail(Guid id)
+        public async Task<bool> DelBillDetail(Guid id)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public bool EditBillDetail(Guid id, BillDetail p)
+        public async Task<bool> EditBillDetail(Guid id, BillDetail p)
         {
             try
             {
@@ -71,12 +71,12 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public List<BillDetail> GetAllBillDetail()
+        public async Task<List<BillDetail>> GetAllBillDetail()
         {
             return context.billDetails.ToList();
         }
 
-        public BillDetail GetBillDetailById(Guid id)
+        public async Task<BillDetail> GetBillDetailById(Guid id)
         {
             var list = context.billDetails.AsQueryable().ToList();
             return list.FirstOrDefault(c => c.ID == id);

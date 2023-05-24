@@ -9,11 +9,11 @@ namespace BILL.Serviece.Interfaces
 {
     internal interface IBillDetailServiece
     {
-        public bool CreatBillDetail(BillDetail p);
-        public bool EditBillDetail(Guid id, BillDetail p);
-        public bool DelBillDetail(Guid id);
-        public List<BillDetail> GetAllBillDetail();
+        public  Task<bool> CreatBillDetail(BillDetail p);
+        public Task<bool> EditBillDetail(Guid id, BillDetail p);
+        public Task<bool> DelBillDetail(Guid id);
+        public Task<List<BillDetail>> GetAllBillDetail();
 
-        public BillDetail GetBillDetailById(Guid id);
+        public Task<BillDetail> GetBillDetailById(Guid id);
     }
 }

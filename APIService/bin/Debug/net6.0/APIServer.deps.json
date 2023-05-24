@@ -514,7 +514,13 @@
       },
       "BILL/1.0.0": {
         "dependencies": {
-          "ASMC5": "1.0.0"
+          "ASMC5": "1.0.0",
+          "Microsoft.AspNetCore.Authentication.Google": "6.0.0",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.0",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.0",
+          "Microsoft.EntityFrameworkCore": "6.0.0",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.0",
+          "Swashbuckle.AspNetCore": "6.2.3"
         },
         "runtime": {
           "BILL.dll": {}

@@ -40,3 +40,7 @@ D:\C#\gif\BILL\obj\Debug\net6.0\BILL.dll
 D:\C#\gif\BILL\obj\Debug\net6.0\refint\BILL.dll
 D:\C#\gif\BILL\obj\Debug\net6.0\BILL.pdb
 D:\C#\gif\BILL\obj\Debug\net6.0\ref\BILL.dll
+C:\Users\NDCT\Desktop\Net105\ASM\BILL\bin\Debug\net6.0\BILL.runtimeconfig.json
+C:\Users\NDCT\Desktop\Net105\ASM\BILL\obj\Debug\net6.0\BILL.genruntimeconfig.cache
+D:\C#\gif\BILL\bin\Debug\net6.0\BILL.runtimeconfig.json
+D:\C#\gif\BILL\obj\Debug\net6.0\BILL.genruntimeconfig.cache

@@ -1,6 +1,7 @@
 ﻿using ASMC5.data;
 using ASMC5.Models;
 using BILL.Serviece.Interfaces;
+using BILL.ViewModel.Product;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,11 @@ namespace BILL.Serviece.Implements
             _context = new ASMDBContext();
         }
         // task , async await là bất đồng bộ 
-        public async Task<bool> CreatProduct(Product p)
+        public async Task<bool> CreatProduct(ProductVM p)
         {
             try
             {
+
                 var product = new Product()
                 {
                     ID = Guid.NewGuid(),
@@ -38,6 +40,7 @@ namespace BILL.Serviece.Implements
                 };
 
                 // hàm AddAsync như này là 1 phương thức bất đồng bộ và có từ khóa await ở đầu và phương thức có Async ở cuối
+                //p.ID = Guid.NewGuid();
                 await _context.AddAsync(product);
                 await _context.SaveChangesAsync();
                 return true;
@@ -67,7 +70,7 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public async Task<bool> EditProduct(Guid id, Product p)
+        public async Task<bool> EditProduct(Guid id, ProductVM p)
         {
             try
             {
@@ -98,7 +101,7 @@ namespace BILL.Serviece.Implements
         }
         public async Task<List<Product>> GetAllProductActive()
         {
-            return await _context.Products.Where(p=>p.Status !=1).ToListAsync();
+            return await _context.Products.Where(p=>p.Status !=0).ToListAsync();
         }
         public async Task<Product> GetProductById(Guid id)
         {

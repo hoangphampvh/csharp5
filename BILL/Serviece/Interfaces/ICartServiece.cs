@@ -9,11 +9,10 @@ namespace BILL.Serviece.Interfaces
 {
     internal interface ICartServiece
     {
-        public bool CreatCart(Cart p);
-        public bool EditCart(Guid id, Cart p);
-        public bool DelCart(Guid id);
-        public List<Cart> GetAllCart();
-
-        public Cart GetCartById(Guid id);
+        public Task<bool> CreatCart(Cart p); 
+        public Task<bool> EditCart(Guid id, Cart p); 
+        public Task<bool> DelCart(Guid id); 
+        public Task<List<Cart>> GetAllCart(); 
+        public Task<Cart> GetCartById(Guid id);
     }
 }
