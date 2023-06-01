@@ -47,15 +47,6 @@ namespace APIServer.Controllers
             return Ok(result);
             
         }
-
-        [HttpDelete("DeleteListUserById")]
-        public async Task<IActionResult> DeleteUserAsync(List<Guid> Ids)
-        {
-            var result = await _userServiece.DelUsers(Ids);
-            return Ok(result);
-
-        }
-
         [HttpPost("Create")]
         public async Task<IActionResult> CreateUserAsync([FromForm]UserCreateVM user)
         {
