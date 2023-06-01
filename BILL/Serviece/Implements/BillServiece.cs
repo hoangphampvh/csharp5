@@ -1,6 +1,7 @@
 ﻿using ASMC5.data;
 using ASMC5.Models;
 using BILL.Serviece.Interfaces;
+using BILL.ViewModel.Bill;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,21 +10,35 @@ using System.Threading.Tasks;
 
 namespace BILL.Serviece.Implements
 {
-    internal class BillServiece : IBillServiece
+    public class BillServiece : IBillServiece
     {
         ASMDBContext context;
         public BillServiece()
         {
             this.context = new ASMDBContext();
         }
-        public async Task<bool> CreatBill(Bill p)
+        public async Task<bool> CreatBill(BillVM p)
         {
             try
             {
-                p.ID = Guid.NewGuid();
-                context.Add(p);
+                var user = await context.Users.FindAsync(p.UserID);
+
+                if (user == null)
+                {
+                    return false;
+                }
+                var bill = new Bill() {
+                    ID = new Guid(),
+                    DateCreatBill = p.DateCreatBill,
+                    DateOfPayment = p.DateOfPayment,
+                    Status = 0,
+                    UserID = user.Id,
+                    User = user,
+                };                
+                context.Add(bill);
                 context.SaveChanges();
                 return true;
+            
             }
             catch (Exception)
             {
@@ -49,7 +64,7 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public async Task <bool> EditBill(Guid id, Bill p)
+        public async Task <bool> EditBill(Guid id, BillVM p)
         {
             try
             {

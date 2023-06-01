@@ -1,6 +1,8 @@
 ﻿using ASMC5.data;
 using ASMC5.Models;
 using BILL.Serviece.Interfaces;
+using BILL.ViewModel.Cart;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,26 +11,33 @@ using System.Threading.Tasks;
 
 namespace BILL.Serviece.Implements
 {
-    internal class CartServiece : ICartServiece
+    public class CartServiece : ICartServiece
     {
-        ASMDBContext context;
+        private readonly ASMDBContext _context;
         public CartServiece()
         {
-            this.context = new ASMDBContext();
+            _context = new ASMDBContext();
         }
-        public async Task< bool> CreatCart(Cart p)
+        public async Task< bool> CreatCart(CartVN p)
         {
             try
             {
-                p.UserId = Guid.NewGuid();
-                context.Add(p);
-                context.SaveChanges();
+                var user = await _context.Users.FindAsync(p.UserId);
+                var cart = new Cart()
+                {
+                    UserId = user.Id,
+                    Description = p.Description,
+                    Status = p.Status,
+                    
+                };
+                await _context.AddAsync(cart);
+                await _context.SaveChangesAsync();
                 return true;
             }
             catch (Exception)
             {
 
-                return false;
+                throw;
             }
         }
 
@@ -36,10 +45,10 @@ namespace BILL.Serviece.Implements
         {
             try
             {
-                var list = context.carts.ToList();
+                var list = _context.carts.ToList();
                 var obj = list.FirstOrDefault(c => c.UserId == id);
-                context.carts.Remove(obj);
-                context.SaveChanges();
+                _context.carts.Remove(obj);
+                _context.SaveChanges();
                 return true;
             }
             catch (Exception)
@@ -49,16 +58,16 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public async Task< bool> EditCart(Guid id, Cart p)
+        public async Task< bool> EditCart(Guid id, CartVN p)
         {
             try
             {
-                var listobj = context.carts.ToList();
+                var listobj = _context.carts.ToList();
                 var obj = listobj.FirstOrDefault(c => c.UserId == id);
                 obj.Description = p.Description;
                 obj.Status = p.Status;
-                context.carts.Update(obj);
-                context.SaveChanges();
+                _context.carts.Update(obj);
+                _context.SaveChanges();
                 return true;
 
             }
@@ -71,12 +80,12 @@ namespace BILL.Serviece.Implements
 
         public async Task< List<Cart>> GetAllCart()
         {
-            return context.carts.ToList();
+            return _context.carts.ToList();
         }
 
         public async Task <Cart> GetCartById(Guid id)
         {
-            var list = context.carts.AsQueryable().ToList();
+            var list = _context.carts.AsQueryable().ToList();
             return list.FirstOrDefault(c => c.UserId == id);
         }
     }

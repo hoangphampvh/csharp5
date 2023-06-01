@@ -1,6 +1,7 @@
 ﻿using ASMC5.data;
 using ASMC5.Models;
 using BILL.Serviece.Interfaces;
+using BILL.ViewModel.Bill;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BILL.Serviece.Implements
 {
-    internal class BillDetailServiece : IBillDetailServiece
+    public class BillDetailServiece : IBillDetailServiece
     {
         ASMDBContext context;
         public BillDetailServiece()
@@ -17,12 +18,34 @@ namespace BILL.Serviece.Implements
             this.context = new ASMDBContext();
         }
 
-        public async Task<bool> CreatBillDetail(BillDetail p)
+        public async Task<bool> CreatBillDetail(BillDetailVM p)
         {
             try
             {
-                p.ID = Guid.NewGuid();
-                context.Add(p);
+                var bill = await context.Bills.FindAsync(p.BillID);
+                var product = await context.Products.FindAsync(p.ProductID);
+
+                if (bill == null)
+                {
+                    return false;
+                }
+                if (product == null)
+                {
+                    return false;
+                }
+                var billdetail = new BillDetail()
+                {
+                    ID = new Guid(),
+                    CodeBill = p.CodeBill,
+                    Price = p.Price,
+                    Quantity = p.Quantity,
+                    Status = 0,
+                    BillID = bill.ID,
+                    ProductID = product.ID,
+                    Product = product,
+                    Bill = bill
+                };
+                context.Add(billdetail);
                 context.SaveChanges();
                 return true;
             }
@@ -38,7 +61,7 @@ namespace BILL.Serviece.Implements
             try
             {
                 var list = context.billDetails.ToList();
-                var obj = list.FirstOrDefault(c => c.ID == id);
+                var obj = list.SingleOrDefault(c => c.ID == id);
                 context.billDetails.Remove(obj);
                 context.SaveChanges();
                 return true;
@@ -50,7 +73,7 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public async Task<bool> EditBillDetail(Guid id, BillDetail p)
+        public async Task<bool> EditBillDetail(Guid id, BillDetailVM p)
         {
             try
             {

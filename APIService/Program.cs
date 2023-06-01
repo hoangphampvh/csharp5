@@ -1,5 +1,6 @@
 ﻿using ASMC5.data;
 using ASMC5.Models;
+using assiment_csad4.Configruration;
 using BILL.Serviece.Implements;
 using BILL.Serviece.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -24,7 +25,11 @@ builder.Services.AddSwaggerGen();
 // AddTransient cac Interface o day
 builder.Services.AddTransient<IUserServiece, UserServiece>();
 builder.Services.AddTransient<IPositionServiece, PositionServiece>();
-
+builder.Services.AddTransient<IProductServiece, ProductServiece>();
+builder.Services.AddTransient<IBillServiece, BillServiece>();
+builder.Services.AddTransient<IBillDetailServiece, BillDetailServiece>();
+builder.Services.AddTransient<ICartServiece, CartServiece>();
+builder.Services.AddTransient<ICartDetailServiece, CartDetailServiece>();
 
 builder.Services.AddDbContext<ASMDBContext>(options =>
 {

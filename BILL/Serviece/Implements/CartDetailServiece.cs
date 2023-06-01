@@ -1,6 +1,7 @@
 ﻿using ASMC5.data;
 using ASMC5.Models;
 using BILL.Serviece.Interfaces;
+using BILL.ViewModel.Cart;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,20 +10,36 @@ using System.Threading.Tasks;
 
 namespace BILL.Serviece.Implements
 {
-    internal class CartDetailServiece : ICartDetailServiece
+    public class CartDetailServiece : ICartDetailServiece
     {
         ASMDBContext context;
         public CartDetailServiece()
         {
             this.context = new ASMDBContext();
         }
-        public async Task <bool> CreatCartDetail(CartDetail p)
+        public async Task <bool> CreatCartDetail(CartDetailVM p)
         {
             try
             {
-                p.ID = Guid.NewGuid();
-                context.Add(p);
-                context.SaveChanges();
+                var carts = await context.carts.FindAsync(p.CartID);
+                var product = await context.Products.FindAsync(p.ProductID);
+
+               
+                var Cartdetail = new CartDetail()
+                {
+                    ID = new Guid(),
+                    Quantity = p.Quantity,
+                    Status = 0,
+                    ProductID = product.ID,
+                    CartID = carts.UserId,
+                    Product = product,
+                    Cart = carts,
+                    
+                   
+                              
+                };
+                context.AddAsync(Cartdetail);
+                context.SaveChangesAsync();
                 return true;
             }
             catch (Exception)
@@ -49,7 +66,7 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public async Task< bool> EditCartDetail(Guid id, CartDetail p)
+        public async Task< bool> EditCartDetail(Guid id, CartDetailVM p)
         {
             try
             {
