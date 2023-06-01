@@ -39,11 +39,10 @@ namespace APIServer.Controllers
             var result =await _positionServiece.CreatPosition(position);
             return Ok(result);
         }
-       
         [HttpPut("Update/{id}")]
-        public async Task<IActionResult> UodateAsync(Guid id,Position position)
+        public async Task<IActionResult> UodateAsync(Guid id, int status, string name, string NormalizedName, string ConcurrencyStamp)
         {
-            var result =await _positionServiece.EditPosition(id,position);
+            var result =await _positionServiece.EditPosition(id,status,name,NormalizedName,ConcurrencyStamp);
             return Ok(result);
         }
         [HttpDelete("Delete/{id}")]

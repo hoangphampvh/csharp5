@@ -3,11 +3,15 @@ using ASMC5.Models;
 using BILL.Serviece.Interfaces;
 using BILL.ViewModel.Account;
 using BILL.ViewModel.User;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
@@ -19,12 +23,15 @@ namespace BILL.Serviece.Implements
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
-        public UserServiece(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
+        private readonly RoleManager<Position> _roleManager;
+        public UserServiece(UserManager<User> userManager, SignInManager<User> signInManager,
+            IConfiguration configuration, RoleManager<Position> roleManager)
         {
             _context = new ASMDBContext();
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
+            _roleManager = roleManager;
         }
         public async Task<LoginResponesVM> LoginWithJWT(LoginRequestVM loginRequest)
         {
@@ -59,6 +66,8 @@ namespace BILL.Serviece.Implements
             return loginResponesVm;
 
         }
+      
+
         public async Task<bool> SignUp(SignUpVM p)
         {
             try
@@ -79,7 +88,7 @@ namespace BILL.Serviece.Implements
                 if (result.Succeeded)
                 {
 
-                    //    await _userManager.AddToRoleAsync(user,"client");
+                   await _userManager.AddToRoleAsync(user,"Client");
                     return true;
                 }
                 return false;
@@ -138,7 +147,7 @@ namespace BILL.Serviece.Implements
                 if (result.Succeeded)
                 {
 
-                    //    await _userManager.AddToRoleAsync(user,"client");
+                    await _userManager.AddToRoleAsync(user,"Client");
                     return true;
                 }
                 return false;
@@ -184,6 +193,28 @@ namespace BILL.Serviece.Implements
                 user.Dateofbirth = p.Dateofbirth;
                 user.PhoneNumber = p.PhoneNumber;
                 user.Email = p.Email;
+
+                // Lấy các vai trò hiện tại của người dùng
+                var currentRoles = await _userManager.GetRolesAsync(user);
+
+                // Chuyển đổi roleIds sang dạng mảng string
+                var roleNameArray = p.roleNames.Select(x => x.ToString()).ToArray();
+
+                // Tìm các vai trò cần thêm
+                var rolesToAdd = roleNameArray.Except(currentRoles);
+                foreach (var item in rolesToAdd)
+                {
+                    Console.WriteLine(item);
+                }
+                // Tìm các vai trò cần xóa
+                var rolesToRemove = currentRoles.Except(roleNameArray);
+
+                // Thêm các vai trò mới cho người dùng
+                await _userManager.AddToRolesAsync(user, rolesToAdd);
+
+                // Xóa các vai trò cần xóa khỏi người dùng
+                await _userManager.RemoveFromRolesAsync(user, rolesToRemove);
+
                 var result = await _userManager.UpdateAsync(user);
                 if (result.Succeeded)
                 {

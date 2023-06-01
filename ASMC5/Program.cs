@@ -3,6 +3,8 @@ using ASMC5.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using ServiceStack;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,7 @@ builder.Services.AddDbContext<ASMDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("MyCS"));
 });
+builder.Services.AddHttpClient();
 
 
 // cau hinh identity
@@ -92,6 +95,9 @@ builder.Services.AddAuthentication().AddGoogle(option =>
     option.ClientId = ggConfig["ClientId"];
     option.ClientSecret = ggConfig["ClientSecret"];
     option.CallbackPath = "/LoginFromGoogle";
+    option.Scope.Add("openid");
+    option.Scope.Add("profile");
+
 
 });
 

@@ -61,15 +61,15 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public async Task<bool> EditPosition(Guid id, Position p)
+        public async Task<bool> EditPosition(Guid id, int status, string name, string NormalizedName,string ConcurrencyStamp)
         {
             try
             {
                 var obj = await _roleManager.FindByIdAsync(id.ToString());
-                obj.status = p.status;
-                obj.Name = p.Name;
-                obj.NormalizedName = p.NormalizedName;
-                obj.ConcurrencyStamp = p.ConcurrencyStamp;
+                obj.status = status;
+                obj.Name = name;
+                obj.NormalizedName = NormalizedName;
+                obj.ConcurrencyStamp = ConcurrencyStamp;
                 await _roleManager.UpdateAsync(obj);
                 return true;
 

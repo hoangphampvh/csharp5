@@ -1,0 +1,13 @@
+﻿@page "/testUser"
+@using System.Text.Json
+@using ASMC5.Models;
+@using ASMC5.ViewModel;
+@using Microsoft.AspNetCore.Authorization
+@inject IHttpContextAccessor HttpContextAccessor
+@attribute [Authorize(Roles = "ADMIN")]
+@{
+    const string key = "User";
+    var userJson = HttpContextAccessor.HttpContext.Session.GetString(key);
+    var user = JsonSerializer.Deserialize<GoogleUserInfoVM>(userJson);
+}
+<h>@user.Name<h>

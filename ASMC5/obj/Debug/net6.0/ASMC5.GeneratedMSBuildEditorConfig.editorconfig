@@ -9,49 +9,65 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ASMC5
 build_property.RootNamespace = ASMC5
-build_property.ProjectDir = D:\C#\gif\ASMC5\
+build_property.ProjectDir = D:\cs5\ASMC5\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\C#\gif\ASMC5
+build_property.MSBuildProjectDirectory = D:\cs5\ASMC5
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/C\#/gif/ASMC5/Views/Home/Index.cshtml]
+[D:/cs5/ASMC5/Views/Account/LoginWithGoogle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbldpdGhHb29nbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/cs5/ASMC5/Views/Account/NotNulls.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxOb3ROdWxscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/cs5/ASMC5/Views/Account/nulls.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxudWxscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/cs5/ASMC5/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/C\#/gif/ASMC5/Views/Home/Privacy.cshtml]
+[D:/cs5/ASMC5/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/C\#/gif/ASMC5/Views/Login/LoginWithGoogle.cshtml]
+[D:/cs5/ASMC5/Views/Login/LoginWithGoogle.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cTG9naW5XaXRoR29vZ2xlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/C\#/gif/ASMC5/Views/Login/NotNulls.cshtml]
+[D:/cs5/ASMC5/Views/Login/NotNulls.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cTm90TnVsbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/C\#/gif/ASMC5/Views/Login/nulls.cshtml]
+[D:/cs5/ASMC5/Views/Login/nulls.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cbnVsbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/C\#/gif/ASMC5/Views/Shared/Error.cshtml]
+[D:/cs5/ASMC5/Views/Register/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVnaXN0ZXJcUmVnaXN0ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/cs5/ASMC5/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/C\#/gif/ASMC5/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/cs5/ASMC5/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/C\#/gif/ASMC5/Views/_ViewImports.cshtml]
+[D:/cs5/ASMC5/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/C\#/gif/ASMC5/Views/_ViewStart.cshtml]
+[D:/cs5/ASMC5/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/C\#/gif/ASMC5/Views/Shared/_Layout.cshtml]
+[D:/cs5/ASMC5/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-svdwjbed4f

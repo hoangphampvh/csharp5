@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\C#\\gif\\APIService\\APIServer.csproj": {}
+    "D:\\cs5\\APIService\\APIServer.csproj": {}
   },
   "projects": {
-    "D:\\C#\\gif\\APIService\\APIServer.csproj": {
+    "D:\\cs5\\APIService\\APIServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\C#\\gif\\APIService\\APIServer.csproj",
+        "projectUniqueName": "D:\\cs5\\APIService\\APIServer.csproj",
         "projectName": "APIServer",
-        "projectPath": "D:\\C#\\gif\\APIService\\APIServer.csproj",
+        "projectPath": "D:\\cs5\\APIService\\APIServer.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\C#\\gif\\APIService\\obj\\",
+        "outputPath": "D:\\cs5\\APIService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\C#\\gif\\BILL\\BILL.csproj": {
-                "projectPath": "D:\\C#\\gif\\BILL\\BILL.csproj"
+              "D:\\cs5\\ASMC5\\ASMC5.csproj": {
+                "projectPath": "D:\\cs5\\ASMC5\\ASMC5.csproj"
+              },
+              "D:\\cs5\\BILL\\BILL.csproj": {
+                "projectPath": "D:\\cs5\\BILL\\BILL.csproj"
+              },
+              "D:\\cs5\\ViewModel\\ViewModel.csproj": {
+                "projectPath": "D:\\cs5\\ViewModel\\ViewModel.csproj"
               }
             }
           }
@@ -98,14 +104,14 @@
         }
       }
     },
-    "D:\\C#\\gif\\ASMC5\\ASMC5.csproj": {
+    "D:\\cs5\\ASMC5\\ASMC5.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\C#\\gif\\ASMC5\\ASMC5.csproj",
+        "projectUniqueName": "D:\\cs5\\ASMC5\\ASMC5.csproj",
         "projectName": "ASMC5",
-        "projectPath": "D:\\C#\\gif\\ASMC5\\ASMC5.csproj",
+        "projectPath": "D:\\cs5\\ASMC5\\ASMC5.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\C#\\gif\\ASMC5\\obj\\",
+        "outputPath": "D:\\cs5\\ASMC5\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -121,7 +127,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\cs5\\ViewModel\\ViewModel.csproj": {
+                "projectPath": "D:\\cs5\\ViewModel\\ViewModel.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -161,6 +171,18 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[6.0.0, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[6.0.13, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "ServiceStack.Client": {
+              "target": "Package",
+              "version": "[6.8.0, )"
             }
           },
           "imports": [
@@ -204,14 +226,14 @@
         }
       }
     },
-    "D:\\C#\\gif\\BILL\\BILL.csproj": {
+    "D:\\cs5\\BILL\\BILL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\C#\\gif\\BILL\\BILL.csproj",
+        "projectUniqueName": "D:\\cs5\\BILL\\BILL.csproj",
         "projectName": "BILL",
-        "projectPath": "D:\\C#\\gif\\BILL\\BILL.csproj",
+        "projectPath": "D:\\cs5\\BILL\\BILL.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\C#\\gif\\BILL\\obj\\",
+        "outputPath": "D:\\cs5\\BILL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -228,8 +250,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\C#\\gif\\ASMC5\\ASMC5.csproj": {
-                "projectPath": "D:\\C#\\gif\\ASMC5\\ASMC5.csproj"
+              "D:\\cs5\\ASMC5\\ASMC5.csproj": {
+                "projectPath": "D:\\cs5\\ASMC5\\ASMC5.csproj"
+              },
+              "D:\\cs5\\ViewModel\\ViewModel.csproj": {
+                "projectPath": "D:\\cs5\\ViewModel\\ViewModel.csproj"
               }
             }
           }
@@ -275,6 +300,75 @@
               "version": "[6.2.3, )"
             }
           },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.12, 6.0.12]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.12, 6.0.12]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.12, 6.0.12]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\cs5\\ViewModel\\ViewModel.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\cs5\\ViewModel\\ViewModel.csproj",
+        "projectName": "ViewModel",
+        "projectPath": "D:\\cs5\\ViewModel\\ViewModel.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\cs5\\ViewModel\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
           "imports": [
             "net461",
             "net462",

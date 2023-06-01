@@ -1,5 +1,4 @@
-﻿using ASMC5.Models;
-using BILL.ViewModel.Product;
+﻿using BILL.ViewModel.Product;
 using BILL.Serviece.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
