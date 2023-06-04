@@ -1,127 +1,59 @@
-﻿using ASMC5.Models;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.WebUtilities;
+using Newtonsoft.Json;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text.Encodings.Web;
 using System.Text;
-using System.Text.Json;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using System.Security.Principal;
+using ViewModel.ViewModel;
 
 namespace ASMC5.Controllers
 {
-    public class loginController : Controller
+    public class LoginController : Controller
     {
-        private readonly SignInManager<User> _signInManager;
-        private readonly UserManager<User> _userManager;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly HttpContext _httpContext;
-
-        public const string key = "User";
-        public IList<AuthenticationScheme> ExternalLogins { get; set; }
-        public loginController(SignInManager<User> signInManager, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor)
+        private readonly HttpClient _httpClient;
+        public LoginController(HttpClient httpClient)
         {
-            _signInManager = signInManager;
-            _userManager = userManager;
-            _httpContext = httpContextAccessor.HttpContext;
+            _httpClient = httpClient;
         }
 
-        [HttpGet("/login/")]
-        [AllowAnonymous]
-        public IActionResult LoginWithGoogle(string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
-            return View();
-        }
-
-        public IActionResult GoogleSignIn()
-        {
-            var properties = new AuthenticationProperties
-            {
-                RedirectUri = Url.Action(nameof(OnGetCallbackAsync)),
-                Items =
-                {
-                    { "Scheme", "Google" }
-                }
-            };
-
-            return Challenge(properties, "Google");
-        }
-        [HttpGet("login/OnGetCallbackAsync")]
-        public async Task<IActionResult> OnGetCallbackAsync()
-        {
-            var authenticateResult = await HttpContext.AuthenticateAsync("Google");
-            if (authenticateResult.Succeeded)
-            {
-                var newUser = new User
-                {
-                    Id = Guid.NewGuid(),
-                    UserName = string.Join("", authenticateResult.Principal.FindFirstValue(ClaimTypes.Name).Replace(" ", "").Split()),
-                    Email = authenticateResult.Principal.FindFirstValue(ClaimTypes.Email),
-                    Password = "Clinet123@$",
-                    // Các thuộc tính khác của người dùng
-                };
-                var checkUser = await _userManager.FindByEmailAsync(newUser.Email);
-
-                if (checkUser == null)
-                {
-                    //// Lưu thông tin người dùng vào bảng User
-                    var result = await _userManager.CreateAsync(newUser, newUser.Password);
-                    checkUser = await _userManager.FindByEmailAsync(newUser.Email);
-
-                    ////    // Xử lý khi tài khoản người dùng được tạo thành công
-                    ////    // Ví dụ: Chuyển hướng đến trang chính, gửi email xác nhận, v.v.                 
-                    if (result.Succeeded)
-                    {
-
-                        var identityUserSignUp = await getRoleAndClaims(checkUser);
-                        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identityUserSignUp));
-                        // luu thong tin nguoi dung vao cookies
-                        _httpContext.Session.SetString(key, JsonSerializer.Serialize(newUser));
-                        return RedirectToAction(nameof(NotNulls));
-                    }
-                    return BadRequest("false");
-                }
-                var identityUserSignIn = await getRoleAndClaims(checkUser);
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identityUserSignIn));
-                _httpContext.Session.SetString(key, JsonSerializer.Serialize(checkUser));
-
-
-                return RedirectToAction(nameof(NotNulls));
-            }
-            return RedirectToAction(nameof(nulls));
-
-        }
-        public async Task<ClaimsIdentity> getRoleAndClaims(User user)
-        {
-            var roles = await _userManager.GetRolesAsync(user);
-            if (roles.Count == 0)
-            {
-                await _userManager.AddToRoleAsync(user, "client");
-            }
-            var claims = new List<Claim>();
-            roles = await _userManager.GetRolesAsync(user);
-            foreach (var item in roles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, item));
-
-            }
-            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            return identity;
-        }
-        [Authorize("ADMIN")]
-        public IActionResult NotNulls()
-        {
-            return View();
-        }
-        public IActionResult nulls()
+        [HttpGet]
+        public IActionResult Login()
         {
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginUser loginUser)
+        {
+            // Convert registerUser to JSON
+            var loginUserJSON = JsonConvert.SerializeObject(loginUser);
+
+            // Convert to string content
+            var stringContent = new StringContent(loginUserJSON, Encoding.UTF8, "application/json");
+
+            // Send request POST to register API
+            var response = await _httpClient.PostAsync($"https://localhost:7257/api/Users/Login", stringContent);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var token = await response.Content.ReadAsStringAsync();
+
+                HttpContext.Session.SetString("JWTToken", token);               
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewBag.Message = await response.Content.ReadAsStringAsync();
+                return View();
+            }
+        }
+
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("JWTToken");
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

@@ -15,7 +15,6 @@
   <ItemGroup>
     <ProjectReference Include="..\ASMC5\ASMC5.csproj" />
     <ProjectReference Include="..\BILL\BILL.csproj" />
-    <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
   </ItemGroup>
 
 </Project>

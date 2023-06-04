@@ -3,6 +3,7 @@ using ASMC5.Models;
 using BILL.Serviece.Interfaces;
 using BILL.ViewModel.Account;
 using BILL.ViewModel.User;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -23,15 +24,15 @@ namespace BILL.Serviece.Implements
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
-        private readonly RoleManager<Position> _roleManager;
+
         public UserServiece(UserManager<User> userManager, SignInManager<User> signInManager,
-            IConfiguration configuration, RoleManager<Position> roleManager)
+            IConfiguration configuration)
         {
             _context = new ASMDBContext();
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
-            _roleManager = roleManager;
+         
         }
         public async Task<LoginResponesVM> LoginWithJWT(LoginRequestVM loginRequest)
         {
@@ -52,17 +53,19 @@ namespace BILL.Serviece.Implements
             {
                 new Claim(ClaimTypes.Name,user.UserName),
                 new Claim(ClaimTypes.Email,user.Email),
-                new Claim(ClaimTypes.Role,string.Join(";",rolesOfUser))
+                new Claim(ClaimTypes.Role,string.Join(";",rolesOfUser.ToList()))
             };
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSecurityKeys"]));
+            
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SecretKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var token = new JwtSecurityToken(
-              _configuration["JwtIssuer"],
-              _configuration["JwtAudience"],
+              _configuration["Jwt:Issuer"],
+              _configuration["Jwt:Audience"],
               claims,
               expires: DateTime.Now.AddHours(3),
               signingCredentials: creds);
             LoginResponesVM loginResponesVm = new LoginResponesVM { Successful = true, Token = new JwtSecurityTokenHandler().WriteToken(token) };
+            
             return loginResponesVm;
 
         }

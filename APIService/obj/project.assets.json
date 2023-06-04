@@ -3767,6 +3767,7 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.Google": "6.0.0",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.0",
           "Microsoft.EntityFrameworkCore": "6.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.0",
@@ -10599,8 +10600,7 @@
       "BILL >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.Google >= 6.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.0",
-      "Swashbuckle.AspNetCore >= 6.2.3",
-      "ViewModel >= 1.0.0"
+      "Swashbuckle.AspNetCore >= 6.2.3"
     ]
   },
   "packageFolders": {
@@ -10635,9 +10635,6 @@
             },
             "D:\\cs5\\BILL\\BILL.csproj": {
               "projectPath": "D:\\cs5\\BILL\\BILL.csproj"
-            },
-            "D:\\cs5\\ViewModel\\ViewModel.csproj": {
-              "projectPath": "D:\\cs5\\ViewModel\\ViewModel.csproj"
             }
           }
         }

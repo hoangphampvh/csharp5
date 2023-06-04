@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIServer", "APIService\API
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BILL", "BILL\BILL.csproj", "{DEDC496F-6DEF-47E6-9DB0-15B7AF60EA2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel", "ViewModel\ViewModel.csproj", "{959A9B83-4986-4D4F-8593-11E75DF3B182}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModel", "ViewModel\ViewModel.csproj", "{959A9B83-4986-4D4F-8593-11E75DF3B182}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Servers", "Servers", "{FDA7B6DE-8C5E-4F50-A4CA-C2F8CC49F9D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{59ED0DCF-9C0B-408D-AC60-5588BD23A909} = {FDA7B6DE-8C5E-4F50-A4CA-C2F8CC49F9D4}
+		{DEDC496F-6DEF-47E6-9DB0-15B7AF60EA2C} = {FDA7B6DE-8C5E-4F50-A4CA-C2F8CC49F9D4}
+		{959A9B83-4986-4D4F-8593-11E75DF3B182} = {FDA7B6DE-8C5E-4F50-A4CA-C2F8CC49F9D4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7552CA0C-CA31-496C-A3F9-AB856A3C40D4}

@@ -4,10 +4,7 @@
 @using ASMC5.ViewModel;
 @using Microsoft.AspNetCore.Authorization
 @inject IHttpContextAccessor HttpContextAccessor
-@attribute [Authorize(Roles = "ADMIN")]
 @{
-    const string key = "User";
-    var userJson = HttpContextAccessor.HttpContext.Session.GetString(key);
-    var user = JsonSerializer.Deserialize<GoogleUserInfoVM>(userJson);
+    var userJson = HttpContextAccessor.HttpContext.Session.GetString("JWTToken");
+    
 }
-<h>@user.Name<h>

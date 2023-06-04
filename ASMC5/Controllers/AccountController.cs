@@ -56,7 +56,7 @@ namespace ASMC5.Controllers
             if (authenticateResult.Succeeded)
             {
                 var token = authenticateResult.Properties.GetTokenValue("access_token");
-                var userInfo = await GoogleLoginAsync(token);
+               // var userInfo =await GoogleLoginAsync(token);
                 var newUser = new User
                 {
                     Id = Guid.NewGuid(),
@@ -132,15 +132,27 @@ namespace ASMC5.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             HttpContext.Session.Clear();
-
+            
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login");
         }
-        [Authorize("ADMIN")]
+        [Authorize]
         public IActionResult NotNulls()
         {
-            return View();
+            // Kiểm tra xem mã token có tồn tại và hợp lệ không
+            if (User.Identity !=null && User.Identity.IsAuthenticated)
+            {
+                // Mã token hợp lệ, thực hiện các logic của action NotNulls
+                return View();
+            }
+            else
+            {
+                // Người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
+                return BadRequest("dell");
+            }
         }
+
+
         public IActionResult nulls()
         {
             return View();
