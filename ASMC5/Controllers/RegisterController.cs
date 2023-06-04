@@ -30,7 +30,7 @@ namespace ASMC5.Controllers
             HttpContent stringContent = new StringContent(registerUserJSON, Encoding.UTF8, "application/json");
 
             // Send POST request to register API
-            var response = await _httpClient.PostAsJsonAsync($"https://localhost:7257/api/Users/SignUp", stringContent);
+            var response = await _httpClient.PostAsync($"https://localhost:7257/api/Users/SignUp", stringContent);
 
             if (response.IsSuccessStatusCode)
             {

@@ -6,6 +6,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using ViewModel.ViewModel;
+using BILL.ViewModel.Account;
 
 namespace ASMC5.Controllers
 {
@@ -24,7 +25,7 @@ namespace ASMC5.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginUser loginUser)
+        public async Task<IActionResult> Login(LoginResponesVM loginUser)
         {
             // Convert registerUser to JSON
             var loginUserJSON = JsonConvert.SerializeObject(loginUser);

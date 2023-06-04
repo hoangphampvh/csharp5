@@ -3,6 +3,7 @@ using BILL.Serviece.Implements;
 using BILL.Serviece.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ViewModel.ViewModel.Role;
 
 namespace APIServer.Controllers
 {
@@ -34,15 +35,15 @@ namespace APIServer.Controllers
             return Ok(result);
         }
         [HttpPost("Add")]
-        public async Task<IActionResult> AddAsync(Position position)
+        public async Task<IActionResult> AddAsync(RoleCreateVM position)
         {
             var result =await _positionServiece.CreatPosition(position);
             return Ok(result);
         }
         [HttpPut("Update/{id}")]
-        public async Task<IActionResult> UodateAsync(Guid id, int status, string name, string NormalizedName, string ConcurrencyStamp)
+        public async Task<IActionResult> UodateAsync(Guid id, RoleUpdateVM roleUpdate)
         {
-            var result =await _positionServiece.EditPosition(id,status,name,NormalizedName,ConcurrencyStamp);
+            var result =await _positionServiece.EditPosition(id,roleUpdate);
             return Ok(result);
         }
         [HttpDelete("Delete/{id}")]

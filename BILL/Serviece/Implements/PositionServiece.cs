@@ -9,6 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ViewModel.ViewModel.Role;
 
 namespace BILL.Serviece.Implements
 {
@@ -21,7 +22,7 @@ namespace BILL.Serviece.Implements
             _roleManager = roleManager;
             _context = new ASMDBContext();
         }
-        public async Task<bool> CreatPosition(Position p)
+        public async Task<bool> CreatPosition(RoleCreateVM p)
         {
             try
             {
@@ -30,8 +31,8 @@ namespace BILL.Serviece.Implements
                     Name = p.Name,
                     Id = Guid.NewGuid(),
                     status = 0,
-                    ConcurrencyStamp = p.ConcurrencyStamp,
-                    NormalizedName = p.NormalizedName,
+                    ConcurrencyStamp = p.concurrencyStamp,
+                    NormalizedName = p.normalizedName,
                 };
                 var result = await _roleManager.CreateAsync(Role);
                 if (result.Succeeded)
@@ -61,15 +62,15 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public async Task<bool> EditPosition(Guid id, int status, string name, string NormalizedName,string ConcurrencyStamp)
+        public async Task<bool> EditPosition(Guid id, RoleUpdateVM roleUpdate)
         {
             try
             {
                 var obj = await _roleManager.FindByIdAsync(id.ToString());
-                obj.status = status;
-                obj.Name = name;
-                obj.NormalizedName = NormalizedName;
-                obj.ConcurrencyStamp = ConcurrencyStamp;
+                obj.status = roleUpdate.status;
+                obj.Name = roleUpdate.Name;
+                obj.NormalizedName = roleUpdate.normalizedName;
+                obj.ConcurrencyStamp = roleUpdate.concurrencyStamp;
                 await _roleManager.UpdateAsync(obj);
                 return true;
 

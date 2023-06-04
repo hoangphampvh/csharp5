@@ -1,6 +1,5 @@
 ﻿using ASMC5.data;
 using ASMC5.Models;
-using assiment_csad4.Configruration;
 using BILL.Serviece.Implements;
 using BILL.Serviece.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
