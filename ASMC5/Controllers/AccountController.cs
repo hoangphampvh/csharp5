@@ -136,7 +136,7 @@ namespace ASMC5.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login");
         }
-        [Authorize]
+        [Authorize(Roles = "ADMIN")]
         public IActionResult NotNulls()
         {
             // Kiểm tra xem mã token có tồn tại và hợp lệ không

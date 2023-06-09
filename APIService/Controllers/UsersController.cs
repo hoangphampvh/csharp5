@@ -3,6 +3,7 @@ using BILL.Serviece.Implements;
 using BILL.Serviece.Interfaces;
 using BILL.ViewModel.Account;
 using BILL.ViewModel.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,7 @@ namespace APIServer.Controllers
 
         }
         [HttpGet("GetAll")]
+
         public async Task<IActionResult> GetAllAsync()
         {
             var user = await _userServiece.GetAllUser();
@@ -27,6 +29,8 @@ namespace APIServer.Controllers
             return BadRequest();
         }
         [HttpGet("GetAllActive")]
+     
+
         public async Task<IActionResult> GetAllActiveAsync()
         {
             var user = await _userServiece.GetAllUserActive();
@@ -34,6 +38,8 @@ namespace APIServer.Controllers
             return BadRequest();
         }
         [HttpGet("GetById/{id}")]
+
+
         public async Task<IActionResult> GetById(Guid id)
         {
             var user = await _userServiece.GetUserById(id);
@@ -41,6 +47,8 @@ namespace APIServer.Controllers
             return BadRequest();
         }
         [HttpDelete("Delete/{Id}")]
+
+
         public async Task<IActionResult> DeleteUserAsync(Guid Id)
         {          
             var result = await _userServiece.DelUser(Id);
@@ -49,6 +57,8 @@ namespace APIServer.Controllers
         }
 
         [HttpDelete("DeleteListUserById")]
+ 
+
         public async Task<IActionResult> DeleteUserAsync(List<Guid> Ids)
         {
             var result = await _userServiece.DelUsers(Ids);
@@ -57,12 +67,16 @@ namespace APIServer.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> CreateUserAsync([FromForm]UserCreateVM user)
+
+
+        public async Task<IActionResult> CreateUserAsync([FromBody]UserCreateVM user)
         {
             var result = await _userServiece.CreatUser(user);
             return Ok(result);
         }
         [HttpPut("Update/{id}")]
+
+
         public async Task<IActionResult> UpdateAsync(Guid id, [FromBody]UserEditVM user)
         {
             var result = await _userServiece.EditUser(id,user);
@@ -70,7 +84,7 @@ namespace APIServer.Controllers
         }
         [HttpPost("Login")]
         public async Task<IActionResult> LoginWithJWT(LoginRequestVM loginRequest)
-        {
+            {
             var result = await _userServiece.LoginWithJWT(loginRequest);
             return Ok(result.Token);
         }
@@ -80,5 +94,7 @@ namespace APIServer.Controllers
             var result = await _userServiece.SignUp(signUp);
             return Ok(result);
         }
+        
+
     }
 }

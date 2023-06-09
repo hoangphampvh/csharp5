@@ -2,6 +2,7 @@
 using BILL.Serviece.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace APIServer.Controllers
 {
@@ -25,12 +26,14 @@ namespace APIServer.Controllers
         }
 
         [HttpPost("CreatProduct")]
+
         public async Task<IActionResult> CreatProductAsync([FromForm]ProductVM product)
         {
             var pro = await _productServiece.CreatProduct(product);
             return Ok(pro);
         }
         [HttpDelete("Delete/{Id}")]
+
         public async Task<IActionResult> DeleteUserAsync(Guid Id)
         {
             var result = await _productServiece.DelProduct(Id);
@@ -44,6 +47,7 @@ namespace APIServer.Controllers
             return BadRequest();
         }
         [HttpPut("Update/{id}")]
+
         public async Task<IActionResult> UpdateAsync(Guid id,[FromBody]ProductVM product)
         {
             var result = await _productServiece.EditProduct(id,product);

@@ -17,6 +17,6 @@ namespace BILL.ViewModel.User
         public string? Email { get; set; }
         public string? DiaChi { get; set; }
         public DateTime Dateofbirth { get; set; }
-        public int Status { get; set; }
+       
     }
 }

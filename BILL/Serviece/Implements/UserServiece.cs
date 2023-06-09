@@ -1,5 +1,6 @@
 ﻿using ASMC5.data;
 using ASMC5.Models;
+using ASMC5.ViewModel;
 using BILL.Serviece.Interfaces;
 using BILL.ViewModel.Account;
 using BILL.ViewModel.User;
@@ -15,6 +16,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+
 
 namespace BILL.Serviece.Implements
 {
@@ -52,24 +54,34 @@ namespace BILL.Serviece.Implements
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.Name,user.UserName),
-                new Claim(ClaimTypes.Email,user.Email),
-                new Claim(ClaimTypes.Role,string.Join(";",rolesOfUser.ToList()))
+                new Claim(ClaimTypes.Email,user.Email),           
             };
-            
+            foreach (var role in rolesOfUser)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SecretKey"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var token = new JwtSecurityToken(
+            SecurityToken token = new JwtSecurityToken(
               _configuration["Jwt:Issuer"],
               _configuration["Jwt:Audience"],
               claims,
               expires: DateTime.Now.AddHours(3),
               signingCredentials: creds);
+            if (token is not JwtSecurityToken jwtSecurityToken ||
+                    !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+            {
+                return new LoginResponesVM
+                {
+                    Successful = false,
+                    Error = "Refresh token không hợp lệ."
+                };
+            }
             LoginResponesVM loginResponesVm = new LoginResponesVM { Successful = true, Token = new JwtSecurityTokenHandler().WriteToken(token) };
             
             return loginResponesVm;
 
         }
-      
 
         public async Task<bool> SignUp(SignUpVM p)
         {
@@ -234,13 +246,56 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public async Task<List<User>> GetAllUser()
+        public async Task<List<UserVM>> GetAllUser()
         {
-            return await _context.Users.ToListAsync();
+
+            var list = await _context.Users.ToListAsync();
+            var ListUserVM = new List<UserVM>();
+            foreach (var item in list)
+            {
+                var User = new UserVM();
+                User.UserName = item.UserName;
+                User.PhoneNumber = item.PhoneNumber;
+                User.Password = item.Password;
+                User.Email = item.Email;
+                User.DiaChi = item.DiaChi;
+                User.Dateofbirth = item.Dateofbirth;
+                User.UrlImage = item.UrlImage;
+                User.Status = item.Status;
+                User.Id = item.Id;
+                ListUserVM.Add(User);
+            }
+            foreach (var item in ListUserVM)
+            {
+                var RolesOfUser = await _userManager.GetRolesAsync(item);
+                item.roleNames = string.Join(",", RolesOfUser);
+            }
+            return ListUserVM.ToList();
         }
-        public async Task<List<User>> GetAllUserActive()
+        public async Task<List<UserVM>> GetAllUserActive()
         {
-            return await _context.Users.Where(p => p.Status != 1).ToListAsync();
+            var list = await _context.Users.ToListAsync();
+            var ListUserVM = new List<UserVM>();
+            foreach (var item in list)
+            {
+                var User = new UserVM();
+                User.UserName = item.UserName;
+                User.PhoneNumber = item.PhoneNumber;
+                User.Password = item.Password;
+                User.Email = item.Email;
+                User.DiaChi = item.DiaChi;
+                User.Dateofbirth= item.Dateofbirth ;
+                User.UrlImage = item.UrlImage;
+                User.Status = item.Status;
+                User.Id = item.Id;
+                ListUserVM.Add(User);
+            }
+            foreach (var item in ListUserVM)
+            {
+                var RolesOfUser = await _userManager.GetRolesAsync(item);
+                item.roleNames = string.Join(",", RolesOfUser);
+            }
+            return ListUserVM.Where(p=>p.Status !=1).ToList();
         }
         public async Task<User> GetUserById(Guid id)
         {

@@ -10,6 +10,7 @@ namespace BILL.ViewModel.User
     {
         public string? UserName { get; set; }
         public string? Password { get; set; }
+        public string? PasswordConfirm { get; set; }
         public string? UrlImage { get; set; }
 
         public string? PhoneNumber { get; set; }
@@ -17,6 +18,6 @@ namespace BILL.ViewModel.User
         public string? DiaChi { get; set; }
         public DateTime Dateofbirth { get; set; }
         public int Status { get; set; }
-        public List<string> roleNames { get; set; }
+        public List<string>? roleNames { get; set; }
     }
 }

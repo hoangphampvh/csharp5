@@ -5,12 +5,56 @@
       "PackagePath": "staticwebassets\\ASMC5.bundle.scp.css"
     },
     {
+      "Id": "D:\\cs5\\ASMC5\\wwwroot\\css\\filter_multi_select.css",
+      "PackagePath": "staticwebassets\\css\\filter_multi_select.css"
+    },
+    {
       "Id": "D:\\cs5\\ASMC5\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "D:\\cs5\\ASMC5\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\cs5\\ASMC5\\wwwroot\\js\\Args.js",
+      "PackagePath": "staticwebassets\\js\\Args.js"
+    },
+    {
+      "Id": "D:\\cs5\\ASMC5\\wwwroot\\js\\Args.js.map",
+      "PackagePath": "staticwebassets\\js\\Args.js.map"
+    },
+    {
+      "Id": "D:\\cs5\\ASMC5\\wwwroot\\js\\FilterMultiSelect.js",
+      "PackagePath": "staticwebassets\\js\\FilterMultiSelect.js"
+    },
+    {
+      "Id": "D:\\cs5\\ASMC5\\wwwroot\\js\\FilterMultiSelect.js.map",
+      "PackagePath": "staticwebassets\\js\\FilterMultiSelect.js.map"
+    },
+    {
+      "Id": "D:\\cs5\\ASMC5\\wwwroot\\js\\filter-multi-select-bundle.js",
+      "PackagePath": "staticwebassets\\js\\filter-multi-select-bundle.js"
+    },
+    {
+      "Id": "D:\\cs5\\ASMC5\\wwwroot\\js\\filter-multi-select-bundle.js.map",
+      "PackagePath": "staticwebassets\\js\\filter-multi-select-bundle.js.map"
+    },
+    {
+      "Id": "D:\\cs5\\ASMC5\\wwwroot\\js\\filter-multi-select-bundle.min.js",
+      "PackagePath": "staticwebassets\\js\\filter-multi-select-bundle.min.js"
+    },
+    {
+      "Id": "D:\\cs5\\ASMC5\\wwwroot\\js\\filter-multi-select-bundle.min.js.map",
+      "PackagePath": "staticwebassets\\js\\filter-multi-select-bundle.min.js.map"
+    },
+    {
+      "Id": "D:\\cs5\\ASMC5\\wwwroot\\js\\filter-multi-select.js",
+      "PackagePath": "staticwebassets\\js\\filter-multi-select.js"
+    },
+    {
+      "Id": "D:\\cs5\\ASMC5\\wwwroot\\js\\filter-multi-select.js.map",
+      "PackagePath": "staticwebassets\\js\\filter-multi-select.js.map"
     },
     {
       "Id": "D:\\cs5\\ASMC5\\wwwroot\\js\\site.js",
