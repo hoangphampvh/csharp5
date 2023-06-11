@@ -105,9 +105,6 @@ namespace ASMC5.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("(newid())");
 
-                    b.Property<Guid>("CartID")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("ProductID")
                         .HasColumnType("uniqueidentifier");
 
@@ -119,9 +116,14 @@ namespace ASMC5.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("UserID")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("ID");
 
                     b.HasIndex("ProductID");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("CartDetail", (string)null);
                 });
@@ -442,7 +444,7 @@ namespace ASMC5.Migrations
 
                     b.HasOne("ASMC5.Models.Cart", "Cart")
                         .WithMany("CartDetails")
-                        .HasForeignKey("ProductID")
+                        .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

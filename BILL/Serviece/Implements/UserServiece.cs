@@ -44,7 +44,7 @@ namespace BILL.Serviece.Implements
                 Successful = false,
                 Error = "Người dùng không tồn tại trong hệ thống."
             };
-            var login = await _signInManager.PasswordSignInAsync(user, user.Password, false, false);
+            var login = await _signInManager.PasswordSignInAsync(user, loginRequest.Password, false, false);
             if (!login.Succeeded) return new LoginResponesVM
             {
                 Successful = false,

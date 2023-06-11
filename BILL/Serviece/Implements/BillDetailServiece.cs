@@ -2,6 +2,7 @@
 using ASMC5.Models;
 using BILL.Serviece.Interfaces;
 using BILL.ViewModel.Bill;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,28 +23,16 @@ namespace BILL.Serviece.Implements
         {
             try
             {
-                var bill = await context.Bills.FindAsync(p.BillID);
-                var product = await context.Products.FindAsync(p.ProductID);
 
-                if (bill == null)
-                {
-                    return false;
-                }
-                if (product == null)
-                {
-                    return false;
-                }
                 var billdetail = new BillDetail()
                 {
-                    ID = new Guid(),
+                    ID = Guid.NewGuid(),
                     CodeBill = p.CodeBill,
                     Price = p.Price,
                     Quantity = p.Quantity,
                     Status = 0,
-                    BillID = bill.ID,
-                    ProductID = product.ID,
-                    Product = product,
-                    Bill = bill
+                    BillID = p.BillID,
+                    ProductID = p.ProductID,
                 };
                 context.Add(billdetail);
                 context.SaveChanges();
@@ -93,7 +82,24 @@ namespace BILL.Serviece.Implements
                 return false;
             }
         }
+        public async Task<bool> CreateBillDetailStatus0(Guid id)
+        {
+            try
+            {
+                var listobj =await context.billDetails.ToListAsync();
+                var obj = listobj.FirstOrDefault(c => c.ID == id);
+                obj.Status = 0;
+                context.billDetails.Update(obj);
+                context.SaveChanges();
+                return true;
 
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
         public async Task<List<BillDetail>> GetAllBillDetail()
         {
             return context.billDetails.ToList();
@@ -104,5 +110,6 @@ namespace BILL.Serviece.Implements
             var list = context.billDetails.AsQueryable().ToList();
             return list.FirstOrDefault(c => c.ID == id);
         }
+
     }
 }

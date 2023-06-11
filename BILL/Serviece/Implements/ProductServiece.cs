@@ -103,10 +103,24 @@ namespace BILL.Serviece.Implements
         {
             return await _context.Products.Where(p=>p.Status !=0).ToListAsync();
         }
-        public async Task<Product> GetProductById(Guid id)
+        public async Task<ProductVM> GetProductById(Guid id)
         {
             var list =await _context.Products.AsQueryable().ToListAsync();
-            return list.FirstOrDefault(c => c.ID == id);
+            var product = list.FirstOrDefault(c => c.ID == id);
+            if(product != null)
+            {
+                var ProductVM = new ProductVM();
+                ProductVM.Price = product.Price;
+                ProductVM.Quantity = product.Quantity;
+                ProductVM.Supplier = product.Supplier;
+                ProductVM.Name = product.Name;
+                ProductVM.UrlImage = product.UrlImage;
+                ProductVM.Description = product.Description;
+                ProductVM.CreateDate = product.CreateDate;
+                ProductVM.Status = product.Status;
+                return ProductVM;
+            }
+            return new ProductVM();
         }
     }
 }

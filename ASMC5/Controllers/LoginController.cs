@@ -50,10 +50,13 @@ namespace ASMC5.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     var token = await response.Content.ReadAsStringAsync();
-
+                    if (token == "") return View();
                     HttpContext.Session.SetString("JWTToken", token);
                     var handler = new JwtSecurityTokenHandler();
+                    if (handler == null) return View();
                     var jwt = handler.ReadJwtToken(token);
+                    if (jwt == null) return View();
+
                     var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
                     identity.AddClaim(new Claim(ClaimTypes.Name, jwt.Claims.FirstOrDefault(u => u.Type == ClaimTypes.Name).Value));
 
@@ -72,7 +75,6 @@ namespace ASMC5.Controllers
                       return RedirectToAction("Index", "Home");
                 }
             }
-            var token123 = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
             return View();
         }
 

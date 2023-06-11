@@ -15,6 +15,6 @@ namespace BILL.Serviece.Interfaces
         public Task<bool> DelProduct(Guid id);
         public Task<List<Product>> GetAllProduct();
         public Task<List<Product>> GetAllProductActive();
-        public Task<Product> GetProductById(Guid id);
+        public Task<ProductVM> GetProductById(Guid id);
     }
 }

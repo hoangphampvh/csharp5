@@ -12,5 +12,6 @@ namespace BILL.ViewModel.Bill
         public DateTime DateOfPayment { get; set; }
         public int Status { get; set; }
         public Guid UserID { get; set; }
+        public Guid Id { get; set; } = new Guid();
     }
 }

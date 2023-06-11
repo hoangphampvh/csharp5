@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\C#\\gif\\DAL\\DAL.csproj",
+      "projectUniqueName": "D:\\cs5\\DAL\\DAL.csproj",
       "projectName": "DAL",
-      "projectPath": "D:\\C#\\gif\\DAL\\DAL.csproj",
+      "projectPath": "D:\\cs5\\DAL\\DAL.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\C#\\gif\\DAL\\obj\\",
+      "outputPath": "D:\\cs5\\DAL\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

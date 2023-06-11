@@ -1,0 +1,5 @@
+D:\cs5\DAL\obj\Debug\net6.0\DAL.csproj.AssemblyReference.cache
+D:\cs5\DAL\obj\Debug\net6.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\cs5\DAL\obj\Debug\net6.0\DAL.AssemblyInfoInputs.cache
+D:\cs5\DAL\obj\Debug\net6.0\DAL.AssemblyInfo.cs
+D:\cs5\DAL\obj\Debug\net6.0\DAL.csproj.CoreCompileInputs.cache

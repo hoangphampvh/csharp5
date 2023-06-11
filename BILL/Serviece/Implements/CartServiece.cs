@@ -88,5 +88,6 @@ namespace BILL.Serviece.Implements
             var list = _context.carts.AsQueryable().ToList();
             return list.FirstOrDefault(c => c.UserId == id);
         }
+        
     }
 }

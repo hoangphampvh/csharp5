@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASMC5", "ASMC5\ASMC5.csproj", "{29500B60-478B-4443-9E7C-7863A3602594}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIServer", "APIService\APIServer.csproj", "{59ED0DCF-9C0B-408D-AC60-5588BD23A909}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BILL", "BILL\BILL.csproj", "{DEDC496F-6DEF-47E6-9DB0-15B7AF60EA2C}"
@@ -13,16 +11,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModel", "ViewModel\View
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Servers", "Servers", "{FDA7B6DE-8C5E-4F50-A4CA-C2F8CC49F9D4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASMC5", "ASMC5\ASMC5.csproj", "{AA57C2B8-C259-48AA-851A-2FEA192A92B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{29500B60-478B-4443-9E7C-7863A3602594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29500B60-478B-4443-9E7C-7863A3602594}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29500B60-478B-4443-9E7C-7863A3602594}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29500B60-478B-4443-9E7C-7863A3602594}.Release|Any CPU.Build.0 = Release|Any CPU
 		{59ED0DCF-9C0B-408D-AC60-5588BD23A909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{59ED0DCF-9C0B-408D-AC60-5588BD23A909}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59ED0DCF-9C0B-408D-AC60-5588BD23A909}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,6 +31,10 @@ Global
 		{959A9B83-4986-4D4F-8593-11E75DF3B182}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{959A9B83-4986-4D4F-8593-11E75DF3B182}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{959A9B83-4986-4D4F-8593-11E75DF3B182}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA57C2B8-C259-48AA-851A-2FEA192A92B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA57C2B8-C259-48AA-851A-2FEA192A92B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA57C2B8-C259-48AA-851A-2FEA192A92B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA57C2B8-C259-48AA-851A-2FEA192A92B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

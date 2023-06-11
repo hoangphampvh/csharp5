@@ -10,6 +10,7 @@ using System.Net.Http.Headers;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 using ASMC5.ViewModel;
 using Newtonsoft.Json;
+using System.Security.Principal;
 
 namespace ASMC5.Controllers
 {
@@ -87,7 +88,9 @@ namespace ASMC5.Controllers
                     return BadRequest("false");
                 }
                 var identityUserSignIn = await getRoleAndClaims(checkUser);
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identityUserSignIn));
+                var principal = new ClaimsPrincipal(identityUserSignIn);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                          principal, new AuthenticationProperties() { IsPersistent = false });
                 _httpContext.Session.SetString(key, JsonSerializer.Serialize(checkUser));
 
 
@@ -101,7 +104,7 @@ namespace ASMC5.Controllers
             var roles = await _userManager.GetRolesAsync(user);
             if (roles.Count == 0)
             {
-                await _userManager.AddToRoleAsync(user, "client");
+                await _userManager.AddToRoleAsync(user, "CLIENT ");
             }
             var claims = new List<Claim>();
             roles = await _userManager.GetRolesAsync(user);
@@ -136,7 +139,7 @@ namespace ASMC5.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login");
         }
-        [Authorize(Roles = "ADMIN")]
+        [Authorize]
         public IActionResult NotNulls()
         {
             // Kiểm tra xem mã token có tồn tại và hợp lệ không

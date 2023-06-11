@@ -1,4 +1,5 @@
-﻿using BILL.Serviece.Implements;
+﻿using ASMC5.Models;
+using BILL.Serviece.Implements;
 using BILL.Serviece.Interfaces;
 using BILL.ViewModel.Bill;
 using BILL.ViewModel.Product;
@@ -47,6 +48,12 @@ namespace APIServer.Controllers
         public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] BillVM product)
         {
             var result = await _bill.EditBill(id, product);
+            return Ok(result);
+        }
+        [HttpDelete("confirm/{Id}")]
+        public async Task<IActionResult> confirmBillDetailAsync(Guid Id)
+        {
+            var result = await _bill.confirmBill(Id);
             return Ok(result);
         }
     }

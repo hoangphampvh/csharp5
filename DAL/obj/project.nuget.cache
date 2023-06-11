@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6mftwWJA8Kpmhz5o288m5xmeMdG+hZwQpjVf8euyT6hvcFTFA6rS5w7FGXdfCJ6YDKzFt6rPoK6ZhiUSTJNwzg==",
+  "dgSpecHash": "E2KzWQ8oO7X6LkECKKvWJaIHznq5MIr4q+LtRJccvSWRk12w8MN1jhD41EY6FI5t7WfYliQKdcYAx+Vz/hgfpQ==",
   "success": true,
-  "projectFilePath": "D:\\C#\\gif\\DAL\\DAL.csproj",
+  "projectFilePath": "D:\\cs5\\DAL\\DAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.12\\microsoft.aspnetcore.app.ref.6.0.12.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.12\\microsoft.windowsdesktop.app.ref.6.0.12.nupkg.sha512",

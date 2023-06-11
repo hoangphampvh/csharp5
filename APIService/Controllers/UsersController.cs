@@ -25,11 +25,11 @@ namespace APIServer.Controllers
         public async Task<IActionResult> GetAllAsync()
         {
             var user = await _userServiece.GetAllUser();
-            if(user !=null) return Ok(user);
+            if (user != null) return Ok(user);
             return BadRequest();
         }
         [HttpGet("GetAllActive")]
-     
+
 
         public async Task<IActionResult> GetAllActiveAsync()
         {
@@ -50,14 +50,14 @@ namespace APIServer.Controllers
 
 
         public async Task<IActionResult> DeleteUserAsync(Guid Id)
-        {          
+        {
             var result = await _userServiece.DelUser(Id);
             return Ok(result);
-            
+
         }
 
         [HttpDelete("DeleteListUserById")]
- 
+
 
         public async Task<IActionResult> DeleteUserAsync(List<Guid> Ids)
         {
@@ -69,7 +69,7 @@ namespace APIServer.Controllers
         [HttpPost("Create")]
 
 
-        public async Task<IActionResult> CreateUserAsync([FromBody]UserCreateVM user)
+        public async Task<IActionResult> CreateUserAsync([FromBody] UserCreateVM user)
         {
             var result = await _userServiece.CreatUser(user);
             return Ok(result);
@@ -77,24 +77,24 @@ namespace APIServer.Controllers
         [HttpPut("Update/{id}")]
 
 
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody]UserEditVM user)
+        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UserEditVM user)
         {
-            var result = await _userServiece.EditUser(id,user);
+            var result = await _userServiece.EditUser(id, user);
             return Ok(result);
         }
         [HttpPost("Login")]
         public async Task<IActionResult> LoginWithJWT(LoginRequestVM loginRequest)
-            {
+        {
             var result = await _userServiece.LoginWithJWT(loginRequest);
             return Ok(result.Token);
         }
         [HttpPost("SignUp")]
-        public async Task<IActionResult> SignUpAsync([FromBody]SignUpVM signUp)
+        public async Task<IActionResult> SignUpAsync([FromBody] SignUpVM signUp)
         {
             var result = await _userServiece.SignUp(signUp);
             return Ok(result);
         }
-        
+
 
     }
 }

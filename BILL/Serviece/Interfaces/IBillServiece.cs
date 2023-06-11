@@ -13,6 +13,7 @@ namespace BILL.Serviece.Interfaces
         public Task<bool> CreatBill(BillVM p);
         public Task<bool> EditBill(Guid id, BillVM p);
         public Task<bool> DelBill(Guid id);
+        public Task<bool> confirmBill(Guid id);
         public Task<List<Bill>> GetAllBill();
 
         public Task<Bill> GetBillById(Guid id);

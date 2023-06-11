@@ -2,6 +2,7 @@
 using ASMC5.Models;
 using BILL.Serviece.Interfaces;
 using BILL.ViewModel.Bill;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,26 @@ namespace BILL.Serviece.Implements
         {
             this.context = new ASMDBContext();
         }
+
+        public async Task<bool> confirmBill(Guid id)
+        {
+            try
+            {
+                var list = await context.Bills.ToListAsync();
+                var obj = list.FirstOrDefault(c => c.ID == id);
+
+                obj.Status = 0;
+                context.Bills.Update(obj);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
+
         public async Task<bool> CreatBill(BillVM p)
         {
             try
@@ -28,7 +49,7 @@ namespace BILL.Serviece.Implements
                     return false;
                 }
                 var bill = new Bill() {
-                    ID = new Guid(),
+                    ID =  p.Id,
                     DateCreatBill = p.DateCreatBill,
                     DateOfPayment = p.DateOfPayment,
                     Status = 0,

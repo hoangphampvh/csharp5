@@ -15,5 +15,6 @@ namespace BILL.Serviece.Interfaces
         public Task<bool> DelBillDetail(Guid id);
         public Task<List<BillDetail>> GetAllBillDetail();
         public Task<BillDetail> GetBillDetailById(Guid id);
+        public Task<bool> CreateBillDetailStatus0(Guid id);
     }
 }

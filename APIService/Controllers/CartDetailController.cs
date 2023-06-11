@@ -49,5 +49,12 @@ namespace APIServer.Controllers
             var result = await _cartDetail.EditCartDetail(id, cartvm);
             return Ok(result);
         }
+
+        [HttpPost("Pay")]
+        public async Task<IActionResult> Pay([FromBody] CartDetailVM cartvm)
+        {
+            var result = await _cartDetail.Pay(cartvm);
+            return Ok(result);
+        }
     }
 }
