@@ -15,7 +15,7 @@ namespace BILL.Serviece.Interfaces
         public Task<bool> DelBill(Guid id);
         public Task<bool> confirmBill(Guid id);
         public Task<List<Bill>> GetAllBill();
-
+        public Task<List<BillView>> GetAllBillList();
         public Task<Bill> GetBillById(Guid id);
     }
 }
