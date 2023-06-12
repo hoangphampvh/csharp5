@@ -80,7 +80,7 @@ namespace BILL.Serviece.Implements
 
         public async Task< List<Cart>> GetAllCart()
         {
-            return _context.carts.ToList();
+            return _context.carts.Include(p=>p.CartDetails).ToList();
         }
 
         public async Task <Cart> GetCartById(Guid id)
