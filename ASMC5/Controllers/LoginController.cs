@@ -70,8 +70,10 @@ namespace ASMC5.Controllers
                     }
 
                     var principal = new ClaimsPrincipal(identity);
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                    await HttpContext.SignInAsync
+                        (CookieAuthenticationDefaults.AuthenticationScheme,
                          principal, new AuthenticationProperties() { IsPersistent = loginUser.RememberMe });
+         
                       return RedirectToAction("Index", "Home");
                 }
             }

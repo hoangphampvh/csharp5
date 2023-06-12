@@ -54,7 +54,7 @@ namespace APIServer.Controllers
             var result = await _bill.EditBill(id, product);
             return Ok(result);
         }
-        [HttpDelete("confirm/{Id}")]
+        [HttpPut("confirm/{Id}")]
         public async Task<IActionResult> confirmBillDetailAsync(Guid Id)
         {
             var result = await _bill.confirmBill(Id);

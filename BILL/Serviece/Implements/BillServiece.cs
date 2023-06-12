@@ -33,7 +33,7 @@ namespace BILL.Serviece.Implements
                 var detailBillList = await _billDetailServiece.GetAllBillDetail();
                 var BillDetail = detailBillList.FirstOrDefault(p=>p.BillID == obj.ID);
                 var IdProductInBillDetail = BillDetail.ProductID;
-                var product =await _productServiece.GetProductById(IdProductInBillDetail);
+                var product = await context.Products.FirstOrDefaultAsync(p => p.ID == IdProductInBillDetail);
                 if (product != null)
                 {
                     foreach (var item in detailBillList.Where(p=>p.ProductID ==IdProductInBillDetail))
@@ -42,8 +42,8 @@ namespace BILL.Serviece.Implements
                         if (product.Quantity == 0) product.Status = 1;
                         product.Status = 0;
                         var UpdateProductVM = new ProductUpdateConfirmVM();
-                        product.Status = UpdateProductVM.Status;
-                        product.Quantity = UpdateProductVM.Quantity;
+                        UpdateProductVM.Status = product.Status;
+                        UpdateProductVM.Quantity = product.Quantity;
                         
                         if(await _productServiece.UpdateProductWhenConfirmBill(IdProductInBillDetail, UpdateProductVM))
                         {

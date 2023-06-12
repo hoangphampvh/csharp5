@@ -25,20 +25,20 @@ namespace BILL.Serviece.Implements
             this.context = new ASMDBContext();
             _productServiece = productServiece;
         }
-        public async Task <bool> CreatCartDetail(CartDetailVM p)
+        public async Task<bool> CreatCartDetail(CartDetailVM p)
         {
             try
-            {            
+            {
                 var Cartdetail = new CartDetail()
                 {
                     ID = Guid.NewGuid(),
                     Quantity = p.Quantity,
                     Status = 0,
                     ProductID = p.ProductID,
-                    UserID = p.UserID,         
+                    UserID = p.UserID,
                 };
-               await context.AddAsync(Cartdetail);
-               await context.SaveChangesAsync();
+                await context.AddAsync(Cartdetail);
+                await context.SaveChangesAsync();
                 return true;
             }
             catch (Exception)
@@ -48,7 +48,7 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public async Task< bool> DelCartDetail(Guid id)
+        public async Task<bool> DelCartDetail(Guid id)
         {
             try
             {
@@ -65,14 +65,14 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public async Task< bool> EditCartDetail(Guid id, CartDetailVM p)
+        public async Task<bool> EditCartDetail(Guid id, CartDetailVM p)
         {
             try
             {
                 var listobj = context.cartDetails.ToList();
                 var obj = listobj.FirstOrDefault(c => c.ID == id);
-                obj.Quantity = p.Quantity;  
-                obj.Status = p.Status;
+                obj.Quantity = p.Quantity;
+                obj.Status = 0;
                 context.cartDetails.Update(obj);
                 context.SaveChanges();
                 return true;
@@ -90,7 +90,7 @@ namespace BILL.Serviece.Implements
             {
                 var listobj = context.cartDetails.ToList();
                 var obj = listobj.FirstOrDefault(c => c.ID == id);
-                obj.Status = 0; // 
+                obj.Status = 2; // 
                 context.cartDetails.Update(obj);
                 context.SaveChanges();
                 return true;
@@ -104,15 +104,18 @@ namespace BILL.Serviece.Implements
         }
         public async Task<List<CartDetailVM>> GetAllCartDetail()
         {
-            var listProduct =await context.Products.ToListAsync();
+            var listProduct = await context.Products.ToListAsync();
             var listCartDeail = await context.cartDetails.ToListAsync();
+            var listDetailCartPaied = listCartDeail.Where(p=>p.Status ==0);
+            var listUser = await context.Users.ToListAsync();
             var list = from a in listProduct
                        join b in listCartDeail on a.ID equals b.ProductID
+                       join c in listUser on b.UserID equals c.Id
                        select new CartDetailVM
                        {
                            ProductName = a.Name,
                            UrlImage = a.UrlImage,
-                           UserID = b.UserID,
+                           UserID = c.Id,
                            ID = b.ID,
                            ProductID = a.ID,
                            Price = a.Price,
@@ -123,7 +126,7 @@ namespace BILL.Serviece.Implements
 
             return list.ToList();
         }
-        public async Task< CartDetail> GetCartDetailById(Guid id)
+        public async Task<CartDetail> GetCartDetailById(Guid id)
         {
             var list = context.cartDetails.AsQueryable().ToList();
             return list.FirstOrDefault(c => c.ID == id);
@@ -164,7 +167,7 @@ namespace BILL.Serviece.Implements
                         billDetail.Quantity = item.Quantity;
                         billDetail.CodeBill = (cartListNow.Count() + "MaHoaDon" + 1).ToString();
                         billDetail.Status = 0;
-                        var product =await _productServiece.GetProductById(item.ProductID);
+                        var product = await _productServiece.GetProductById(item.ProductID);
                         if (product != null)
                         {
                             billDetail.Price = product.Price;
@@ -178,7 +181,7 @@ namespace BILL.Serviece.Implements
                 foreach (var item in cartListNow)
                 {
                     item.Status = 2; // trang thai da mua
-                    if(await EditCartDetailPaied(item.ID))
+                    if (await EditCartDetailPaied(item.ID))
                     {
                         Console.WriteLine("EditCartDetailPaied");
                     }
@@ -190,8 +193,8 @@ namespace BILL.Serviece.Implements
 
                 return false;
             }
-            
-            
+
+
         }
     }
 }
