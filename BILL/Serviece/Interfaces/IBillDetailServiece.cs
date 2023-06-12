@@ -13,7 +13,7 @@ namespace BILL.Serviece.Interfaces
         public  Task<bool> CreatBillDetail(BillDetailVM p);
         public Task<bool> EditBillDetail(Guid id, BillDetailVM p);
         public Task<bool> DelBillDetail(Guid id);
-        public Task<List<BillDetail>> GetAllBillDetail();
+        public Task<List<BillDetailVM>> GetAllBillDetail();
         public Task<BillDetail> GetBillDetailById(Guid id);
         public Task<bool> CreateBillDetailStatus0(Guid id);
     }

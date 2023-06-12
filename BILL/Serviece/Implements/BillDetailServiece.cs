@@ -34,8 +34,8 @@ namespace BILL.Serviece.Implements
                     BillID = p.BillID,
                     ProductID = p.ProductID,
                 };
-                context.Add(billdetail);
-                context.SaveChanges();
+               await context.AddAsync(billdetail);
+               await context.SaveChangesAsync();
                 return true;
             }
             catch (Exception)
@@ -100,9 +100,22 @@ namespace BILL.Serviece.Implements
                 return false;
             }
         }
-        public async Task<List<BillDetail>> GetAllBillDetail()
+        public async Task<List<BillDetailVM>> GetAllBillDetail()
         {
-            return context.billDetails.ToList();
+            var listBillDetail = await context.billDetails.ToListAsync();
+            var listBillDetailVM = new List<BillDetailVM>();
+            foreach (var item in listBillDetail)
+            {
+                var billDetailVM = new BillDetailVM();
+                billDetailVM.Price = item.Price;
+                billDetailVM.Quantity = item.Quantity;
+                billDetailVM.CodeBill = item.CodeBill;
+                billDetailVM.Status = item.Status;
+                billDetailVM.BillID = item.BillID;
+                billDetailVM.ProductID = item.ProductID;
+                listBillDetailVM.Add(billDetailVM);
+            }
+            return listBillDetailVM;
         }
 
         public async Task<BillDetail> GetBillDetailById(Guid id)

@@ -95,6 +95,25 @@ namespace BILL.Serviece.Implements
             }
         }
 
+        public async Task<bool> UpdateProductWhenConfirmBill(Guid id, ProductUpdateConfirmVM p)
+        {
+            try
+            {
+                var listobj = await _context.Products.ToListAsync();
+                var obj = listobj.FirstOrDefault(c => c.ID == id);
+                obj.Quantity = p.Quantity;
+                obj.Status = p.Status;
+                _context.Products.Update(obj);
+                await _context.SaveChangesAsync();
+                return true;
+
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
         public async Task<List<Product>> GetAllProduct()
         {
             return await _context.Products.ToListAsync();

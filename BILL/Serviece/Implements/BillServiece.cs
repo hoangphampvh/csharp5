@@ -2,6 +2,7 @@
 using ASMC5.Models;
 using BILL.Serviece.Interfaces;
 using BILL.ViewModel.Bill;
+using BILL.ViewModel.Product;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,12 @@ namespace BILL.Serviece.Implements
     public class BillServiece : IBillServiece
     {
         ASMDBContext context;
-        public BillServiece()
+        private readonly IBillDetailServiece _billDetailServiece;
+        private readonly IProductServiece _productServiece;
+        public BillServiece(IBillDetailServiece billDetailServiece, IProductServiece productServiece)
         {
+            _billDetailServiece = billDetailServiece;
+            _productServiece = productServiece;
             this.context = new ASMDBContext();
         }
 
@@ -24,12 +29,32 @@ namespace BILL.Serviece.Implements
             try
             {
                 var list = await context.Bills.ToListAsync();
-                var obj = list.FirstOrDefault(c => c.ID == id);
-
-                obj.Status = 0;
-                context.Bills.Update(obj);
-                context.SaveChanges();
-                return true;
+                Bill obj = list.FirstOrDefault(c => c.ID == id);
+                var detailBillList = await _billDetailServiece.GetAllBillDetail();
+                var BillDetail = detailBillList.FirstOrDefault(p=>p.BillID == obj.ID);
+                var IdProductInBillDetail = BillDetail.ProductID;
+                var product =await _productServiece.GetProductById(IdProductInBillDetail);
+                if (product != null)
+                {
+                    foreach (var item in detailBillList.Where(p=>p.ProductID ==IdProductInBillDetail))
+                    {
+                        product.Quantity = product.Quantity - item.Quantity;
+                        if (product.Quantity == 0) product.Status = 1;
+                        product.Status = 0;
+                        var UpdateProductVM = new ProductUpdateConfirmVM();
+                        product.Status = UpdateProductVM.Status;
+                        product.Quantity = UpdateProductVM.Quantity;
+                        
+                        if(await _productServiece.UpdateProductWhenConfirmBill(IdProductInBillDetail, UpdateProductVM))
+                        {
+                            obj.Status = 2; // confirm thanh cong
+                            context.Bills.Update(obj);
+                            context.SaveChanges();
+                            return true;
+                        }
+                    }
+                }
+                return false;
             }
             catch (Exception)
             {

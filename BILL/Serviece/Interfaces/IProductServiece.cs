@@ -16,5 +16,6 @@ namespace BILL.Serviece.Interfaces
         public Task<List<Product>> GetAllProduct();
         public Task<List<Product>> GetAllProductActive();
         public Task<ProductVM> GetProductById(Guid id);
+        public Task<bool> UpdateProductWhenConfirmBill(Guid id, ProductUpdateConfirmVM p);
     }
 }
