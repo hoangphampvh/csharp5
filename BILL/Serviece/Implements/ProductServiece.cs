@@ -122,5 +122,9 @@ namespace BILL.Serviece.Implements
             }
             return new ProductVM();
         }
+         public Task<bool> UpdateProductWhenConfirmBill(Guid id, ProductUpdateConfirmVM p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
