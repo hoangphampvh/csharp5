@@ -42,5 +42,11 @@ namespace ASMC5.Controllers
                 return BadRequest("xoá không thành công");
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> ListBillDetail()
+        {
+            var response = await _httpClient.GetFromJsonAsync<List<BillDetailView>>($"https://localhost:7257/api/BillDetail/GetListBillDetail");
+            return View(response);
+        }
     }
 }
