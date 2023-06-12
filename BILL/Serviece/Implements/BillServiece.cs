@@ -135,6 +135,24 @@ namespace BILL.Serviece.Implements
         {
                 return context.Bills.ToList();
         }
+        public async Task<List<BillView>> GetAllBillList()
+        {
+            var bills = await context.Bills.ToListAsync();
+            var users = await context.Users.ToListAsync();
+
+            var viewModel = from bill in bills
+                            join user in users on bill.UserID equals user.Id
+                            select new BillView
+                            {
+                                BillID = bill.ID,
+                                DateCreatBill = bill.DateCreatBill,
+                                DateOfPayment = bill.DateOfPayment,
+                                Status = bill.Status,
+                                UserName = user.UserName
+                            };
+
+            return viewModel.ToList();
+        }
 
         public async Task< Bill> GetBillById(Guid id)
         {
