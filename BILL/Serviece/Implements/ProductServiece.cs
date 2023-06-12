@@ -58,8 +58,7 @@ namespace BILL.Serviece.Implements
             {
                 var list = await _context.Products.ToListAsync();
                 var obj = list.FirstOrDefault(c => c.ID == id);
-                obj.Status = 1; // ta sẽ kh xóa mà thay đổi trạng thái từ hđ sang kh hđ
-                _context.Products.Update(obj);
+                _context.Products.Remove(obj);
                 await _context.SaveChangesAsync();
                 return true;
             }
@@ -83,6 +82,7 @@ namespace BILL.Serviece.Implements
                 obj.Supplier = p.Supplier;
                 obj.Description = p.Description;
                 obj.UrlImage = p.UrlImage;
+                obj.CreateDate = p.CreateDate;
                 _context.Products.Update(obj);
                 await _context.SaveChangesAsync();
                 return true;
@@ -95,25 +95,6 @@ namespace BILL.Serviece.Implements
             }
         }
 
-        public async Task<bool> UpdateProductWhenConfirmBill(Guid id, ProductUpdateConfirmVM p)
-        {
-            try
-            {
-                var listobj = await _context.Products.ToListAsync();
-                var obj = listobj.FirstOrDefault(c => c.ID == id);
-                obj.Quantity = p.Quantity;
-                obj.Status = p.Status;
-                _context.Products.Update(obj);
-                await _context.SaveChangesAsync();
-                return true;
-
-            }
-            catch (Exception)
-            {
-
-                return false;
-            }
-        }
         public async Task<List<Product>> GetAllProduct()
         {
             return await _context.Products.ToListAsync();
@@ -140,6 +121,10 @@ namespace BILL.Serviece.Implements
                 return ProductVM;
             }
             return new ProductVM();
+        }
+         public Task<bool> UpdateProductWhenConfirmBill(Guid id, ProductUpdateConfirmVM p)
+        {
+            throw new NotImplementedException();
         }
     }
 }

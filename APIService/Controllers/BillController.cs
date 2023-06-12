@@ -1,4 +1,5 @@
-﻿using ASMC5.Models;
+﻿using ASMC5.data;
+using ASMC5.Models;
 using BILL.Serviece.Implements;
 using BILL.Serviece.Interfaces;
 using BILL.ViewModel.Bill;
@@ -12,16 +13,19 @@ namespace APIServer.Controllers
     [ApiController]
     public class BillController : ControllerBase
     {
+        private readonly ASMDBContext _context;
         private readonly IBillServiece _bill;
 
         public BillController(IBillServiece billServiece)
         {
+            _context = new ASMDBContext();
             _bill = billServiece;
         }
         [HttpGet("GetAllBill")]
         public async Task<IActionResult> GetAllAsync()
         {
             var bills = await _bill.GetAllBill();
+
             return Ok(bills);
 
         }
@@ -50,7 +54,7 @@ namespace APIServer.Controllers
             var result = await _bill.EditBill(id, product);
             return Ok(result);
         }
-        [HttpPut("confirm/{Id}")]
+        [HttpDelete("confirm/{Id}")]
         public async Task<IActionResult> confirmBillDetailAsync(Guid Id)
         {
             var result = await _bill.confirmBill(Id);

@@ -27,14 +27,14 @@ namespace APIServer.Controllers
 
         [HttpPost("CreatProduct")]
 
-        public async Task<IActionResult> CreatProductAsync([FromForm]ProductVM product)
+        public async Task<IActionResult> CreatProductAsync([FromBody]ProductVM product)
         {
             var pro = await _productServiece.CreatProduct(product);
             return Ok(pro);
         }
         [HttpDelete("Delete/{Id}")]
 
-        public async Task<IActionResult> DeleteUserAsync(Guid Id)
+        public async Task<IActionResult> DeleteAsync(Guid Id)
         {
             var result = await _productServiece.DelProduct(Id);
             return Ok(result);
