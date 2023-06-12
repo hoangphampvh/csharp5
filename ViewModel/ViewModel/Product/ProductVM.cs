@@ -16,5 +16,6 @@ namespace BILL.ViewModel.Product
         public string? Description { get; set; }
         public string? UrlImage { get; set; }
         public DateTime? CreateDate { get; set; }
+        public Guid Id { get; set; }
     }
 }

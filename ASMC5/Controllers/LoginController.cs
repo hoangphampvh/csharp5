@@ -31,12 +31,12 @@ namespace ASMC5.Controllers
         public async Task<IActionResult> Login(LoginRequestVM loginUser)
         {
 
-            if (User.Identity != null && User.Identity.IsAuthenticated)
-            {
-                // Người dùng đã đăng nhập, chuyển hướng đến trang khác
-                return RedirectToAction("Index", "Home");
-            }
-            else
+            //if (User.Identity != null && User.Identity.IsAuthenticated)
+            //{
+            //    // Người dùng đã đăng nhập, chuyển hướng đến trang khác
+            //    return RedirectToAction("Index", "Home");
+            //}
+            //else
             {
                 // Convert registerUser to JSON
                 var loginUserJSON = JsonConvert.SerializeObject(loginUser);

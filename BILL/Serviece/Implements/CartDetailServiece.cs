@@ -3,6 +3,7 @@ using ASMC5.Models;
 using BILL.Serviece.Interfaces;
 using BILL.ViewModel.Bill;
 using BILL.ViewModel.Cart;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -101,11 +102,27 @@ namespace BILL.Serviece.Implements
                 return false;
             }
         }
-        public async Task< List<CartDetail>> GetAllCartDetail()
+        public async Task<List<CartDetailVM>> GetAllCartDetail()
         {
-            return context.cartDetails.ToList();
-        }
+            var listProduct =await context.Products.ToListAsync();
+            var listCartDeail = await context.cartDetails.ToListAsync();
+            var list = from a in listProduct
+                       join b in listCartDeail on a.ID equals b.ProductID
+                       select new CartDetailVM
+                       {
+                           ProductName = a.Name,
+                           UrlImage = a.UrlImage,
+                           UserID = b.UserID,
+                           ID = b.ID,
+                           ProductID = a.ID,
+                           Price = a.Price,
+                           Quantity = b.Quantity,
+                           Status = b.Status,
 
+                       };
+
+            return list.ToList();
+        }
         public async Task< CartDetail> GetCartDetailById(Guid id)
         {
             var list = context.cartDetails.AsQueryable().ToList();
@@ -132,7 +149,7 @@ namespace BILL.Serviece.Implements
                 }
                 // tao bill 
                 BillVM bill = new BillVM();
-                bill.Status = 2;
+                bill.Status = 1;
                 bill.DateCreatBill = DateTime.Now;
                 bill.UserID = cartDetail.UserID;
                 bill.Id = Guid.NewGuid();

@@ -14,7 +14,7 @@ namespace BILL.Serviece.Interfaces
         public Task<bool> EditCartDetail(Guid id, CartDetailVM p);
         public Task<bool> EditCartDetailPaied(Guid id);
         public Task<bool> DelCartDetail(Guid id);
-        public Task<List<CartDetail>> GetAllCartDetail();
+        public Task<List<CartDetailVM>> GetAllCartDetail();
         public Task<bool> Pay(CartDetailVM cartDetail);
 
         public Task<CartDetail> GetCartDetailById(Guid id);

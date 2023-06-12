@@ -10,8 +10,12 @@ namespace BILL.ViewModel.Cart
     {
         public int Quantity { get; set; }
         public Guid UserID { get; set; }
+        public Guid ID { get; set; }
+
         public int Status { get; set; }
         public Guid ProductID { get; set; }
-
+        public string? ProductName { get; set; }
+        public decimal Price { get; set; }
+        public string? UrlImage { get; set; }
     }
 }

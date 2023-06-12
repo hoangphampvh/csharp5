@@ -316,5 +316,17 @@ namespace BILL.Serviece.Implements
             var list = await _context.Users.AsQueryable().ToListAsync();
             return list.FirstOrDefault(c => c.Id == id);
         }
+        public async Task<UserVM> GetUserByName(string name)
+        {
+            User user = await _context.Users.AsQueryable().FirstOrDefaultAsync(c => c.UserName == name);
+            UserVM userVM = new UserVM();
+            userVM.UserName = user.UserName;
+            userVM.PhoneNumber = user.PhoneNumber;
+            userVM.DiaChi = user.DiaChi;
+            userVM.Email = user.Email;
+            userVM.Id = user.Id;
+            userVM.Status = user.Status;
+            return userVM;  
+        }
     }
 }

@@ -19,6 +19,7 @@ builder.Services.AddDbContext<ASMDBContext>(options =>
 });
 builder.Services.AddHttpClient();
 
+builder.Services.AddHttpContextAccessor();
 
 // cau hinh identity
 builder.Services.AddIdentity<User, Position>()
@@ -125,7 +126,7 @@ builder.Services.AddAuthentication().AddGoogle(option =>
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("ADMIN", policy => { policy.RequireAuthenticatedUser(); policy.RequireRole("ADMIN"); });
-    options.AddPolicy("Clinet", policy => { policy.RequireAuthenticatedUser(); policy.RequireRole("Clinet"); });
+    options.AddPolicy("CLIENT", policy => { policy.RequireAuthenticatedUser(); policy.RequireRole("CLIENT"); });
     options.AddPolicy("ClinetOld", policy => { policy.RequireAuthenticatedUser(); policy.RequireRole("ClientOld"); });
 
 });

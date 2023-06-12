@@ -2,6 +2,7 @@
 using ASMC5.ViewModel;
 using BILL.ViewModel.Account;
 using BILL.ViewModel.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
@@ -10,6 +11,8 @@ using ViewModel.ViewModel.Role;
 
 namespace ASMC5.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
+
     public class UserController : Controller
     {
         private readonly HttpClient _httpClient;
@@ -19,11 +22,13 @@ namespace ASMC5.Controllers
         }
        
         [HttpGet]
+        
         public ActionResult Create()
         {
             return View();
         }
         [HttpPost]
+
         public async Task<IActionResult> Create(UserCreateVM Create)
         {
             var jsonObj = JsonConvert.SerializeObject(Create);

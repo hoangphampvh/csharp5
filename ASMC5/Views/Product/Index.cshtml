@@ -5,10 +5,13 @@
 }
 
 <h1>Index</h1>
+@if (User.IsInRole("ADMIN"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -78,13 +81,29 @@
                     @Html.DisplayFor(modelItem => item.CreateDate)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    @using (Html.BeginForm("Delete", "Product", new { item.Id }))
+                    @if (User.IsInRole("ADMIN"))
                     {
-                        <input type="hidden" value="@item.Id" name="id" />
-                        <input type="submit" value="Delete" class="btn btn-danger" />
+                        <a asp-action="Details" asp-route-id="@item.Id"> Details </a><span>|</span>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        @using (Html.BeginForm("Delete", "Product", new { item.Id }))
+                        {
+                            <input type="hidden" value="@item.Id" name="id" />
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                         
+                        }
+                        <form asp-controller="Cart" asp-action="addToCart" asp-route-id="@item?.Id" method="post">
+                            <input type="submit" value="AddToCart" class="btn btn-primary" />
+                        </form>
                     }
+                    else
+                    {
+                        <a asp-action="Details" asp-route-id="@item.Id"> Details </a >
+                        <form asp-controller="Cart" asp-action="addToCart" asp-route-id="@item?.Id" method="post">
+                            <input type="submit" value="AddToCart" class="btn btn-primary" />
+                        </form>
+                    }
+
+
                 </td>
             </tr>
         }

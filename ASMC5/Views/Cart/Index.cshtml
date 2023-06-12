@@ -1,5 +1,5 @@
 ﻿
-@model IEnumerable<ASMC5.Models.CartDetail>
+@model IEnumerable<BILL.ViewModel.Cart.CartDetailVM>
 
 @{
     decimal sumMoney = 0;
@@ -28,19 +28,19 @@
         {
             <tr>
                 <td>@(stt++)</td>
-                @if (cartitem.Product != null)
+                @if (cartitem.ProductName != null)
                 {
-                    <td>@cartitem.Product.Name</td>
-                    <td>@cartitem.Product.Price</td>
+                    <td>@cartitem.ProductName</td>
+                    <td>@cartitem.Price</td>
 
                     @if (cartitem.Status == 0)
                     {
                         @using (Html.BeginForm("Update", "Cart", new { cartitem.ID, cartitem.Quantity, cartitem.Status, cartitem.ProductID, cartitem.UserID }))
                         {
-                            <input type="hidden" value="@cartitem.ProductID" name="IdProduct" />
-                            <input type="hidden" value="@cartitem.UserID" name="IdUser" />
+                            <input type="hidden" value="@cartitem.ProductID" name="ProductID" />
+                            <input type="hidden" value="@cartitem.UserID" name="UserID" />
                             <td><input asp-for="@cartitem.Quantity" name="Quantilty" /></td>
-                            <td>@(cartitem.Quantity * cartitem.Product.Price)</td>
+                            <td>@(cartitem.Quantity * cartitem.Price)</td>
                             <td>
    
                                     <p>Chua Mua</p>
@@ -69,7 +69,7 @@
                             <input type="hidden" value="@cartitem.ProductID" name="IdProduct" />
                             <input type="hidden" value="@cartitem.UserID" name="IdUser" />
                             <td><input asp-for="@cartitem.Quantity" name="Quantilty" /></td>
-                            <td>@(cartitem.Quantity * cartitem.Product.Price)</td>
+                            <td>@(cartitem.Quantity * cartitem.Price)</td>
                             <td>
                                     <p>Da Mua</p>
                             
@@ -94,7 +94,7 @@
                                                 <input type="hidden" value="@cartitem.ProductID" name="IdProduct" />
                                                 <input type="hidden" value="@cartitem.UserID" name="IdUser" />
                                                 <td>@cartitem.Quantity</td>
-                                                <td>@(cartitem.Quantity * cartitem.Product.Price)</td>
+                                                <td>@(cartitem.Quantity * cartitem.Price)</td>
                                                 <td>                              
                                                             <p>Cho Xac Nhan Mua</p>
                                                 </td>
@@ -111,14 +111,14 @@
     @foreach (var item in Model)
     {
 
-        if (item.Product != null)
+        if (item != null)
         {
-            sumMoney = sumMoney + (item.Quantity * item.Product.Price);
+            sumMoney = sumMoney + (item.Quantity * item.Price);
         }
     }
     <p>Tong Tien: @sumMoney</p>
 
-    @using (Html.BeginForm("ThanhToan", "Cart", FormMethod.Post))
+    @using (Html.BeginForm("Pay", "Cart", FormMethod.Post))
     {
         foreach (var cartitem in Model)
         {

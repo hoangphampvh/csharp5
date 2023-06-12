@@ -10609,11 +10609,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\cs5\\APIService\\APIServer.csproj",
+      "projectUniqueName": "D:\\CSHAP5\\APIService\\APIServer.csproj",
       "projectName": "APIServer",
-      "projectPath": "D:\\cs5\\APIService\\APIServer.csproj",
+      "projectPath": "D:\\CSHAP5\\APIService\\APIServer.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\cs5\\APIService\\obj\\",
+      "outputPath": "D:\\CSHAP5\\APIService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -10630,11 +10630,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\cs5\\ASMC5\\ASMC5.csproj": {
-              "projectPath": "D:\\cs5\\ASMC5\\ASMC5.csproj"
+            "D:\\CSHAP5\\ASMC5\\ASMC5.csproj": {
+              "projectPath": "D:\\CSHAP5\\ASMC5\\ASMC5.csproj"
             },
-            "D:\\cs5\\BILL\\BILL.csproj": {
-              "projectPath": "D:\\cs5\\BILL\\BILL.csproj"
+            "D:\\CSHAP5\\BILL\\BILL.csproj": {
+              "projectPath": "D:\\CSHAP5\\BILL\\BILL.csproj"
             }
           }
         }

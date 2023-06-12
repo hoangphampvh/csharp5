@@ -29,8 +29,6 @@ namespace APIServer.Controllers
             return BadRequest();
         }
         [HttpGet("GetAllActive")]
-
-
         public async Task<IActionResult> GetAllActiveAsync()
         {
             var user = await _userServiece.GetAllUserActive();
@@ -39,13 +37,22 @@ namespace APIServer.Controllers
         }
         [HttpGet("GetById/{id}")]
 
-
         public async Task<IActionResult> GetById(Guid id)
         {
             var user = await _userServiece.GetUserById(id);
             if (user != null) return Ok(user);
             return BadRequest();
         }
+
+        [HttpGet("GetByName/{name}")]
+
+        public async Task<IActionResult> GetUserByName(string name)
+        {
+            var user = await _userServiece.GetUserByName(name);
+            if (user != null) return Ok(user);
+            return BadRequest();
+        }
+
         [HttpDelete("Delete/{Id}")]
 
 

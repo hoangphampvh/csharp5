@@ -24,7 +24,7 @@ namespace APIServer.Controllers
             return Ok(cartde);
         }
         [HttpPost("CreatCartDetail")]
-        public async Task<IActionResult> CreateCartDetailDetailAsync([FromForm] CartDetailVM cartde)
+        public async Task<IActionResult> CreateCartDetailDetailAsync([FromBody] CartDetailVM cartde)
         {
             var cartdetais = await _cartDetail.CreatCartDetail(cartde);
             return Ok(cartdetais);

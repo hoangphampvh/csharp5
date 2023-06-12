@@ -1,11 +1,14 @@
 ﻿using BILL.ViewModel.Account;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Data;
 using System.Text;
 using ViewModel.ViewModel.Role;
 
 namespace ASMC5.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     public class RoleController : Controller
     {
         private readonly HttpClient _httpClient;
@@ -13,6 +16,7 @@ namespace ASMC5.Controllers
         {
             _httpClient = httpClient;
         }
+        
         [HttpGet]
         public ActionResult Create()
         {
@@ -36,6 +40,7 @@ namespace ASMC5.Controllers
             }
         }
         [HttpGet]
+
         public async Task<IActionResult> Index()
         {           
             var response = await _httpClient.GetFromJsonAsync<List<RolesVM>>($"https://localhost:7257/api/Roles/GetAllActive");

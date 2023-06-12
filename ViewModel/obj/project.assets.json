@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\cs5\\ViewModel\\ViewModel.csproj",
+      "projectUniqueName": "D:\\CSHAP5\\ViewModel\\ViewModel.csproj",
       "projectName": "ViewModel",
-      "projectPath": "D:\\cs5\\ViewModel\\ViewModel.csproj",
+      "projectPath": "D:\\CSHAP5\\ViewModel\\ViewModel.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\cs5\\ViewModel\\obj\\",
+      "outputPath": "D:\\CSHAP5\\ViewModel\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -15,6 +15,7 @@ namespace BILL.Serviece.Interfaces
         public Task<List<UserVM>> GetAllUser();
         public Task<List<UserVM>> GetAllUserActive();
         public Task<User> GetUserById(Guid id);
+        public Task<UserVM> GetUserByName(string name);
         public Task<LoginResponesVM> LoginWithJWT(LoginRequestVM loginRequest);
         public Task<bool> SignUp(SignUpVM p);
 

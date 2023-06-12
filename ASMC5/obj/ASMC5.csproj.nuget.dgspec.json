@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\cs5\\ASMC5\\ASMC5.csproj": {}
+    "D:\\CSHAP5\\ASMC5\\ASMC5.csproj": {}
   },
   "projects": {
-    "D:\\cs5\\ASMC5\\ASMC5.csproj": {
+    "D:\\CSHAP5\\ASMC5\\ASMC5.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\cs5\\ASMC5\\ASMC5.csproj",
+        "projectUniqueName": "D:\\CSHAP5\\ASMC5\\ASMC5.csproj",
         "projectName": "ASMC5",
-        "projectPath": "D:\\cs5\\ASMC5\\ASMC5.csproj",
+        "projectPath": "D:\\CSHAP5\\ASMC5\\ASMC5.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\cs5\\ASMC5\\obj\\",
+        "outputPath": "D:\\CSHAP5\\ASMC5\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\cs5\\ViewModel\\ViewModel.csproj": {
-                "projectPath": "D:\\cs5\\ViewModel\\ViewModel.csproj"
+              "D:\\CSHAP5\\ViewModel\\ViewModel.csproj": {
+                "projectPath": "D:\\CSHAP5\\ViewModel\\ViewModel.csproj"
               }
             }
           }
@@ -130,14 +130,14 @@
         }
       }
     },
-    "D:\\cs5\\ViewModel\\ViewModel.csproj": {
+    "D:\\CSHAP5\\ViewModel\\ViewModel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\cs5\\ViewModel\\ViewModel.csproj",
+        "projectUniqueName": "D:\\CSHAP5\\ViewModel\\ViewModel.csproj",
         "projectName": "ViewModel",
-        "projectPath": "D:\\cs5\\ViewModel\\ViewModel.csproj",
+        "projectPath": "D:\\CSHAP5\\ViewModel\\ViewModel.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\cs5\\ViewModel\\obj\\",
+        "outputPath": "D:\\CSHAP5\\ViewModel\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
