@@ -123,6 +123,27 @@ namespace BILL.Serviece.Implements
             var list = context.billDetails.AsQueryable().ToList();
             return list.FirstOrDefault(c => c.ID == id);
         }
+        public async Task<List<BillDetailView>> ListBillDetail()
+        {
+            var billDetailViews = await context.billDetails
+            .Include(bd => bd.Product)
+        .Include(bd => bd.Bill)
+            .ThenInclude(b => b.User)
+        .Select(bd => new BillDetailView
+        {
+            ID = bd.ID,
+            CodeBill = bd.CodeBill,
+            Price = bd.Price,
+            Quantity = bd.Quantity,
+            Status = bd.Status,
+            BillID = bd.BillID,
+            ProductID = bd.ProductID,
+            NameProduct = bd.Product.Name,
+            UserName = bd.Bill.User.UserName
+        })
+        .ToListAsync();
+            return billDetailViews;
+        }
 
     }
 }

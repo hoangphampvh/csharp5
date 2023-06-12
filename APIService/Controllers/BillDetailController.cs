@@ -47,5 +47,11 @@ namespace APIServer.Controllers
             var result = await _billDetail.EditBillDetail(id, billdetail);
             return Ok(result);
         }
+        [HttpGet("GetListBillDetail")]
+        public async Task<IActionResult> GetListAsync()
+        {
+            var billDetails = await _billDetail.ListBillDetail();
+            return Ok(billDetails);
+        }
     }
 }

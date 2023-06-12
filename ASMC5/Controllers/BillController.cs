@@ -18,7 +18,7 @@ namespace ASMC5.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var response = await _httpClient.GetFromJsonAsync<List<Bill>>($"https://localhost:7257/api/Bill/GetAllBill");
+            var response = await _httpClient.GetFromJsonAsync<List<BillView>>($"https://localhost:7257/api/Bill/GetAllList");
             return View(response);
         }
 
@@ -41,6 +41,12 @@ namespace ASMC5.Controllers
             {
                 return BadRequest("xoá không thành công");
             }
+        }
+        [HttpGet]
+        public async Task<IActionResult> ListBillDetail()
+        {
+            var response = await _httpClient.GetFromJsonAsync<List<BillDetailView>>($"https://localhost:7257/api/BillDetail/GetListBillDetail");
+            return View(response);
         }
     }
 }

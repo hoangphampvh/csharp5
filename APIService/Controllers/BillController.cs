@@ -54,11 +54,18 @@ namespace APIServer.Controllers
             var result = await _bill.EditBill(id, product);
             return Ok(result);
         }
-        [HttpPut("confirm/{Id}")]
+        [HttpDelete("confirm/{Id}")]
         public async Task<IActionResult> confirmBillDetailAsync(Guid Id)
         {
             var result = await _bill.confirmBill(Id);
             return Ok(result);
         }
+        [HttpGet("GetAllList")]
+        public async Task<IActionResult> GetBillProductList()
+        {
+            var list = await _bill.GetAllBillList();
+            return Ok(list);
+        }
+
     }
 }

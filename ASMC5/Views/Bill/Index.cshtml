@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ASMC5.Models.Bill>
+﻿@model IEnumerable<ViewModel.ViewModel.Bill.BillView>
 
 @{
     ViewData["Title"] = "Index";
@@ -10,7 +10,10 @@
     <thead>
         <tr>
             <th>
-                <b> User</b>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                Mã hoá đơn
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DateCreatBill)
@@ -21,29 +24,47 @@
             <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
+            
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => modelItem.FirstOrDefault(p=>p.UserID == item.UserID).User.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateCreatBill)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateOfPayment)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.ActionLink("Detais", "Details", new { id=item.ID  }) |
-                </td>
-            </tr>
-        }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreatBill)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfPayment)
+            </td>
+            <td>
+                    @if (item.Status == 0)
+                    {
+                        <p> đã xác nhận</p>
+                    }
+                    @if(item.Status ==1)
+                    {
+                        <p>chưa xác nhận</p>
+                    }
+            </td>
+           
+            <td>
+                    <p>
+                        <a asp-action="ListBillDetail">Detail</a>
+                    </p>
+                @using (Html.BeginForm("DeleteBill", "Bill", new { item.BillID }))
+                    {
+                        <input type="hidden" value="@item.BillID" name="id" />
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                    } 
+            </td>
+        </tr>
+}
     </tbody>
 </table>
