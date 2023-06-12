@@ -22,10 +22,10 @@ namespace BILL.Serviece.Implements
         {
             try
             {
-                var user = await _context.Users.FindAsync(p.UserId);
+               
                 var cart = new Cart()
                 {
-                    UserId = user.Id,
+                    UserId = p.UserId,
                     Description = p.Description,
                     Status = p.Status,
                     

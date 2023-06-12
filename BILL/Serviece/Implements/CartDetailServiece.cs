@@ -160,7 +160,7 @@ namespace BILL.Serviece.Implements
                 }
                 foreach (var item in cartListNow)
                 {
-                    item.Status = 2;
+                    item.Status = 2; // trang thai da mua
                     if(await EditCartDetailPaied(item.ID))
                     {
                         Console.WriteLine("EditCartDetailPaied");

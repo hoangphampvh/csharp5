@@ -36,7 +36,7 @@ namespace APIServer.Controllers
 
 
         [HttpPost("CreatCart")]
-        public async Task<IActionResult> CreatCartAsync([FromForm]CartVN cartt)
+        public async Task<IActionResult> CreatCartAsync([FromBody]CartVN cartt)
         {
             var car = await _cartServiece.CreatCart(cartt);
             return Ok(car);

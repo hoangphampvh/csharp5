@@ -11,6 +11,8 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 using ASMC5.ViewModel;
 using Newtonsoft.Json;
 using System.Security.Principal;
+using BILL.ViewModel.Cart;
+using System.Text;
 
 namespace ASMC5.Controllers
 {
@@ -20,14 +22,15 @@ namespace ASMC5.Controllers
         private readonly UserManager<User> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly HttpContext _httpContext;
-
+        private readonly HttpClient _httpClient;
         public const string key = "User";
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
-        public AccountController(SignInManager<User> signInManager, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor)
+        public AccountController(SignInManager<User> signInManager, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor, HttpClient httpClient)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _httpContext = httpContextAccessor.HttpContext;
+            _httpClient = httpClient;
         }
 
         //   [HttpGet("/login/")]
@@ -51,6 +54,7 @@ namespace ASMC5.Controllers
             return Challenge(properties, "Google");
         }
         //[HttpGet("login/OnGetCallbackAsync")]
+        User user = new User(); 
         public async Task<IActionResult> CallbackGoogle()
         {
             var authenticateResult = await HttpContext.AuthenticateAsync("Google");
@@ -66,6 +70,7 @@ namespace ASMC5.Controllers
                     Password = "Clinet123@$",
                     // Các thuộc tính khác của người dùng
                 };
+                user = newUser;
                 var checkUser = await _userManager.FindByEmailAsync(newUser.Email);
 
                 if (checkUser == null)
@@ -83,6 +88,8 @@ namespace ASMC5.Controllers
                         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identityUserSignUp));
                         // luu thong tin nguoi dung vao cookies
                         _httpContext.Session.SetString(key, JsonSerializer.Serialize(newUser));
+                        await CreateCart();
+
                         return RedirectToAction(nameof(NotNulls));
                     }
                     return BadRequest("false");
@@ -92,19 +99,35 @@ namespace ASMC5.Controllers
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                           principal, new AuthenticationProperties() { IsPersistent = false });
                 _httpContext.Session.SetString(key, JsonSerializer.Serialize(checkUser));
-
+                    await CreateCart();
 
                 return RedirectToAction(nameof(NotNulls));
             }
             return RedirectToAction(nameof(nulls));
 
         }
+        public async Task<bool> CreateCart()
+        {
+            var cartVM = new CartVN();
+            cartVM.Status = 0;
+            cartVM.Description = "Giỏ Hàng";
+            cartVM.UserId = user.Id;
+            var CartJSON = JsonConvert.SerializeObject(cartVM);
+
+            // Convert to string content
+            var stringContent = new StringContent(CartJSON, Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync($"https://localhost:7257/api/Cart/CreatCart", stringContent);
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }return false;
+        }
         public async Task<ClaimsIdentity> getRoleAndClaims(User user)
         {
             var roles = await _userManager.GetRolesAsync(user);
             if (roles.Count == 0)
             {
-                await _userManager.AddToRoleAsync(user, "CLIENT ");
+                await _userManager.AddToRoleAsync(user, "CLIENT");
             }
             var claims = new List<Claim>();
             roles = await _userManager.GetRolesAsync(user);

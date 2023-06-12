@@ -3,6 +3,7 @@ using ASMC5.Models;
 using ASMC5.ViewModel;
 using BILL.Serviece.Interfaces;
 using BILL.ViewModel.Account;
+using BILL.ViewModel.Cart;
 using BILL.ViewModel.User;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -26,14 +27,15 @@ namespace BILL.Serviece.Implements
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
-
+        private readonly ICartServiece _cartServiece;
         public UserServiece(UserManager<User> userManager, SignInManager<User> signInManager,
-            IConfiguration configuration)
+            IConfiguration configuration,ICartServiece cartServiece)
         {
             _context = new ASMDBContext();
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
+            _cartServiece = cartServiece;
          
         }
         public async Task<LoginResponesVM> LoginWithJWT(LoginRequestVM loginRequest)
@@ -102,8 +104,14 @@ namespace BILL.Serviece.Implements
                 var result = await _userManager.CreateAsync(user, p.Password);
                 if (result.Succeeded)
                 {
-
                    await _userManager.AddToRoleAsync(user,"Client");
+                    var cartVM = new CartVN();
+                    cartVM.UserId = user.Id;
+                    cartVM.Description = "Giỏ Hàng";
+                    if (await _cartServiece.CreatCart(cartVM))
+                    {
+                        Console.WriteLine("cart create thanh cong");
+                    }
                     return true;
                 }
                 return false;
@@ -161,8 +169,14 @@ namespace BILL.Serviece.Implements
                 var result = await _userManager.CreateAsync(user, p.Password);
                 if (result.Succeeded)
                 {
-
                     await _userManager.AddToRoleAsync(user,"Client");
+                    var cartVM = new CartVN();
+                    cartVM.UserId = user.Id;
+                    cartVM.Description = "Giỏ Hàng";
+                    if (await _cartServiece.CreatCart(cartVM))
+                    {
+                        Console.WriteLine("cart create thanh cong");
+                    }
                     return true;
                 }
                 return false;
