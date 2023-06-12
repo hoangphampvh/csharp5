@@ -4,9 +4,11 @@ using BILL.ViewModel.Bill;
 using BILL.ViewModel.Product;
 using ASMC5.Models;
 using ViewModel.ViewModel.Role;
+using ViewModel.ViewModel.Bill;
 
 namespace ASMC5.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     public class BillController : Controller
     {
         private readonly HttpClient _httpClient;
