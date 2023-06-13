@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ASMC5.Models;
 using BILL.ViewModel.Bill;
+using ViewModel.ViewModel.Bill;
 
 namespace BILL.Serviece.Interfaces
 {

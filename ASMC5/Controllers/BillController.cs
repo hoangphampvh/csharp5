@@ -32,7 +32,7 @@ namespace ASMC5.Controllers
 
         }
         [HttpPost]
-        public async Task<IActionResult> Delete(Guid Id)
+        public async Task<IActionResult> DeleteBill(Guid Id)
         {
             var obj = await _httpClient.DeleteAsync($"https://localhost:7257/api/Bill/Delete/{Id}");
             if (obj.IsSuccessStatusCode)

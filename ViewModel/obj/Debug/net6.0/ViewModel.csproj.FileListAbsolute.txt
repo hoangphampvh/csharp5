@@ -46,3 +46,15 @@ D:\visualStudio\cs5\ViewModel\obj\Debug\net6.0\ViewModel.dll
 D:\visualStudio\cs5\ViewModel\obj\Debug\net6.0\refint\ViewModel.dll
 D:\visualStudio\cs5\ViewModel\obj\Debug\net6.0\ViewModel.pdb
 D:\visualStudio\cs5\ViewModel\obj\Debug\net6.0\ref\ViewModel.dll
+C:\Users\Admin\Source\Repos\csharp5\ViewModel\bin\Debug\net6.0\ViewModel.deps.json
+C:\Users\Admin\Source\Repos\csharp5\ViewModel\bin\Debug\net6.0\ViewModel.dll
+C:\Users\Admin\Source\Repos\csharp5\ViewModel\bin\Debug\net6.0\ViewModel.pdb
+C:\Users\Admin\Source\Repos\csharp5\ViewModel\obj\Debug\net6.0\ViewModel.csproj.AssemblyReference.cache
+C:\Users\Admin\Source\Repos\csharp5\ViewModel\obj\Debug\net6.0\ViewModel.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Source\Repos\csharp5\ViewModel\obj\Debug\net6.0\ViewModel.AssemblyInfoInputs.cache
+C:\Users\Admin\Source\Repos\csharp5\ViewModel\obj\Debug\net6.0\ViewModel.AssemblyInfo.cs
+C:\Users\Admin\Source\Repos\csharp5\ViewModel\obj\Debug\net6.0\ViewModel.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Source\Repos\csharp5\ViewModel\obj\Debug\net6.0\ViewModel.dll
+C:\Users\Admin\Source\Repos\csharp5\ViewModel\obj\Debug\net6.0\refint\ViewModel.dll
+C:\Users\Admin\Source\Repos\csharp5\ViewModel\obj\Debug\net6.0\ViewModel.pdb
+C:\Users\Admin\Source\Repos\csharp5\ViewModel\obj\Debug\net6.0\ref\ViewModel.dll

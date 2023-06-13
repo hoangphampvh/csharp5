@@ -65,7 +65,7 @@ namespace ASMC5.Controllers
                 var newUser = new User
                 {
                     Id = Guid.NewGuid(),
-                    UserName = string.Join("", authenticateResult.Principal.FindFirstValue(ClaimTypes.Name).Replace(" ", "").Split()),
+                    UserName = string.Join("", authenticateResult.Principal.FindFirstValue(ClaimTypes.Email).Replace(" ", "").Split()),
                     Email = authenticateResult.Principal.FindFirstValue(ClaimTypes.Email),
                     Password = "Clinet123@$",
                     // Các thuộc tính khác của người dùng

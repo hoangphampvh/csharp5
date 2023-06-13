@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YaYpk29zTLA4BByhz28QicWoZWAXqMkhKCCTeauNtQqt7cB8569lbgAJybUKaWVlvEjhe11nOzw5u5W6SPMEew==",
+  "dgSpecHash": "WJDlYO71QaoHTX4KxH9MoIk2IVTtCqGQIyWDQOJw02igkQK/jvm7dz119mg33q4l6z/sCBkoP/hYQe6OnolYFA==",
   "success": true,
-  "projectFilePath": "D:\\visualStudio\\cs5\\ViewModel\\ViewModel.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\Source\\Repos\\csharp5\\ViewModel\\ViewModel.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.12\\microsoft.aspnetcore.app.ref.6.0.12.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.12\\microsoft.windowsdesktop.app.ref.6.0.12.nupkg.sha512",

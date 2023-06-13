@@ -10609,11 +10609,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\visualStudio\\cs5\\APIService\\APIServer.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\Source\\Repos\\csharp5\\APIService\\APIServer.csproj",
       "projectName": "APIServer",
-      "projectPath": "D:\\visualStudio\\cs5\\APIService\\APIServer.csproj",
+      "projectPath": "C:\\Users\\Admin\\Source\\Repos\\csharp5\\APIService\\APIServer.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\visualStudio\\cs5\\APIService\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\Source\\Repos\\csharp5\\APIService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -10630,11 +10630,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\visualStudio\\cs5\\ASMC5\\ASMC5.csproj": {
-              "projectPath": "D:\\visualStudio\\cs5\\ASMC5\\ASMC5.csproj"
+            "C:\\Users\\Admin\\Source\\Repos\\csharp5\\ASMC5\\ASMC5.csproj": {
+              "projectPath": "C:\\Users\\Admin\\Source\\Repos\\csharp5\\ASMC5\\ASMC5.csproj"
             },
-            "D:\\visualStudio\\cs5\\BILL\\BILL.csproj": {
-              "projectPath": "D:\\visualStudio\\cs5\\BILL\\BILL.csproj"
+            "C:\\Users\\Admin\\Source\\Repos\\csharp5\\BILL\\BILL.csproj": {
+              "projectPath": "C:\\Users\\Admin\\Source\\Repos\\csharp5\\BILL\\BILL.csproj"
             }
           }
         }

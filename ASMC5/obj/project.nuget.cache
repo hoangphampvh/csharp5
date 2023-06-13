@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KZ7tIKjrf3eTNKnWeTGrQ75ABFhbL/WwWggq+rMMtU3V7cQrU2ZTbPoRHUhODjTtTvuiZtmmrM0ZWTc0jYS0DQ==",
+  "dgSpecHash": "y0rBBcI3/lRpYeExlF2zZaqJOF568QTdM3HFTYN4mH1TfMxkEpgHja/sMWqcx8MgqBnjjmKwFlnKDlCNUTIWAQ==",
   "success": true,
-  "projectFilePath": "D:\\visualStudio\\cs5\\ASMC5\\ASMC5.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\Source\\Repos\\csharp5\\ASMC5\\ASMC5.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
