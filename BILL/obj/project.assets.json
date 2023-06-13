@@ -10664,11 +10664,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\CSHAP5\\BILL\\BILL.csproj",
+      "projectUniqueName": "D:\\visualStudio\\cs5\\BILL\\BILL.csproj",
       "projectName": "BILL",
-      "projectPath": "D:\\CSHAP5\\BILL\\BILL.csproj",
+      "projectPath": "D:\\visualStudio\\cs5\\BILL\\BILL.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\CSHAP5\\BILL\\obj\\",
+      "outputPath": "D:\\visualStudio\\cs5\\BILL\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -10685,11 +10685,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\CSHAP5\\ASMC5\\ASMC5.csproj": {
-              "projectPath": "D:\\CSHAP5\\ASMC5\\ASMC5.csproj"
+            "D:\\visualStudio\\cs5\\ASMC5\\ASMC5.csproj": {
+              "projectPath": "D:\\visualStudio\\cs5\\ASMC5\\ASMC5.csproj"
             },
-            "D:\\CSHAP5\\ViewModel\\ViewModel.csproj": {
-              "projectPath": "D:\\CSHAP5\\ViewModel\\ViewModel.csproj"
+            "D:\\visualStudio\\cs5\\ViewModel\\ViewModel.csproj": {
+              "projectPath": "D:\\visualStudio\\cs5\\ViewModel\\ViewModel.csproj"
             }
           }
         }

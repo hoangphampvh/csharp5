@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\CSHAP5\\ViewModel\\ViewModel.csproj": {}
+    "D:\\visualStudio\\cs5\\ViewModel\\ViewModel.csproj": {}
   },
   "projects": {
-    "D:\\CSHAP5\\ViewModel\\ViewModel.csproj": {
+    "D:\\visualStudio\\cs5\\ViewModel\\ViewModel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\CSHAP5\\ViewModel\\ViewModel.csproj",
+        "projectUniqueName": "D:\\visualStudio\\cs5\\ViewModel\\ViewModel.csproj",
         "projectName": "ViewModel",
-        "projectPath": "D:\\CSHAP5\\ViewModel\\ViewModel.csproj",
+        "projectPath": "D:\\visualStudio\\cs5\\ViewModel\\ViewModel.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\CSHAP5\\ViewModel\\obj\\",
+        "outputPath": "D:\\visualStudio\\cs5\\ViewModel\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
