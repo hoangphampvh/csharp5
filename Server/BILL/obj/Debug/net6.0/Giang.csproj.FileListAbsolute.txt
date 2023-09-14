@@ -1,0 +1,5 @@
+D:\New folder\CSHAP5\Server\BILL\obj\Debug\net6.0\Giang.csproj.AssemblyReference.cache
+D:\New folder\CSHAP5\Server\BILL\obj\Debug\net6.0\Giang.GeneratedMSBuildEditorConfig.editorconfig
+D:\New folder\CSHAP5\Server\BILL\obj\Debug\net6.0\Giang.AssemblyInfoInputs.cache
+D:\New folder\CSHAP5\Server\BILL\obj\Debug\net6.0\Giang.AssemblyInfo.cs
+D:\New folder\CSHAP5\Server\BILL\obj\Debug\net6.0\Giang.csproj.CoreCompileInputs.cache

@@ -1,0 +1,42 @@
+D:\CSHAP5\DAL\bin\Debug\net6.0\DAL.deps.json
+D:\CSHAP5\DAL\bin\Debug\net6.0\DAL.runtimeconfig.json
+D:\CSHAP5\DAL\bin\Debug\net6.0\DAL.dll
+D:\CSHAP5\DAL\bin\Debug\net6.0\DAL.pdb
+D:\CSHAP5\DAL\obj\Debug\net6.0\DAL.csproj.AssemblyReference.cache
+D:\CSHAP5\DAL\obj\Debug\net6.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\CSHAP5\DAL\obj\Debug\net6.0\DAL.AssemblyInfoInputs.cache
+D:\CSHAP5\DAL\obj\Debug\net6.0\DAL.AssemblyInfo.cs
+D:\CSHAP5\DAL\obj\Debug\net6.0\DAL.csproj.CoreCompileInputs.cache
+D:\CSHAP5\DAL\obj\Debug\net6.0\DAL.dll
+D:\CSHAP5\DAL\obj\Debug\net6.0\refint\DAL.dll
+D:\CSHAP5\DAL\obj\Debug\net6.0\DAL.pdb
+D:\CSHAP5\DAL\obj\Debug\net6.0\DAL.genruntimeconfig.cache
+D:\CSHAP5\DAL\obj\Debug\net6.0\ref\DAL.dll
+D:\CSHAP5\Server\DAL\bin\Debug\net6.0\DAL.deps.json
+D:\CSHAP5\Server\DAL\bin\Debug\net6.0\DAL.runtimeconfig.json
+D:\CSHAP5\Server\DAL\bin\Debug\net6.0\DAL.dll
+D:\CSHAP5\Server\DAL\bin\Debug\net6.0\DAL.pdb
+D:\CSHAP5\Server\DAL\obj\Debug\net6.0\DAL.csproj.AssemblyReference.cache
+D:\CSHAP5\Server\DAL\obj\Debug\net6.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\CSHAP5\Server\DAL\obj\Debug\net6.0\DAL.AssemblyInfoInputs.cache
+D:\CSHAP5\Server\DAL\obj\Debug\net6.0\DAL.AssemblyInfo.cs
+D:\CSHAP5\Server\DAL\obj\Debug\net6.0\DAL.csproj.CoreCompileInputs.cache
+D:\CSHAP5\Server\DAL\obj\Debug\net6.0\DAL.dll
+D:\CSHAP5\Server\DAL\obj\Debug\net6.0\refint\DAL.dll
+D:\CSHAP5\Server\DAL\obj\Debug\net6.0\DAL.pdb
+D:\CSHAP5\Server\DAL\obj\Debug\net6.0\DAL.genruntimeconfig.cache
+D:\CSHAP5\Server\DAL\obj\Debug\net6.0\ref\DAL.dll
+D:\New folder\CSHAP5\Server\DAL\bin\Debug\net6.0\DAL.deps.json
+D:\New folder\CSHAP5\Server\DAL\bin\Debug\net6.0\DAL.runtimeconfig.json
+D:\New folder\CSHAP5\Server\DAL\bin\Debug\net6.0\DAL.dll
+D:\New folder\CSHAP5\Server\DAL\bin\Debug\net6.0\DAL.pdb
+D:\New folder\CSHAP5\Server\DAL\obj\Debug\net6.0\DAL.csproj.AssemblyReference.cache
+D:\New folder\CSHAP5\Server\DAL\obj\Debug\net6.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\New folder\CSHAP5\Server\DAL\obj\Debug\net6.0\DAL.AssemblyInfoInputs.cache
+D:\New folder\CSHAP5\Server\DAL\obj\Debug\net6.0\DAL.AssemblyInfo.cs
+D:\New folder\CSHAP5\Server\DAL\obj\Debug\net6.0\DAL.csproj.CoreCompileInputs.cache
+D:\New folder\CSHAP5\Server\DAL\obj\Debug\net6.0\DAL.dll
+D:\New folder\CSHAP5\Server\DAL\obj\Debug\net6.0\refint\DAL.dll
+D:\New folder\CSHAP5\Server\DAL\obj\Debug\net6.0\DAL.pdb
+D:\New folder\CSHAP5\Server\DAL\obj\Debug\net6.0\DAL.genruntimeconfig.cache
+D:\New folder\CSHAP5\Server\DAL\obj\Debug\net6.0\ref\DAL.dll

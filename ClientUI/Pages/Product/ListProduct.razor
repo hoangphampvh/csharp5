@@ -1,0 +1,140 @@
+﻿@page "/Product"
+@using System.Net.Http.Json
+@using BILL.ViewModel.Product
+@using ClientUI.Component
+@using ClientUI.Service.IResponsitories
+@using MudBlazor
+@using TodoList.Models.SeedWork
+@inject IResponsitoriesProduct _ResponsitoriesProduct;
+@inject IResponsitoriesCartDetail _ResponsitoriesCartDetail;
+@using Microsoft.AspNetCore.SignalR.Client;
+@inject HttpClient httpClient
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar;
+@inject NavigationManager navigation;
+<div class="row">
+        <Search OnSearch="OnSearch"></Search>
+    </div>
+
+<div class="container">
+    <div class="row">
+        @if (Products != null)
+        {
+            @foreach (var item in Products)
+            {
+                <div class="col-md-3">
+                    <div class="card">
+                        <!-- Nội dung của MudCard -->
+                         <MudCard>
+                <MudCardHeader>
+                    <CardHeaderAvatar>
+                        <MudAvatar>I</MudAvatar>
+                    </CardHeaderAvatar>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.body1">@item.Name</MudText>
+                        <MudText Typo="Typo.body2">So Luong: @item.Quantity</MudText>
+                    </CardHeaderContent>
+
+                </MudCardHeader>
+                            <div style="display: flex; justify-content: center; align-items: center;">
+                                <MudImage ObjectFit="ObjectFit.Fill" Src="@item.UrlImage" Width="250" Height="250"></MudImage>
+                            </div>
+                <MudCardContent>
+                    <MudText Typo="Typo.body2">@item.Description</MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudIconButton Icon="@Icons.Material.Filled.Favorite" Color="Color.Default" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Share" Color="Color.Default" />
+                     <MudIconButton  />
+                                <MudIconButton Style="margin-left:135px" Icon="@Icons.Material.Filled.AddShoppingCart" OnClick="@(() => OpenAddNewDialog(item.Id))" Color="Color.Default"></MudIconButton>
+
+                                <style>
+                                    .my-custom-class {
+                                        backdrop-filter: blur(10px);
+                                    }
+                                </style>
+                </MudCardActions>
+            </MudCard>
+           
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+<div class="mt-3">
+    <Pagination MetaData="MetaData" Spread="2" SelectedPage="SelectedPage"></Pagination>
+
+</div>
+@code {
+    private PagedList<ProductVM> pagedData;
+    private MudTable<ProductVM> table;
+    IEnumerable<ProductVM> Products;
+    private int totalItems;
+    private string searchString = null;
+    private ProductListSearch ProductListSearch = new ProductListSearch();
+    public MetaData MetaData { get; set; } = new MetaData();
+    private HubConnection hubConnection;
+    private async Task loadData()
+    {
+        hubConnection = new HubConnectionBuilder().WithUrl(navigation.ToAbsoluteUri("/chatHub")).Build();
+        hubConnection.On("ReceiveMessage", () =>
+        {
+
+            StateHasChanged();
+        });
+        await hubConnection.StartAsync();
+        pagedData = await _ResponsitoriesProduct.GetAllProductActive(ProductListSearch);
+        Products = pagedData.Items;
+        MetaData = pagedData.MetaData;
+
+    }
+    public void Dispose()
+    {
+        _ = hubConnection.DisposeAsync();
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        await loadData();
+    }
+
+    private async Task SelectedPage(int page)
+    {
+        ProductListSearch.PageNumber = page;
+        await loadData();
+    }
+    public async Task OnSearch(string text)
+    {
+        ProductListSearch.Name = text;
+        pagedData = await _ResponsitoriesProduct.GetAllProductActive(ProductListSearch);
+        await loadData();
+    }
+    private DialogOptions dialogOptions = new() { CloseButton = true, DisableBackdropClick = true, MaxWidth = MaxWidth.Medium, FullWidth = true };
+
+    private async Task OpenAddNewDialog(Guid id)
+    {
+        var parameters = new DialogParameters();
+        string tilteString = "";
+        string snackbarMessage = "";
+        
+            tilteString = "Thêm mới vào giỏ hàng ";
+            snackbarMessage = "Thêm mới";            
+            parameters.Add("Id", id);
+
+        var result = await DialogService.Show<AddCart>(tilteString, parameters, dialogOptions).Result;
+        if (!result.Canceled)
+        {
+            var success = result.Data as bool?;
+            if (success == true)
+            {
+                Snackbar.Add(snackbarMessage + " thành công!", Severity.Success);
+                await loadData();
+                StateHasChanged();
+            }
+            else
+            {
+                Snackbar.Add(snackbarMessage + " thất bại!", Severity.Error);
+            }
+        }
+    }
+}

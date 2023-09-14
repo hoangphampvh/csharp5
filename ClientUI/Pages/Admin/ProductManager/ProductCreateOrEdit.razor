@@ -1,0 +1,303 @@
+﻿`@using ASMC5.ViewModel
+@using BILL.ViewModel.Product
+@using Blazored.Toast.Services
+@using ClientUI.Service.IResponsitories
+@using MudBlazor
+@using System.Text.Json
+@using System.ComponentModel.DataAnnotations
+@using System.Reflection
+@using TodoList.Models.SeedWork
+@inject IResponsitoriesProduct _Repositories
+@inject IWebHostEnvironment _env;
+@inject ISnackbar Snackbar;
+@inject NavigationManager navigation;
+@using Microsoft.AspNetCore.SignalR.Client;
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Edit" Class="mr-3" /> @MudDialog?.Title
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+
+        <EditForm Model="@productVM" OnValidSubmit="@OnValidSubmit">
+            <DataAnnotationsValidator />
+            <MudGrid>
+
+
+                <MudItem xs="12" sm="6" Class="d-flex justify-center p-4">
+
+                    <MudGrid>
+
+                        <MudItem xs="12">
+
+
+                            <MudContainer MaxWidth="MaxWidth.Small">
+
+                                <MudImage Width="200" Height="200" Src="@productVM.UrlImage" Alt="Thumbnail Image" Elevation="25" Class="rounded-lg" />
+
+                            </MudContainer>
+
+                        </MudItem>
+
+                        <MudItem xs="12">
+
+
+                            <MudFileUpload T="IBrowserFile" Accept="image/*" FilesChanged="UploadFile" Class="d-flex">
+                                <ButtonTemplate Context="ctext">
+                                    <MudButton HtmlTag="label"
+                                               Variant="Variant.Filled"
+                                               Color="Color.Primary"
+                                               StartIcon="@Icons.Material.Filled.CloudUpload"
+                                               for="@ctext">
+                                        Only image
+                                    </MudButton>
+                                </ButtonTemplate>
+                            </MudFileUpload>
+                            <MudTextField Class="mt-3" Label="@GetImageUrlDisplayName()" @bind-Value="@SelectedFileName"
+                                          For="@(() => productVM.UrlImage)" ReadOnly="true"
+                                          Variant="Variant.Outlined" Margin="Margin.Dense" />
+                        </MudItem>
+
+                    </MudGrid>
+
+
+
+                </MudItem>
+
+
+                <MudItem xs="12" sm="6">
+                    <MudGrid>
+
+
+
+                        <MudItem xs="12">
+                            <MudTextField Label="@GetNameDisplayName()" @bind-Value="@productVM.Name"
+                                          For="@(() => productVM.Name)" Required="true"
+                                          Variant="Variant.Outlined" Margin="Margin.Dense" />
+                        </MudItem>
+
+                        <MudItem xs="12">
+                            <MudTextField Label="@GetDescriptionDisplayName()" @bind-Value="@productVM.Description"
+                                          For="@(() => productVM.Description)" Required="true"
+                                          Variant="Variant.Outlined" Margin="Margin.Dense" Lines="3" />
+                        </MudItem>
+                        <MudItem xs="12">
+                            <MudTextField Label="@GetQuantityDisplayName()" @bind-Value="@productVM.Quantity"
+                                          For="@(() => productVM.Quantity)" Required="true"
+                                          Variant="Variant.Outlined" Margin="Margin.Dense" />
+                        </MudItem>
+                        <MudItem xs="12">
+                            <MudTextField Label="@GetPriceDisplayName()" @bind-Value="@productVM.Price"
+                                          For="@(() => productVM.Price)" Required="true"
+                                          Variant="Variant.Outlined" Margin="Margin.Dense" />
+                        </MudItem>
+                        <MudItem xs="12">
+                            <MudTextField Label="@GetSupplierDisplayName()" @bind-Value="@productVM.Supplier"
+                                          For="@(() => productVM.Supplier)" Required="true"
+                                          Variant="Variant.Outlined" Margin="Margin.Dense" />
+                        </MudItem>
+
+
+
+                        <MudItem xs="12">
+                            <MudSelect Label="@GetStatusDisplayName()" @bind-Value="@productVM.Status"
+                                       For="@(() => productVM.Status)"
+                                       Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                                <MudSelectItem Value="0">Hoạt Động</MudSelectItem>
+                                <MudSelectItem Value="1">Không hoạt động</MudSelectItem>
+                            </MudSelect>
+                        </MudItem>
+
+                        <MudItem xs="12">
+                            @{
+                                var customAttributes = new Dictionary<string, object>
+                            {
+                            { "style", @"padding: 0.75rem 1.25rem;background-color: #f5c6cb;}"},
+                            };
+                            }
+
+                            <ValidationSummary AdditionalAttributes="customAttributes" />
+                        </MudItem>
+
+                        <MudItem xs="12">
+                            <div class="mt-4">
+                                <MudButton Variant="Variant.Text" Color="Color.Primary" ButtonType="ButtonType.Submit">Hoàn tất</MudButton>
+                                <MudButton OnClick="Cancel">Hủy bỏ</MudButton>
+                            </div>
+                        </MudItem>
+
+                    </MudGrid>
+                </MudItem>
+
+
+            </MudGrid>
+        </EditForm>
+
+
+
+    </DialogContent>
+</MudDialog>
+
+
+@code {
+
+    [Parameter]
+    public Guid Id { get; set; }
+    private List<ProductVM> pagedData;
+
+    #region Parameter
+    [CascadingParameter] MudDialogInstance? MudDialog { get; set; }
+    private HubConnection hubConnection;
+    private ProductListSearch ProductListSearch = new ProductListSearch();
+    #endregion
+
+    #region Propreties
+
+    bool success;
+    private IBrowserFile? SelectedFile;
+    private string? SelectedFileName = "...\\no-thumbnail.jpg";
+    private ProductVM productVM = new ProductVM()
+        {
+            UrlImage = $"\\image\\ProductImg\\no-thumbnail.jpg",
+            CreateDate = DateTime.Now
+        };
+
+    #endregion
+
+    private async Task loadData()
+    {
+        pagedData = await _Repositories.GetAllProduct();
+        productVM = await _Repositories.GetById(Id);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        hubConnection = new HubConnectionBuilder().WithUrl(navigation.ToAbsoluteUri("/chatHub")).Build();
+
+        await hubConnection.StartAsync();
+        await loadData();
+        SelectedFileName = "...\\" + Path.GetFileName(productVM.UrlImage) ?? string.Empty;
+
+    }
+    public bool IsConnected => hubConnection.State == HubConnectionState.Connected;
+    
+    
+    private async void OnValidSubmit(EditContext context)
+    {
+
+        if (productVM.Name != null && Id != new Guid())
+        {
+            if (await _Repositories.UpdateNewProduct(productVM, Id))
+            {
+                if (IsConnected)
+                await SendMess();
+                success = true;
+            }
+        }
+
+        else if (await _Repositories.CreateNewProduct(productVM))
+        {
+            if (IsConnected) 
+            await SendMess();
+            success = true;
+        }
+        else
+        {
+            success = false;
+        }
+        // Call your method to add the model to the database here
+        // and set the success variable to true if the adding was successful
+        //
+        await loadData();
+        StateHasChanged();
+        MudDialog?.Close(DialogResult.Ok(success));
+
+    }
+    async Task SendMess() => await hubConnection.SendAsync("SendMessage");
+    private void Cancel()
+    {
+        MudDialog?.Cancel();
+    }
+
+    public void Dispose()
+    {
+        _ = hubConnection.DisposeAsync();
+    }
+    #region Get DisplayName Attribute of Proprety
+    private string GetNameDisplayName()
+    {
+        var displayAttribute = typeof(ProductVM).GetProperty(nameof(ProductVM.Name))?.GetCustomAttribute<DisplayAttribute>();
+        return displayAttribute?.Name ?? nameof(ProductVM.Name);
+    }
+
+    private string GetDescriptionDisplayName()
+    {
+        var displayAttribute = typeof(ProductVM).GetProperty(nameof(ProductVM.Description))?.GetCustomAttribute<DisplayAttribute>();
+        return displayAttribute?.Name ?? nameof(ProductVM.Description);
+    }
+    private string GetQuantityDisplayName()
+    {
+        var displayAttribute = typeof(ProductVM).GetProperty(nameof(ProductVM.Quantity))?.GetCustomAttribute<DisplayAttribute>();
+        return displayAttribute?.Name ?? nameof(ProductVM.Quantity);
+    }
+    private string GetSupplierDisplayName()
+    {
+        var displayAttribute = typeof(ProductVM).GetProperty(nameof(ProductVM.Supplier))?.GetCustomAttribute<DisplayAttribute>();
+        return displayAttribute?.Name ?? nameof(ProductVM.Supplier);
+    }
+    private string GetImageUrlDisplayName()
+    {
+        var displayAttribute = typeof(ProductVM).GetProperty(nameof(ProductVM.UrlImage))?.GetCustomAttribute<DisplayAttribute>();
+        return displayAttribute?.Name ?? nameof(ProductVM.UrlImage);
+    }
+
+    private string GetPriceDisplayName()
+    {
+        var displayAttribute = typeof(ProductVM).GetProperty(nameof(ProductVM.Price))?.GetCustomAttribute<DisplayAttribute>();
+        return displayAttribute?.Name ?? nameof(ProductVM.Price);
+    }
+    private string GetStatusDisplayName()
+    {
+        var displayAttribute = typeof(ProductVM).GetProperty(nameof(ProductVM.Status))?.GetCustomAttribute<DisplayAttribute>();
+        return displayAttribute?.Name ?? nameof(ProductVM.Status);
+    }
+    #endregion
+
+
+    #region Upload Image to wwwRoot
+   private async Task UploadFile(IBrowserFile file)
+{
+    // Define a list of allowed file extensions
+    var allowedExtensions = new[] { ".jpg", ".txt", ".xlsx" };
+
+    SelectedFile = file;
+
+    if (SelectedFile != null)
+    {
+        // Check if the file extension is allowed
+        string fileExtension = Path.GetExtension(SelectedFile.Name).ToLower();
+        if (!allowedExtensions.Contains(fileExtension))
+        {
+            // Handle the case when the file extension is not allowed
+            // For example, you can display an error message to the user
+            return;
+        }
+
+        string fileName = SelectedFile.Name;
+        var filePath = Path.Combine(_env.WebRootPath, "image/ProductImg", fileName);
+
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            await SelectedFile.OpenReadStream().CopyToAsync(stream);
+        }
+
+        // Assuming you have a property to store the uploaded file URL
+            productVM.UrlImage = $"\\image\\ProductImg\\{fileName}";
+    }
+}
+
+
+    #endregion
+}

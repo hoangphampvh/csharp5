@@ -1,0 +1,81 @@
+﻿@using System.IdentityModel.Tokens.Jwt
+@using BILL.Serviece.Interfaces;
+@using ClientUI.Component
+@using ClientUI.Pages
+@using Microsoft.IdentityModel.Tokens
+@using System.Text
+@using System.Security.Claims
+@using System.Net.Http.Headers;
+@inject ICurrentUserProvider _ICurrentUserProvider;
+@inject HttpClient _httpClient;
+@inherits LayoutComponentBase
+    <MudThemeProvider/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+<PageTitle>ClientUI</PageTitle>
+
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+      
+ 
+                    Hello: @UserName
+                    <a href="/logout">Logout</a>
+
+       
+                    <a href="/login" class="ml-md-auto">Login</a>
+           
+       
+            <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+            
+
+            <div class="d-flex">
+                <MudBadge Content="100" Color="Color.Primary" Overlap="true" Class="mx-6 my-4">
+                    <MudIconButton OnClick="@ToggleOpen" Icon="@Icons.Material.Outlined.Notifications" />
+                </MudBadge>
+	<MudPopover Open="@_isOpen" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
+		<div class="d-flex flex-column pa-1">
+			<Component />
+		</div>
+	</MudPopover>
+</div>
+            
+        </div>
+
+        <div class="content px-4">
+
+                    @Body
+
+        </div>
+    </main>
+</div>
+
+@code{
+
+    public bool _isOpen = true;
+
+    public void ToggleOpen()
+    {
+        if (_isOpen)
+            _isOpen = false;
+        else
+            _isOpen = true;
+    }
+
+    [Inject]
+    public IHttpContextAccessor HttpContextAccessor { get; set; }
+    public string UserName { get; set; } = "";
+    protected override async Task OnInitializedAsync()
+    {
+       
+        
+        var user =  _ICurrentUserProvider.GetCurrentUserInfos();
+        if(user!=null)
+        UserName = user.UserName;
+    }
+}

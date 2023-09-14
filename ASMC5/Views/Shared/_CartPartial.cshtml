@@ -1,6 +1,0 @@
-﻿
-@if(User.Identity!=null && !User.Identity.IsAuthenticated){
-    <div class="nav-item">  <a asp-controller="Cart" class="cart" asp-action="ShowCart"><i class="fas fa-shopping-cart"></i></a></div>
-}else{
-         <div class="nav-item"><a asp-controller="Cart" class="cart" asp-action="ListCart"><i class="fas fa-shopping-cart"></i></a></div>
-}

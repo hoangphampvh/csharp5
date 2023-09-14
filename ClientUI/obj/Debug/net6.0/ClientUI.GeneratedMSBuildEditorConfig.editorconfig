@@ -1,0 +1,105 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = ClientUI
+build_property.RootNamespace = ClientUI
+build_property.ProjectDir = D:\New folder\CSHAP5\ClientUI\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\New folder\CSHAP5\ClientUI
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/New folder/CSHAP5/ClientUI/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/New folder/CSHAP5/ClientUI/Component/Component.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50XENvbXBvbmVudC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/New folder/CSHAP5/ClientUI/Component/Pagination.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50XFBhZ2luYXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/New folder/CSHAP5/ClientUI/Pages/Admin/ProductManager/ExcelManager/Excel.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUHJvZHVjdE1hbmFnZXJcRXhjZWxNYW5hZ2VyXEV4Y2VsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/New folder/CSHAP5/ClientUI/Pages/Admin/ProductManager/ListProduct.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUHJvZHVjdE1hbmFnZXJcTGlzdFByb2R1Y3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/New folder/CSHAP5/ClientUI/Pages/Admin/ProductManager/ProductCreateOrEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUHJvZHVjdE1hbmFnZXJcUHJvZHVjdENyZWF0ZU9yRWRpdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/New folder/CSHAP5/ClientUI/Pages/CartDetail/AddCart.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FydERldGFpbFxBZGRDYXJ0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/New folder/CSHAP5/ClientUI/Pages/CartDetail/ListCartOfCustom.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2FydERldGFpbFxMaXN0Q2FydE9mQ3VzdG9tLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/New folder/CSHAP5/ClientUI/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/New folder/CSHAP5/ClientUI/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/New folder/CSHAP5/ClientUI/Pages/Product/AddCart.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZHVjdFxBZGRDYXJ0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/New folder/CSHAP5/ClientUI/Pages/Product/ListProduct.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZHVjdFxMaXN0UHJvZHVjdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/New folder/CSHAP5/ClientUI/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/New folder/CSHAP5/ClientUI/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/New folder/CSHAP5/ClientUI/Component/Search.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50XFNlYXJjaC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-wakh8yl47f
+
+[D:/New folder/CSHAP5/ClientUI/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-gjgd0e6dai
+
+[D:/New folder/CSHAP5/ClientUI/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-jv82d44eow
+
+[D:/New folder/CSHAP5/ClientUI/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/New folder/CSHAP5/ClientUI/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/New folder/CSHAP5/ClientUI/Pages/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/New folder/CSHAP5/ClientUI/Views/Account/LoginWithGoogle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbldpdGhHb29nbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/New folder/CSHAP5/ClientUI/Views/Login/login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cbG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 

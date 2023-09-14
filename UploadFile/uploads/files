@@ -1,0 +1,8 @@
+docker run -i : nhận tương tác 	  } => docker run -it --name <Name> -h <Host> + id
+docker run -t : kết nối terminal  }
+
+ctrl +pq => thoát container nhưng vẫn chạy; muốn cho container đó dừng thì docker stop + id
+
+thi hành 1 lệnh bên trong container mặc dù đang ở bên ngoài dùng docker exec + name
+
+kiểm tra hiến trình đang chạy dùng  htop ở ngoài thì dùng docker exec + name + htop 

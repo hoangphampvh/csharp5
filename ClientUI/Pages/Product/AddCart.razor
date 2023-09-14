@@ -1,0 +1,119 @@
+﻿@using BILL.ViewModel.Cart
+@using BILL.ViewModel.Product
+@using ClientUI.Component
+@using ClientUI.Service.IResponsitories
+@using Microsoft.IdentityModel.Tokens
+@using MudBlazor
+@using System.Text
+@using System.IdentityModel.Tokens.Jwt
+@using System.Security.Claims
+@using TodoList.Models.SeedWork
+@inject IResponsitoriesProduct _ResponsitoriesProduct;
+@inject IResponsitoriesCartDetail _ResponsitoriesCartDetail;
+@inject HttpClient httpClient
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar;
+@inject NavigationManager navigation;
+@using Microsoft.AspNetCore.SignalR.Client;
+<MudDialog>
+    <DialogContent>
+        <MudCard>
+            <MudCardHeader>
+                <CardHeaderAvatar>
+                    <MudAvatar>I</MudAvatar>
+                </CardHeaderAvatar>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.body1">@productVM.Name</MudText>
+                    <MudText Typo="Typo.body2">So Luong: @productVM.Quantity</MudText>
+                </CardHeaderContent>
+
+            </MudCardHeader>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <MudImage ObjectFit="ObjectFit.Fill" Src="@productVM.UrlImage" Width="250" Height="250"></MudImage>
+            </div>
+            <MudCardContent>
+                <MudText Typo="Typo.body2">@productVM.Description</MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudIconButton Icon="@Icons.Material.Filled.Favorite" Color="Color.Default" />
+                <MudIconButton Icon="@Icons.Material.Filled.Share" Color="Color.Default" />
+                <MudIconButton />
+               
+     
+            </MudCardActions>
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="intValue" Label="Enter an int" />
+            </MudItem>
+
+        </MudCard>
+        
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Ok</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter]
+    public Guid Id { get; set; }
+    int intValue;
+    private ProductVM productVM = new ProductVM();
+    [Inject]
+    public IHttpContextAccessor HttpContextAccessor { get; set; }
+    public string UserName { get; set; } = "";
+    private HubConnection hubConnection;
+    protected override async Task OnInitializedAsync()
+    {
+        hubConnection = new HubConnectionBuilder().WithUrl(navigation.ToAbsoluteUri("/chatHub")).Build();
+        hubConnection.On("Message", () =>
+        {
+
+            StateHasChanged();
+        });
+        await hubConnection.StartAsync();
+        productVM =await _ResponsitoriesProduct.GetById(Id);
+    }
+    public bool IsConnected => hubConnection.State == HubConnectionState.Connected;
+    public void Dispose()
+    {
+        _ = hubConnection.DisposeAsync();
+    }
+
+    private async void Submit(){
+        CartDetailVM cart = new CartDetailVM();
+        cart.Status = 0;
+        cart.Quantity = intValue;
+        cart.Price = cart.Quantity * productVM.Price;
+        cart.ProductName = productVM.Name;
+        cart.UrlImage = productVM.UrlImage;
+        cart.ProductID = Id;
+        var productsInCart = await _ResponsitoriesCartDetail.GetAllCartDetail();
+        if(productsInCart !=null)
+        {
+
+            var productInCart= productsInCart.FirstOrDefault(p => p.ProductID == Id);
+            if (productInCart != null)
+            {
+                if (await _ResponsitoriesCartDetail.EditCartDetail(productInCart.ID, cart))
+                {
+                    MudDialog.Close(DialogResult.Ok(true));
+                    if (IsConnected) 
+                    await SendMess();
+                }
+            }
+            else if (await _ResponsitoriesCartDetail.CreatCartDetail(cart))
+            {
+                MudDialog.Close(DialogResult.Ok(true));
+                await SendMess();
+
+            }
+        }
+        else MudDialog.Close(DialogResult.Ok(false));
+
+
+    }
+    async Task SendMess() => await hubConnection.SendAsync("SendMessage");
+    void Cancel() => MudDialog.Cancel();
+}

@@ -1,0 +1,45 @@
+﻿<div class="wave-group">
+    <input required="" title="@Title" onchange="@((ChangeEventArgs e) => ComponentSearch(e.Value.ToString()))" type="search" class="input">
+    <span class="bar"></span>
+    <label class="label">
+        <span class="label-char" style="--index: 0; margin-right: 5px;">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </span>
+        <span class="label-char" style="--index: 1">T</span>
+        <span class="label-char" style="--index: 2">ì</span>
+        <span class="label-char" style="--index: 3">m</span>
+        <span class="label-char" style="--index: 4; margin-left: 5px;">k</span>
+        <span class="label-char" style="--index: 5">i</span>
+        <span class="label-char" style="--index: 6">ế</span>
+        <span class="label-char" style="--index: 7">m</span>
+    </label>
+</div>
+
+@code {
+
+    [Parameter]
+    public EventCallback<string> OnSearch { get; set; }
+
+    [Parameter]
+    public string Title { get; set; }
+
+    private string textSearch = "";
+
+    /// <summary>
+    /// Giá trị của textSearch sẽ được truyền vào đối tượng
+    /// EventCallback<string> OnSearch bằng cách sử dụng phương thức InvokeAsync
+    /// </summary>
+    /// <param name="textSearch">Giá trị nhận được từ input</param>
+    /// <returns>Gán được giá trị qua Component Search đang dùng EventCallback OnSearch</returns>
+    private async Task SearchForm(EditContext context)
+    {
+        await OnSearch.InvokeAsync(textSearch);
+    }
+
+    private async Task ComponentSearch(string text)
+    {
+        textSearch = text;
+        await SearchForm(null);
+    }
+
+}

@@ -1,0 +1,55 @@
+﻿@using BILL.ViewModel.Cart
+@using BILL.ViewModel.Product
+@using ClientUI.Component
+@using ClientUI.Service.IResponsitories
+@using Microsoft.IdentityModel.Tokens
+@using MudBlazor
+@using System.Text
+@using System.IdentityModel.Tokens.Jwt
+@using System.Security.Claims
+@using TodoList.Models.SeedWork
+@inject IResponsitoriesCartDetail _ResponsitoriesCartDetail;
+@inject HttpClient httpClient
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar;
+
+<MudDialog>
+    <DialogContent>
+        <MudCard>
+            
+            <MudItem xs="12" sm="6" md="4">
+                <MudTextField @bind-Value="intValue" Label="Nhập số lượng" />
+            </MudItem>
+
+        </MudCard>
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Ok</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code
+{
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    int intValue;
+    [Parameter]
+    public Guid Id { get; set; }
+
+    private async void Submit()
+    {
+        CartDetailVM cart = new CartDetailVM();
+        cart.Status = 0;
+        cart.Quantity = intValue;
+        cart.ProductID = Id;
+        if (await _ResponsitoriesCartDetail.EditCartDetail(Id,cart)){
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+            
+    }
+    private void Cancel()
+    {
+        MudDialog?.Cancel();
+    }
+}
