@@ -1,6 +1,6 @@
 ﻿using BILL.ViewModel.Account;
 using BILL.ViewModel.Product;
-using TodoList.Models.SeedWork;
+using BLL.ViewModel.ModelConfiguration.SeedWork;
 
 namespace ClientUI.Service.IResponsitories
 {

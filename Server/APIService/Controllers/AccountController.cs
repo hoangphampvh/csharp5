@@ -1,9 +1,9 @@
 ﻿using ASMC5.Models;
 using BILL.Serviece.Implements;
 using BILL.Serviece.Interfaces;
-using BILL.ViewModel;
 using BILL.ViewModel.Account;
 using BILL.ViewModel.User;
+using BLL.ViewModel.ModelConfiguration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

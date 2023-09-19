@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="ExcelDataReader" Version="3.6.0" />
+    <PackageReference Include="IronXL.Excel" Version="2023.9.29" />
     <PackageReference Include="Microsoft.AspNet.SignalR" Version="2.4.3" />
     <PackageReference Include="Microsoft.AspNet.SignalR.Client" Version="2.4.3" />
     <PackageReference Include="Microsoft.AspNet.SignalR.JS" Version="2.4.3" />
@@ -17,6 +18,7 @@
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="7.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
+    <PackageReference Include="NETCore.MailKit" Version="2.1.0" />
     <PackageReference Include="StackExchange.Redis" Version="2.6.122" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="6.0.0" />

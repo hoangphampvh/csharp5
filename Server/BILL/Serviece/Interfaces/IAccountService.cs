@@ -1,6 +1,6 @@
 ﻿using ASMC5.Models;
-using BILL.ViewModel;
 using BILL.ViewModel.Account;
+using BLL.ViewModel.ModelConfiguration;
 using System;
 using System.Collections.Generic;
 using System.Linq;

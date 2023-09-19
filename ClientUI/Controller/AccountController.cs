@@ -1,5 +1,4 @@
-﻿using ASMC5.Models;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,14 +16,14 @@ namespace ASMC5.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly SignInManager<User> _signInManager;
-        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<UserVM> _signInManager;
+        private readonly UserManager<UserVM> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly HttpContext _httpContext;
         private readonly HttpClient _httpClient;
-        public const string key = "User";
+        public const string key = "_tokenAuthorization";
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
-        public AccountController(SignInManager<User> signInManager, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor, HttpClient httpClient)
+        public AccountController(SignInManager<UserVM> signInManager, UserManager<UserVM> userManager, IHttpContextAccessor httpContextAccessor, HttpClient httpClient)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -53,7 +52,7 @@ namespace ASMC5.Controllers
             return Challenge(properties, "Google");
         }
         //[HttpGet("login/OnGetCallbackAsync")]
-        User user = new User(); 
+        UserVM user = new UserVM(); 
         public async Task<IActionResult> CallbackGoogle()
         {
             var authenticateResult = await HttpContext.AuthenticateAsync("Google");
@@ -61,7 +60,7 @@ namespace ASMC5.Controllers
             {
                 var accessToken = authenticateResult.Properties.GetTokens().FirstOrDefault(token => token.Name == "access_token")?.Value;
                 // var userInfo =await GoogleLoginAsync(token);
-                var newUser = new User
+                var newUser = new UserVM
                 {
                     Id = Guid.NewGuid(),
                     UserName = string.Join("", authenticateResult.Principal.FindFirstValue(ClaimTypes.Name).Replace(" ", "").Split()),
@@ -89,7 +88,8 @@ namespace ASMC5.Controllers
                         _httpContext.Session.SetString(key, JsonSerializer.Serialize(newUser));
                         await CreateCart();
 
-                        return RedirectToAction(nameof(NotNulls));
+                        return RedirectToPage("/_Host");
+
                     }
                     return BadRequest("false");
                 }
@@ -100,9 +100,9 @@ namespace ASMC5.Controllers
                 _httpContext.Session.SetString(key, JsonSerializer.Serialize(checkUser));
                     await CreateCart();
 
-                return RedirectToAction(nameof(NotNulls));
+                return RedirectToPage("/_Host");
             }
-            return RedirectToAction(nameof(nulls));
+            return RedirectToAction(nameof(LoginWithGoogle));
 
         }
         public async Task<bool> CreateCart()
@@ -121,7 +121,7 @@ namespace ASMC5.Controllers
                 return true;
             }return false;
         }
-        public async Task<ClaimsIdentity> getRoleAndClaims(User user)
+        public async Task<ClaimsIdentity> getRoleAndClaims(UserVM user)
         {
             var roles = await _userManager.GetRolesAsync(user);
             if (roles.Count == 0)
@@ -161,27 +161,7 @@ namespace ASMC5.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login");
         }
-        [Authorize]
-        public IActionResult NotNulls()
-        {
-            // Kiểm tra xem mã token có tồn tại và hợp lệ không
-            if (User.Identity !=null && User.Identity.IsAuthenticated)
-            {
-                // Mã token hợp lệ, thực hiện các logic của action NotNulls
-                return View();
-            }
-            else
-            {
-                // Người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
-                return BadRequest("dell");
-            }
-        }
-
-
-        public IActionResult nulls()
-        {
-            return View();
-        }
+     
 
     }
 }

@@ -2,13 +2,13 @@
 using ASMC5.Models;
 using BILL.Serviece.Interfaces;
 using BILL.ViewModel.Product;
+using BLL.ViewModel.ModelConfiguration.SeedWork;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TodoList.Models.SeedWork;
 using XAct;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
@@ -27,9 +27,7 @@ namespace BILL.Serviece.Implements
         public async Task<bool> CreatProduct(ProductVM p)
         {
             try
-            {
-                for (int i = 0; i < 100; i++)
-                {
+            {     
                     var product = new Product()
                     {
                         ID = Guid.NewGuid(),
@@ -43,8 +41,7 @@ namespace BILL.Serviece.Implements
                         UrlImage = p.UrlImage,
                     };
                     await _context.AddAsync(product);
-                    await _context.SaveChangesAsync();
-                }
+                    await _context.SaveChangesAsync();               
                
                 return true;
             }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace ASMC5.Migrations
+namespace DAL.Migrations
 {
     [DbContext(typeof(ASMDBContext))]
     partial class ASMDBContextModelSnapshot : ModelSnapshot
@@ -62,7 +62,7 @@ namespace ASMC5.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("money");
 
                     b.Property<Guid>("ProductID")
                         .HasColumnType("uniqueidentifier");

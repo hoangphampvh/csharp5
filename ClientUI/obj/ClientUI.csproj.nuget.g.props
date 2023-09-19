@@ -13,6 +13,7 @@
     <SourceRoot Include="C:\Users\hoang\.nuget\packages\" />
   </ItemGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)sixlabors.imagesharp\3.0.1\build\SixLabors.ImageSharp.props" Condition="Exists('$(NuGetPackageRoot)sixlabors.imagesharp\3.0.1\build\SixLabors.ImageSharp.props')" />
     <Import Project="$(NuGetPackageRoot)mudblazor\6.6.0\buildTransitive\MudBlazor.props" Condition="Exists('$(NuGetPackageRoot)mudblazor\6.6.0\buildTransitive\MudBlazor.props')" />
     <Import Project="$(NuGetPackageRoot)blazored.toast\4.1.0\buildTransitive\Blazored.Toast.props" Condition="Exists('$(NuGetPackageRoot)blazored.toast\4.1.0\buildTransitive\Blazored.Toast.props')" />
   </ImportGroup>

@@ -44,6 +44,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[6.2.9, )"
+            },
             "Microsoft.AspNet.SignalR": {
               "target": "Package",
               "version": "[2.4.3, )"
@@ -97,6 +101,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[6.0.0, )"
+            },
+            "NETCore.MailKit": {
+              "target": "Package",
+              "version": "[2.1.0, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

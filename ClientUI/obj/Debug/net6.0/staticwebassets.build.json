@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/r3GSSfiWsI3e/vXME2mECGWdFUL5ShMWPnKuVrM2P4=",
+  "Hash": "5bUWLtHsh8pONXFPQq5NUCIinX25RRt5+whOJR8+JYc=",
   "Source": "ClientUI",
   "BasePath": "_content/ClientUI",
   "Mode": "Default",
@@ -338,6 +338,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\image\\ProductImg\\274626509_1277290382762114_6511364226895252014_n.jpg"
+    },
+    {
+      "Identity": "D:\\New folder\\CSHAP5\\ClientUI\\wwwroot\\image\\ProductImg\\mappng.jpg",
+      "SourceId": "ClientUI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\New folder\\CSHAP5\\ClientUI\\wwwroot\\",
+      "BasePath": "_content/ClientUI",
+      "RelativePath": "image/ProductImg/mappng.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\image\\ProductImg\\mappng.jpg"
     },
     {
       "Identity": "D:\\New folder\\CSHAP5\\ClientUI\\wwwroot\\image\\ProductImg\\z4367894576038_efe70afd7bba4c6286313a9248202bb5.jpg",

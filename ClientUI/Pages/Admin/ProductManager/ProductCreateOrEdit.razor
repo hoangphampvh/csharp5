@@ -6,7 +6,6 @@
 @using System.Text.Json
 @using System.ComponentModel.DataAnnotations
 @using System.Reflection
-@using TodoList.Models.SeedWork
 @inject IResponsitoriesProduct _Repositories
 @inject IWebHostEnvironment _env;
 @inject ISnackbar Snackbar;
@@ -182,8 +181,8 @@
 
     }
     public bool IsConnected => hubConnection.State == HubConnectionState.Connected;
-    
-    
+
+
     private async void OnValidSubmit(EditContext context)
     {
 
@@ -192,7 +191,7 @@
             if (await _Repositories.UpdateNewProduct(productVM, Id))
             {
                 if (IsConnected)
-                await SendMess();
+                    await SendMess();
                 success = true;
             }
         }
@@ -200,7 +199,7 @@
         else if (await _Repositories.CreateNewProduct(productVM))
         {
             if (IsConnected) 
-            await SendMess();
+                await SendMess();
             success = true;
         }
         else
@@ -267,37 +266,38 @@
 
 
     #region Upload Image to wwwRoot
-   private async Task UploadFile(IBrowserFile file)
-{
-    // Define a list of allowed file extensions
-    var allowedExtensions = new[] { ".jpg", ".txt", ".xlsx" };
-
-    SelectedFile = file;
-
-    if (SelectedFile != null)
+    private async Task UploadFile(IBrowserFile file)
     {
-        // Check if the file extension is allowed
-        string fileExtension = Path.GetExtension(SelectedFile.Name).ToLower();
-        if (!allowedExtensions.Contains(fileExtension))
+        // Define a list of allowed file extensions
+        var allowedExtensions = new[] { ".jpg", ".txt", ".xlsx" };
+
+        SelectedFile = file;
+
+        if (SelectedFile != null)
         {
-            // Handle the case when the file extension is not allowed
-            // For example, you can display an error message to the user
-            return;
-        }
+            // Check if the file extension is allowed
+            string fileExtension = Path.GetExtension(SelectedFile.Name).ToLower();
+            if (!allowedExtensions.Contains(fileExtension))
+            {
+                // Handle the case when the file extension is not allowed
+                // For example, you can display an error message to the user
+                return;
+            }
 
-        string fileName = SelectedFile.Name;
-        var filePath = Path.Combine(_env.WebRootPath, "image/ProductImg", fileName);
+            string fileName = SelectedFile.Name;
+            var filePath = Path.Combine(_env.WebRootPath, "image/ProductImg", fileName);
 
-        using (var stream = new FileStream(filePath, FileMode.Create))
-        {
-            await SelectedFile.OpenReadStream().CopyToAsync(stream);
-        }
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await SelectedFile.OpenReadStream().CopyToAsync(stream);
+            }
 
-        // Assuming you have a property to store the uploaded file URL
+            // Assuming you have a property to store the uploaded file URL
             productVM.UrlImage = $"\\image\\ProductImg\\{fileName}";
+        }
     }
-}
 
+    
 
     #endregion
 }

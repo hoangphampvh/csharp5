@@ -1,11 +1,11 @@
 ﻿using ASMC5.Models;
 using BILL.ViewModel.Product;
+using BLL.ViewModel.ModelConfiguration.SeedWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TodoList.Models.SeedWork;
 
 namespace BILL.Serviece.Interfaces
 {

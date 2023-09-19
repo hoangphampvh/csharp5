@@ -8,9 +8,9 @@ using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MudBlazor;
 using Newtonsoft.Json;
-using BILL.ViewModel;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Authorization;
+using BLL.ViewModel.ModelConfiguration;
 
 namespace ClientUI.Controllers
 {

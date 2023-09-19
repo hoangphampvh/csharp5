@@ -3,10 +3,10 @@ using BILL.Serviece.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using TodoList.Models.SeedWork;
 using BILL.CacheRedisData;
 using Newtonsoft.Json;
 using DemoRedis.Attributes;
+using BLL.ViewModel.ModelConfiguration.SeedWork;
 
 namespace APIServer.Controllers
 {
@@ -51,7 +51,7 @@ namespace APIServer.Controllers
         }
       //  [AuthorizeUser]
         [HttpPost("CreatProduct")]
-        [Authorize(Roles ="ADMIN")]
+       // [Authorize(Roles ="ADMIN")]
         public async Task<IActionResult> CreatProductAsync([FromBody]ProductVM product)
         {
             var pro = await _productServiece.CreatProduct(product);

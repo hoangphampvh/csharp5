@@ -1,99 +1,170 @@
 ﻿@page "/GetDataFromExcel"
-@using System.Net.Http.Json
-@using BILL.ViewModel.Product
-@using ClientUI.Component
-@using ClientUI.Service.IResponsitories
-@using MudBlazor
+@using BILL.ViewModel.Product;
+@using BILL.ViewModel.UploadFile;
+@using ClientUI.Service.IResponsitories;
 @using System.Net.Http.Headers;
-@using TodoList.Models.SeedWork
 @inject IResponsitoriesUpload _ResponsitoriesProduct;
+@inject ISnackbar Snackbar;
 @inject HttpClient httpClient
 @inject IDialogService DialogService
 @inject ISnackbar Snackbar;
 @inject NavigationManager navigation;
-@using Microsoft.AspNetCore.SignalR.Client;
-@using Microsoft.AspNetCore.Hosting
-@inject IJSRuntime JSRuntime
-
-@inject HttpClient Http
-<div class="col-8">
-
-  
+@inject IResponsitoriesProduct _Repositories
 
 
- 
+<style>
 
-</div>
-<MudTable Items="@pagedData" Filter="new Func<ProductVM,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1">
+    /* Trong file CSS của bạn */
+    .btnFile {
+        /* Đặt các thuộc tính CSS mà bạn muốn thay đổi */
+        background-color: #007bff; /* Màu nền */
+        color: #fff; /* Màu chữ */
+        padding: 10px 20px; /* Kích thước và khoảng cách bên trong nút */
+        border: none; /* Không có đường viền */
+        border-radius: 5px; /* Bo góc */
+        cursor: pointer; /* Con trỏ chuột khi di chuột vào */
+        /* Thêm các thuộc tính CSS khác tùy ý */
+        
+    }
 
-    <ToolBarContent>
-        <MudText Typo="Typo.h6">Periodic CartDetailVMs</MudText>
-        <MudSpacer />
-        <MudTextField @bind-Value="searchString" Placeholder="Search" Adornment="Adornment.Start"
-                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        /* Tùy chỉnh giao diện khi di chuột vào */
+        .btnFile:hover {
+            background-color: #0056b3; /* Màu nền khi hover */
+        }
+
+</style>
+
+<PageTitle>Upload Files</PageTitle>
+
+<h1>Import Excel</h1>
+
+<InputFile style="margin-bottom:20px" class="btnFile" OnChange="@OnInputFileChange" accept=".xlsx" />
+
+
+@if (fileNames.Count > 0 && Lst !=null && Lst.Count() >0)
+{
+    <div class="row">
+        <div class="col-2">
+            <MudButton Variant="Variant.Filled" Class="px-3"
+                       OnClick="() => OpenAddNewDialog(0)"
+                       Color="Color.Primary">
+                <MudIcon Icon="@Icons.Material.Filled.Add"></MudIcon>
+                Thêm mới
+            </MudButton>
+        </div>
+        <div class="col-6">
+            <MudButton Variant="Variant.Filled" Class="px-3"
+                       OnClick="SaveDataList"
+                       Color="Color.Info">
+                <MudIcon Icon="@Icons.Material.Filled.Dataset"></MudIcon>
+                Lưu
+            </MudButton>
+        </div>
+
+    </div>
+    <MudTable Items="@Lst" Filter="new Func<ProductVM,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1">
+
+        <ToolBarContent>
+
+            <MudSpacer />
+            <MudTextField @bind-Value="searchString" Placeholder="Search" Adornment="Adornment.Start"
+                          AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh><MudTableSortLabel SortLabel="nr_field" T="ProductVM">STT</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortLabel="nr_field" T="ProductVM">Name</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortLabel="sign_field" T="ProductVM">Price</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortLabel="name_field" T="ProductVM">Quantity</MudTableSortLabel></MudTh>
+
+            <MudTh>Chức Năng</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="STT">@context.STT</MudTd>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd DataLabel="Price">@context.Price</MudTd>
+            <MudTd DataLabel="Quantity">@context.Quantity</MudTd>
+
+            <MudTd>
+                <MudIconButton Icon="@Icons.Material.Filled.Edit" @onclick="() =>OpenAddNewDialog(context.STT)" Color="Color.Success"></MudIconButton>
+                <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="@(() =>OpenDeleteDialogMessage(context.STT))" Color="Color.Error"></MudIconButton>
+            </MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager PageSizeOptions="new int[]{50, 100}" />
+        </PagerContent>
+    </MudTable>
+
+
+}
 
 
 
-    </ToolBarContent>
-    <HeaderContent>
-        <MudTh><MudTableSortLabel SortLabel="nr_field" T="ProductVM">Name</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortLabel="sign_field" T="ProductVM">Price</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortLabel="name_field" T="ProductVM">Quantity</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortLabel="position_field" T="ProductVM">Status</MudTableSortLabel></MudTh>
-        <MudTh><MudTableSortLabel SortLabel="mass_field" T="ProductVM">Description</MudTableSortLabel></MudTh>
-        <MudTh>Chức Năng</MudTh>
-    </HeaderContent>
-    <RowTemplate>
-        <MudTd DataLabel="Nr">@context.Name</MudTd>
-        <MudTd DataLabel="Sign">@context.Price</MudTd>
-        <MudTd DataLabel="Name">@context.Quantity</MudTd>
-        <MudTd DataLabel="Position">@context.Status</MudTd>
-        <MudTd DataLabel="Molar mass">@context.Description</MudTd>
-        <MudIconButton Style="color:green" Size="@Size.Medium" Icon="@Icons.Material.Filled.Edit" OnClick="@(() => OpenAddNewDialog(context.Id))" />
-        <MudIconButton Icon="@Icons.Material.Filled.Delete" OnClick="@(() =>OpenDeleteDialogMessage(context.Id))" Color="Color.Error"></MudIconButton>
-    </RowTemplate>
-    <PagerContent>
-        <MudTablePager PageSizeOptions="new int[]{50, 100}" />
-    </PagerContent>
-</MudTable>
 
 @code {
-    private List<ProductVM> pagedData;
-    private MudTable<ProductVM> table;
-    private HubConnection hubConnection;
+
+
     private string searchString = "";
+    private List<ProductVM> Lst;
+    private int maxAllowedFiles = int.MaxValue;
+    private long maxFileSize = long.MaxValue;
+    private List<string> fileNames = new();
+
     private ProductVM selectedItem1 = null;
-    public MetaData MetaData { get; set; } = new MetaData();
     protected async Task loadData()
     {
+
 
     }
     protected override async Task OnInitializedAsync()
     {
-       
-        hubConnection = new HubConnectionBuilder().WithUrl(navigation.ToAbsoluteUri("/chatHub")).Build();
-        hubConnection.On("ReceiveMessage", () =>
-        {
-            InvokeAsync(() =>
-             {
-                 callData();
-                 StateHasChanged();
-             });
-        });
-        await hubConnection.StartAsync();
+
         await loadData();
     }
-    private void callData()
+
+    private DialogOptions dialogOptions = new() { CloseButton = true, DisableBackdropClick = true, MaxWidth = MaxWidth.Medium, FullWidth = true };
+
+    private async Task OpenAddNewDialog(int stt)
     {
-        Task.Run(async () =>
+        var parameters = new DialogParameters();
+        string tilteString = "";
+        string snackbarMessage = "";
+        if (stt == 0)
         {
-            await loadData();
-        });
+            tilteString = "Thêm mới ";
+            snackbarMessage = "Thêm mới";
+            parameters.Add("product", new ProductVM());
+
+        }
+        else
+        {
+
+            tilteString = "Chỉnh sửa ";
+            snackbarMessage = "Chỉnh sửa";
+            selectedItem1 = Lst.FirstOrDefault(p => p.STT == stt);
+            parameters.Add("product", selectedItem1);
+        }
+        parameters.Add("Lst", Lst);
+        parameters.Add("stt", stt);
+
+        var result = await DialogService.Show<CreateofUpdateExcel>(tilteString, parameters, dialogOptions).Result;
+        if (!result.Canceled)
+        {
+            var success = result.Data as bool?;
+            if (success == true)
+            {
+                Snackbar.Add(snackbarMessage + " thành công!", Severity.Success);
+
+                StateHasChanged();
+            }
+            else
+            {
+                Snackbar.Add(snackbarMessage + " thất bại!", Severity.Error);
+            }
+        }
     }
-    public void Dispose()
-    {
-        _ = hubConnection.DisposeAsync();
-    }
+
+
+
     private bool FilterFunc1(ProductVM CartDetailVM) => FilterFunc(CartDetailVM, searchString);
 
     private bool FilterFunc(ProductVM CartDetailVM, string searchString)
@@ -105,48 +176,9 @@
 
         return false;
     }
-
-    private DialogOptions dialogOptions = new() { CloseButton = true, DisableBackdropClick = true, MaxWidth = MaxWidth.Medium, FullWidth = true };
-
-    private async Task OpenAddNewDialog(Guid id)
+    private async void OpenDeleteDialogMessage(int id)
     {
-        var parameters = new DialogParameters();
-        string tilteString = "";
-        string snackbarMessage = "";
-        if (id == Guid.Empty)
-        {
-            tilteString = "Thêm mới ";
-            snackbarMessage = "Thêm mới";
-        }
-        else
-        {
-
-            tilteString = "Chỉnh sửa ";
-            snackbarMessage = "Chỉnh sửa";
-        }
-
-        parameters.Add("Id", id);
-
-
-
-        var result = await DialogService.Show<ProductCreateOrEdit>(tilteString, parameters, dialogOptions).Result;
-        if (!result.Canceled)
-        {
-            var success = result.Data as bool?;
-            if (success == true)
-            {
-                Snackbar.Add(snackbarMessage + " thành công!", Severity.Success);
-                await loadData();
-                StateHasChanged();
-            }
-            else
-            {
-                Snackbar.Add(snackbarMessage + " thất bại!", Severity.Error);
-            }
-        }
-    }
-    private async void OpenDeleteDialogMessage(Guid id)
-    {
+        await loadData();
         bool? result = await DialogService.ShowMessageBox(
             "Cảnh báo",
             "Khi xóa sẽ không thể quay lại!",
@@ -162,24 +194,56 @@
 
         if (result != null)
         {
-         //   result = await _ResponsitoriesProduct.DeleteById(id);
+            selectedItem1 = Lst.FirstOrDefault(p => p.STT == id);
+            Lst.Remove(selectedItem1);
 
-            if (result ?? false)
-            {
-                Snackbar.Add("Xóa bỏ thành công!", Severity.Success);
-                await loadData();
-                StateHasChanged();
+            Snackbar.Add("Xóa bỏ thành công!", Severity.Success);
+            await loadData();
+            StateHasChanged();
 
-            }
-            else
-            {
-                Snackbar.Add("Xóa bỏ thất bại!", Severity.Error);
-            }
         }
-       
+
     }
 
+    private async Task OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        using var content = new MultipartFormDataContent();
 
+        foreach (var file in e.GetMultipleFiles(maxAllowedFiles))
+        {
+            var fileContent = new StreamContent(file.OpenReadStream(maxFileSize));
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
 
+            fileNames.Add(file.Name);
+
+            content.Add(
+                content: fileContent,
+                name: "\"files\"",
+                fileName: file.Name);
+        }
+        var result = await _ResponsitoriesProduct.UploadFileExcel(content, default);
+        Lst = result;
+        if (result != null && result.Count()>0)
+        {
+            Snackbar.Add("Upload thành công!", Severity.Success);
+        }
+        else Snackbar.Add("Upload thất bại!", Severity.Error);
+    }
+    bool check = false;
+    private async Task SaveDataList()
+    {
+        foreach (var item in Lst)
+        {
+            check = await _Repositories.CreateNewProduct(item);
+        }
+        if (check)
+        {
+            Snackbar.Add("Thêm mới thành công!", Severity.Success);
+        }
+        else
+        {
+            Snackbar.Add("Thêm mới không thành công!", Severity.Error);
+        }
+    }
 
 }

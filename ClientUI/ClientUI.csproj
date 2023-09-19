@@ -16,7 +16,9 @@
 
   <ItemGroup>
     <PackageReference Include="Blazored.Toast" Version="4.1.0" />
+    <PackageReference Include="EPPlus" Version="6.2.9" />
     <PackageReference Include="ExcelDataReader" Version="3.6.0" />
+    <PackageReference Include="IronXL.Excel" Version="2023.9.29" />
     <PackageReference Include="Microsoft.AspNet.SignalR" Version="2.4.3" />
     <PackageReference Include="Microsoft.AspNet.SignalR.Client" Version="2.4.3" />
     <PackageReference Include="Microsoft.AspNet.SignalR.JS" Version="2.4.3" />

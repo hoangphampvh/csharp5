@@ -3,8 +3,6 @@ using BILL.ViewModel.Account;
 using BILL.ViewModel.Cart;
 using BILL.ViewModel.Product;
 using Microsoft.AspNetCore.Mvc;
-using TodoList.Models.SeedWork;
-
 namespace ClientUI.Service.IResponsitories
 {
     public interface IResponsitoriesCartDetail

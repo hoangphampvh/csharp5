@@ -3,6 +3,9 @@ using ASMC5.Models;
 using BILL.CacheRedisData;
 using BILL.Serviece.Implements;
 using BILL.Serviece.Interfaces;
+using BLL.Serviece.Interfaces;
+using BLL.ViewModel.ModelConfiguration.mailConfig;
+using MailKit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +32,8 @@ builder.Services.AddTransient<ICartServiece, CartServiece>();
 builder.Services.AddTransient<ICartDetailServiece, CartDetailServiece>();
 builder.Services.AddTransient<IAccountService, AccountService>();
 builder.Services.AddTransient<ICurrentUserProvider, CurrentUserProvider>();
-
+builder.Services.AddTransient<IUploadFileService, UploadFileService>();
+builder.Services.AddTransient<ISendMailService, SendMailService>();
 // Add Identity
 builder.Services.AddIdentity<User, Position>()
                 .AddEntityFrameworkStores<ASMDBContext>()
@@ -61,6 +65,11 @@ builder.Services.AddAuthentication(options =>
         ValidateLifetime = true,
     };
 });
+
+// mail setting
+builder.Services.AddControllers();
+builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

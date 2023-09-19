@@ -19,6 +19,7 @@ builder.Services.AddHttpClient("examapi", client =>
 {
     client.BaseAddress = new Uri(builder.Configuration["BackEndAPIURL"]);
 });
+
 builder.Services.AddScoped(api => new HttpClient { BaseAddress = new Uri(builder.Configuration["BackEndAPIURL"]) });
 
 builder.Services.AddDbContext<ASMDBContext>(options =>
@@ -41,7 +42,7 @@ builder.Services.AddAuthorizationCore();
 builder.Services.AddTransient<IResponsitoriesProduct, ResponsitoriesProduct>();
 builder.Services.AddTransient<IResponsitoriesCartDetail, ResponsitoriesCartDetail>();
 builder.Services.AddScoped<ICurrentUserProvider, CurrentUserProvider>();
-
+builder.Services.AddScoped<IResponsitoriesUpload, ResponsitoriesUpload>();
 
 // Add services to the container.
 

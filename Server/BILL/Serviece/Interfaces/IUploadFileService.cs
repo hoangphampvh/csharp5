@@ -1,5 +1,6 @@
 ﻿using ASMC5.Models;
 using BILL.ViewModel.Cart;
+using BILL.ViewModel.Product;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,8 @@ namespace BILL.Serviece.Interfaces
 {
     public interface IUploadFileService
     {
-        public Task<bool> UploadFile(List<IFormFile> files);
+        public Task<bool> UploadFile(IFormFile file, CancellationToken cancellationtoken);
+        public Task<List<ProductVM>> UploadFileExcel(IFormFile file, CancellationToken cancellationToken);
 
     }
 }

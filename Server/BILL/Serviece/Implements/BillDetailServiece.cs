@@ -14,7 +14,7 @@ namespace BILL.Serviece.Implements
     public class BillDetailServiece : IBillDetailServiece
     {
         ASMDBContext context;
-        public BillDetailServiece()
+        public BillDetailServiece()   
         {
             this.context = new ASMDBContext();
         }

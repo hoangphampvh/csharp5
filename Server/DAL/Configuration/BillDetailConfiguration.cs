@@ -16,6 +16,7 @@ namespace assiment_csad4.Configruration
             builder.HasOne(p => p.Product).WithMany(p => p.BillDetails).
                 HasForeignKey(p => p.ProductID).HasConstraintName("FK_SP");
             builder.Property(x => x.ID).HasDefaultValueSql("(newid())");
+            builder.Property(x => x.Price).HasColumnType("money");
 
         }
     }
