@@ -131,12 +131,16 @@
         var result = await DialogService.Show<ProductCreateOrEdit>(tilteString, parameters, dialogOptions).Result;
         if (!result.Canceled)
         {
-            var success = result.Data as bool?;
-            if (success == true)
+            var success = result.Data as int?;
+            if (success == 1)
             {
                 Snackbar.Add(snackbarMessage + " thành công!", Severity.Success);
                 await loadData();
                 StateHasChanged();
+            }
+            else if(success == 2)
+            {
+                Snackbar.Add("thất bại!!! Trùng tên rồi!", Severity.Error);
             }
             else
             {

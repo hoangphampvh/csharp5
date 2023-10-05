@@ -100,53 +100,9 @@ namespace BILL.Serviece.Implements
 
         public async Task<List<ProductVM>> GetAllProduct()
         {
-            var stopwatch = new System.Diagnostics.Stopwatch();
-            stopwatch.Start();
-            var query = from a in  _context.Products.AsQueryable()
-                        where a.Status ==1
-                        select new Product
-                        {
-                            ID = a.ID,
-                            Name = a.Name,
-                            Price = a.Price,
-                            Quantity = a.Quantity,
-                            Status = a.Status,
-                            Supplier = a.Supplier,
-                            Description = a.Description,
-                            UrlImage = a.UrlImage,
-                            CreateDate = a.CreateDate,
-
-                        };
-            stopwatch.Stop();
-            var ss = stopwatch.ElapsedMilliseconds;
-            Console.WriteLine($"Thời gian thực hiện: {stopwatch.ElapsedMilliseconds} ms");
-
-
-            var stopwatch2 = new System.Diagnostics.Stopwatch();
-            stopwatch.Start();
-            var query2 = from a in _context.Products.AsQueryable()
-                       
-                        select new Product
-                        {
-                            ID = a.ID,
-                            Name = a.Name,
-                            Price = a.Price,
-                            Quantity = a.Quantity,
-                            Status = a.Status,
-                            Supplier = a.Supplier,
-                            Description = a.Description,
-                            UrlImage = a.UrlImage,
-                            CreateDate = a.CreateDate,
-
-                        };
-            stopwatch.Stop();
-            var ss2 = stopwatch.ElapsedMilliseconds;
-          
-
-
+         
             var products = await _context.Products.AsQueryable().ToListAsync();
-            var data = products.ToList();
-            var count = products.Count();
+            var data = products.ToList();         
             var productVMList = new List<ProductVM>();
             foreach (var product in data)
             {

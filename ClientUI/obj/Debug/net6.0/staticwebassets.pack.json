@@ -69,6 +69,10 @@
       "PackagePath": "staticwebassets\\image\\ProductImg\\z4367894576038_efe70afd7bba4c6286313a9248202bb5.jpg"
     },
     {
+      "Id": "D:\\New folder\\CSHAP5\\ClientUI\\wwwroot\\js\\ShoppingCartFunctions.js",
+      "PackagePath": "staticwebassets\\js\\ShoppingCartFunctions.js"
+    },
+    {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.ClientUI.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

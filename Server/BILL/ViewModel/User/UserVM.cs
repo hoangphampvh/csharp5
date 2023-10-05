@@ -11,6 +11,6 @@ namespace ASMC5.ViewModel
     {
        
         public string? roleNames { get; set; }
-    
+        
     }
 }

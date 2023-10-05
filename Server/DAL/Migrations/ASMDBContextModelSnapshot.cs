@@ -105,6 +105,10 @@ namespace DAL.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("(newid())");
 
+                    b.Property<string>("PaymentID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<Guid>("ProductID")
                         .HasColumnType("uniqueidentifier");
 
@@ -121,11 +125,154 @@ namespace DAL.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("PaymentID");
+
                     b.HasIndex("ProductID");
 
                     b.HasIndex("UserID");
 
                     b.ToTable("CartDetail", (string)null);
+                });
+
+            modelBuilder.Entity("ASMC5.Models.Merchant", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastUpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastUpdatedByy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MerchantIpnUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MerchantName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MerchantReturnUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MerchantWebLink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SecretKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Merchants");
+                });
+
+            modelBuilder.Entity("ASMC5.Models.Payment", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("ExpireDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MerchantId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal?>("PaidAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("PaymentContent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentCurrency")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PaymentDestinationId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("PaymentLanguage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentLastMessage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentRefId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("RequiredAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Signature")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MerchantId");
+
+                    b.HasIndex("PaymentDestinationId");
+
+                    b.ToTable("Payments");
+                });
+
+            modelBuilder.Entity("ASMC5.Models.PaymentDestination", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DesLogo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DesName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DesParentId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DesShortName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastUpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastUpdatedByy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentDestinationId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("SortIndex")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PaymentDestinationId");
+
+                    b.ToTable("PaymentDestinations");
                 });
 
             modelBuilder.Entity("ASMC5.Models.Position", b =>
@@ -330,6 +477,118 @@ namespace DAL.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("DAL.Models.PaymentNotification", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal>("NotiAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("NotiContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("NotiDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NotiMerchantId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NotiMessage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NotiNotiStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NotiPaymentId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("NotiResDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NotiResHttpCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NotiResMessage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NotiSignature")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentRefId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("paymentId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("paymentId");
+
+                    b.ToTable("PaymentNotifications");
+                });
+
+            modelBuilder.Entity("DAL.Models.PaymentSignature", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsValid")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PaymentId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SignAlgo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("SignDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SignOwn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SignValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PaymentId");
+
+                    b.ToTable("PaymentSignatures");
+                });
+
+            modelBuilder.Entity("DAL.Models.PaymentTransaction", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("PaymentId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal?>("TranAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("TranDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TranMessage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TranPayload")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TranStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PaymentId");
+
+                    b.ToTable("PaymentTransactions");
+                });
+
             modelBuilder.Entity("DAL.Models.UploadResult", b =>
                 {
                     b.Property<Guid>("Id")
@@ -501,6 +760,12 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("ASMC5.Models.CartDetail", b =>
                 {
+                    b.HasOne("ASMC5.Models.Payment", "Payment")
+                        .WithMany("CartDetails")
+                        .HasForeignKey("PaymentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ASMC5.Models.Product", "Product")
                         .WithMany("CartDetails")
                         .HasForeignKey("ProductID")
@@ -515,7 +780,31 @@ namespace DAL.Migrations
 
                     b.Navigation("Cart");
 
+                    b.Navigation("Payment");
+
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("ASMC5.Models.Payment", b =>
+                {
+                    b.HasOne("ASMC5.Models.Merchant", "Merchant")
+                        .WithMany("Payments")
+                        .HasForeignKey("MerchantId");
+
+                    b.HasOne("ASMC5.Models.PaymentDestination", "PaymentDestination")
+                        .WithMany("Payments")
+                        .HasForeignKey("PaymentDestinationId");
+
+                    b.Navigation("Merchant");
+
+                    b.Navigation("PaymentDestination");
+                });
+
+            modelBuilder.Entity("ASMC5.Models.PaymentDestination", b =>
+                {
+                    b.HasOne("ASMC5.Models.PaymentDestination", null)
+                        .WithMany("PaymentDestinations")
+                        .HasForeignKey("PaymentDestinationId");
                 });
 
             modelBuilder.Entity("ASMC5.Models.Token", b =>
@@ -528,6 +817,33 @@ namespace DAL.Migrations
                         .HasConstraintName("FK_Token");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DAL.Models.PaymentNotification", b =>
+                {
+                    b.HasOne("ASMC5.Models.Payment", "payment")
+                        .WithMany("PaymentNotifications")
+                        .HasForeignKey("paymentId");
+
+                    b.Navigation("payment");
+                });
+
+            modelBuilder.Entity("DAL.Models.PaymentSignature", b =>
+                {
+                    b.HasOne("ASMC5.Models.Payment", "Payment")
+                        .WithMany("PaymentSignatures")
+                        .HasForeignKey("PaymentId");
+
+                    b.Navigation("Payment");
+                });
+
+            modelBuilder.Entity("DAL.Models.PaymentTransaction", b =>
+                {
+                    b.HasOne("ASMC5.Models.Payment", "payment")
+                        .WithMany("PaymentTransactions")
+                        .HasForeignKey("PaymentId");
+
+                    b.Navigation("payment");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -589,6 +905,29 @@ namespace DAL.Migrations
             modelBuilder.Entity("ASMC5.Models.Cart", b =>
                 {
                     b.Navigation("CartDetails");
+                });
+
+            modelBuilder.Entity("ASMC5.Models.Merchant", b =>
+                {
+                    b.Navigation("Payments");
+                });
+
+            modelBuilder.Entity("ASMC5.Models.Payment", b =>
+                {
+                    b.Navigation("CartDetails");
+
+                    b.Navigation("PaymentNotifications");
+
+                    b.Navigation("PaymentSignatures");
+
+                    b.Navigation("PaymentTransactions");
+                });
+
+            modelBuilder.Entity("ASMC5.Models.PaymentDestination", b =>
+                {
+                    b.Navigation("PaymentDestinations");
+
+                    b.Navigation("Payments");
                 });
 
             modelBuilder.Entity("ASMC5.Models.Product", b =>

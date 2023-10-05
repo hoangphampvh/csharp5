@@ -12,5 +12,6 @@ namespace BILL.Serviece.Interfaces
     {
         Task<UserVM> GetCurrentUserInfo();
         UserVM GetCurrentUserInfos();
+        public string? IpAddress { get; }
     }
 }

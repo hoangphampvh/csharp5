@@ -13,12 +13,12 @@ namespace APIServer.Controllers
     [ApiController]
     public class BillController : ControllerBase
     {
-        private readonly ASMDBContext _context;
+
         private readonly IBillServiece _bill;
 
         public BillController(IBillServiece billServiece)
         {
-            _context = new ASMDBContext();
+
             _bill = billServiece;
         }
         [HttpGet("GetAllBill")]

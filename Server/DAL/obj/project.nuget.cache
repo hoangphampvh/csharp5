@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "GwR1LT2KYSYUqYwj6RsWTNwUmxC0p4zKdF/e4inD9s/5Q5I1/26VDYsipizjXipjb7p+CWVcRuv7ZGnG5bMPqg==",
+  "dgSpecHash": "xNWwOYvCZ9+AElhkkkGU2t9I0NNGBntC8dhmnykXx29JORzNicFw4VVptNjJShjzSV1GzN1Yfvv83L93BOtYaQ==",
   "success": true,
   "projectFilePath": "D:\\New folder\\CSHAP5\\Server\\DAL\\DAL.csproj",
   "expectedPackageFiles": [
@@ -74,6 +74,7 @@
     "C:\\Users\\hoang\\.nuget\\packages\\microsoft.owin\\2.1.0\\microsoft.owin.2.1.0.nupkg.sha512",
     "C:\\Users\\hoang\\.nuget\\packages\\microsoft.owin.host.systemweb\\2.1.0\\microsoft.owin.host.systemweb.2.1.0.nupkg.sha512",
     "C:\\Users\\hoang\\.nuget\\packages\\microsoft.owin.security\\2.1.0\\microsoft.owin.security.2.1.0.nupkg.sha512",
+    "C:\\Users\\hoang\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.5\\microsoft.visualstudio.azure.containers.tools.targets.1.19.5.nupkg.sha512",
     "C:\\Users\\hoang\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\hoang\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\hoang\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",

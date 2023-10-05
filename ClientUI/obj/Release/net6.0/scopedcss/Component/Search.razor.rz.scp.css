@@ -1,0 +1,71 @@
+.wave-group[b-wakh8yl47f] {
+    position: relative;
+}
+
+.wave-group .input[b-wakh8yl47f] {
+    font-size: 16px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #515151;
+    background: transparent;
+}
+
+.wave-group .input:focus[b-wakh8yl47f] {
+    outline: none;
+}
+
+.wave-group .label[b-wakh8yl47f] {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    display: flex;
+}
+
+.wave-group .label-char[b-wakh8yl47f] {
+    transition: 0.2s ease all;
+    transition-delay: calc(var(--index) * .05s);
+}
+
+.wave-group .input:focus ~ label .label-char[b-wakh8yl47f],
+.wave-group .input:valid ~ label .label-char[b-wakh8yl47f] {
+    transform: translateY(-20px);
+    font-size: 14px;
+    color: #5264AE;
+}
+
+.wave-group .bar[b-wakh8yl47f] {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.wave-group .bar[b-wakh8yl47f]:before, .wave-group .bar[b-wakh8yl47f]:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #5264AE;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.wave-group .bar[b-wakh8yl47f]:before {
+    left: 50%;
+}
+
+.wave-group .bar[b-wakh8yl47f]:after {
+    right: 50%;
+}
+
+.wave-group .input:focus ~ .bar[b-wakh8yl47f]:before,
+.wave-group .input:focus ~ .bar[b-wakh8yl47f]:after {
+    width: 50%;
+}

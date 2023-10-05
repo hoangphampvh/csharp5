@@ -1,0 +1,206 @@
+/* _content/ClientUI/Component/Search.razor.rz.scp.css */
+.wave-group[b-wakh8yl47f] {
+    position: relative;
+}
+
+.wave-group .input[b-wakh8yl47f] {
+    font-size: 16px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #515151;
+    background: transparent;
+}
+
+.wave-group .input:focus[b-wakh8yl47f] {
+    outline: none;
+}
+
+.wave-group .label[b-wakh8yl47f] {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    display: flex;
+}
+
+.wave-group .label-char[b-wakh8yl47f] {
+    transition: 0.2s ease all;
+    transition-delay: calc(var(--index) * .05s);
+}
+
+.wave-group .input:focus ~ label .label-char[b-wakh8yl47f],
+.wave-group .input:valid ~ label .label-char[b-wakh8yl47f] {
+    transform: translateY(-20px);
+    font-size: 14px;
+    color: #5264AE;
+}
+
+.wave-group .bar[b-wakh8yl47f] {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.wave-group .bar[b-wakh8yl47f]:before, .wave-group .bar[b-wakh8yl47f]:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #5264AE;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.wave-group .bar[b-wakh8yl47f]:before {
+    left: 50%;
+}
+
+.wave-group .bar[b-wakh8yl47f]:after {
+    right: 50%;
+}
+
+.wave-group .input:focus ~ .bar[b-wakh8yl47f]:before,
+.wave-group .input:focus ~ .bar[b-wakh8yl47f]:after {
+    width: 50%;
+}
+/* _content/ClientUI/Shared/MainLayout.razor.rz.scp.css */
+.page[b-gjgd0e6dai] {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+main[b-gjgd0e6dai] {
+    flex: 1;
+}
+
+.sidebar[b-gjgd0e6dai] {
+    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+}
+
+.top-row[b-gjgd0e6dai] {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #d6d5d5;
+    justify-content: flex-end;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+    .top-row[b-gjgd0e6dai]  a, .top-row .btn-link[b-gjgd0e6dai] {
+        white-space: nowrap;
+        margin-left: 1.5rem;
+    }
+
+    .top-row a:first-child[b-gjgd0e6dai] {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+@media (max-width: 640.98px) {
+    .top-row:not(.auth)[b-gjgd0e6dai] {
+        display: none;
+    }
+
+    .top-row.auth[b-gjgd0e6dai] {
+        justify-content: space-between;
+    }
+
+    .top-row a[b-gjgd0e6dai], .top-row .btn-link[b-gjgd0e6dai] {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 641px) {
+    .page[b-gjgd0e6dai] {
+        flex-direction: row;
+    }
+
+    .sidebar[b-gjgd0e6dai] {
+        width: 250px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .top-row[b-gjgd0e6dai] {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .top-row[b-gjgd0e6dai], article[b-gjgd0e6dai] {
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+/* _content/ClientUI/Shared/NavMenu.razor.rz.scp.css */
+.navbar-toggler[b-jv82d44eow] {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.top-row[b-jv82d44eow] {
+    height: 3.5rem;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.navbar-brand[b-jv82d44eow] {
+    font-size: 1.1rem;
+}
+
+.oi[b-jv82d44eow] {
+    width: 2rem;
+    font-size: 1.1rem;
+    vertical-align: text-top;
+    top: -2px;
+}
+
+.nav-item[b-jv82d44eow] {
+    font-size: 0.9rem;
+    padding-bottom: 0.5rem;
+}
+
+    .nav-item:first-of-type[b-jv82d44eow] {
+        padding-top: 1rem;
+    }
+
+    .nav-item:last-of-type[b-jv82d44eow] {
+        padding-bottom: 1rem;
+    }
+
+    .nav-item[b-jv82d44eow]  a {
+        color: #d7d7d7;
+        border-radius: 4px;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        line-height: 3rem;
+    }
+
+.nav-item[b-jv82d44eow]  a.active {
+    background-color: rgba(255,255,255,0.25);
+    color: white;
+}
+
+.nav-item[b-jv82d44eow]  a:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+@media (min-width: 641px) {
+    .navbar-toggler[b-jv82d44eow] {
+        display: none;
+    }
+
+    .collapse[b-jv82d44eow] {
+        /* Never collapse the sidebar for wide screens */
+        display: block;
+    }
+}

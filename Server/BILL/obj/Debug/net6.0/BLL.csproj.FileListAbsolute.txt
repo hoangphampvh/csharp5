@@ -15,3 +15,5 @@ D:\New folder\CSHAP5\Server\BILL\obj\Debug\net6.0\refint\BLL.dll
 D:\New folder\CSHAP5\Server\BILL\obj\Debug\net6.0\BLL.pdb
 D:\New folder\CSHAP5\Server\BILL\obj\Debug\net6.0\BLL.genruntimeconfig.cache
 D:\New folder\CSHAP5\Server\BILL\obj\Debug\net6.0\ref\BLL.dll
+D:\New folder\CSHAP5\Server\BILL\bin\Debug\net6.0\Ultils.dll
+D:\New folder\CSHAP5\Server\BILL\bin\Debug\net6.0\Ultils.pdb

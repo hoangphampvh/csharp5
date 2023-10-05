@@ -1,0 +1,12 @@
+D:\New folder\CSHAP5\Ultils\obj\Debug\net6.0\Ultils.csproj.AssemblyReference.cache
+D:\New folder\CSHAP5\Ultils\obj\Debug\net6.0\Ultils.GeneratedMSBuildEditorConfig.editorconfig
+D:\New folder\CSHAP5\Ultils\obj\Debug\net6.0\Ultils.AssemblyInfoInputs.cache
+D:\New folder\CSHAP5\Ultils\obj\Debug\net6.0\Ultils.AssemblyInfo.cs
+D:\New folder\CSHAP5\Ultils\obj\Debug\net6.0\Ultils.csproj.CoreCompileInputs.cache
+D:\New folder\CSHAP5\Ultils\bin\Debug\net6.0\Ultils.deps.json
+D:\New folder\CSHAP5\Ultils\bin\Debug\net6.0\Ultils.dll
+D:\New folder\CSHAP5\Ultils\bin\Debug\net6.0\Ultils.pdb
+D:\New folder\CSHAP5\Ultils\obj\Debug\net6.0\Ultils.dll
+D:\New folder\CSHAP5\Ultils\obj\Debug\net6.0\refint\Ultils.dll
+D:\New folder\CSHAP5\Ultils\obj\Debug\net6.0\Ultils.pdb
+D:\New folder\CSHAP5\Ultils\obj\Debug\net6.0\ref\Ultils.dll

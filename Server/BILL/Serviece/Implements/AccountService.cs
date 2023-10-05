@@ -21,6 +21,8 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json.Serialization;
+using Ultils.Helpers;
+using Ultils.Manager.JWT;
 using Token = ASMC5.Models.Token;
 
 namespace BILL.Serviece.Implements
@@ -33,7 +35,6 @@ namespace BILL.Serviece.Implements
         private readonly IConfiguration _configuration;
         private readonly ICartServiece _cartServiece;
         protected CacheData cacheData = CacheData.Instance;
-        private static readonly string key = "HOANG_PHAM_NGHIA_HUNG_NAM_DINH18";
         public AccountService(UserManager<User> userManager, SignInManager<User> signInManager, ICartServiece cartServiece,IConfiguration configuration)
         {
             _context = new ASMDBContext();
@@ -50,13 +51,13 @@ namespace BILL.Serviece.Implements
             var token = await GenerateToken(loginRequest);
             return new LoginResponesVM { Successful = true, Mess = "Successful",Data =  token };
         }
-
-        public async Task<TokenModel> GenerateToken(LoginRequestVM loginRequest)
+        
+        public async Task<TokenModel?> GenerateToken(LoginRequestVM loginRequest)
         {
             var user = await _userManager.FindByNameAsync(loginRequest.UserName);
             if (user == null || await _userManager.CheckPasswordAsync(user, loginRequest.Password) == false)
             {
-                return new TokenModel();
+                return null;
             }
             var secretKeyBytes = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SecretKey"]));
             var rolesOfUser = await _userManager.GetRolesAsync(user);
@@ -120,7 +121,7 @@ namespace BILL.Serviece.Implements
 
             // lưu thông tin người dùng vào redis server
             user.AccessToken = accessToken;
-            await cacheData.SetObj(keyUserQuanTri(user.Id.ToString(), user.UserName), user, 30);
+            await cacheData.SetObj(AccessToken.keyUserQuanTri(user.Id.ToString(), user.UserName), user, 30);
 
             return new TokenModel
             {
@@ -129,16 +130,7 @@ namespace BILL.Serviece.Implements
             };
 
         }
-        public static string keyUserQuanTri(string Id, string userName)
-        {
-            object keyRedis = new
-            {
-                UserName = userName,
-                Id = Id,
-            };
-
-            return CacheData.Instance.GenerateKey(keyRedis);
-        }
+        
 
         private string GenerateRefreshToken()
         {
@@ -149,77 +141,7 @@ namespace BILL.Serviece.Implements
                 return Convert.ToBase64String(random);
             }
         }
-        private static DateTime ConvertUnixTimeToDateTime(long utcExpireDate)
-        {
-            var dateTimeInterval = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-            dateTimeInterval.AddSeconds(utcExpireDate).ToUniversalTime();
-
-            return dateTimeInterval;
-        }
-        public static async Task<bool> checkAccessToken(string AccessToken)
-        {
-
-
-            var jwtTokenHandler = new JwtSecurityTokenHandler();
-            CacheData cacheData = CacheData.Instance;
-            byte[] secretKeyBytes = Encoding.UTF8.GetBytes(key);
-            var tokenValidateParam = new TokenValidationParameters
-            {
-                //tự cấp token
-                ValidateIssuer = false,
-                ValidateAudience = false,
-
-                //ký vào token
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(secretKeyBytes),
-
-                ClockSkew = TimeSpan.Zero,
-
-                ValidateLifetime = false
-            };
-            //task 1: accesstoken valid format
-            var tokenInVerification = jwtTokenHandler.ValidateToken(AccessToken, tokenValidateParam, out var validatedToken);
-
-            //task 2: check alg
-            if (validatedToken is JwtSecurityToken jwtSecurityToken)
-            {
-                var result = jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase);
-                if (!result)//false
-                {
-                    return false;
-
-                }
-            }
-
-            //task 3: check accessToken expire
-            var utcExpireDate = long.Parse(tokenInVerification.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Exp).Value);
-
-            var expireDate = ConvertUnixTimeToDateTime(utcExpireDate);
-            if (expireDate > DateTime.UtcNow)
-            {
-                return false;
-            }
-            var simplePrinciple = tokenInVerification;
-            var identity = simplePrinciple?.Identity as ClaimsIdentity;
-
-            if (identity == null)
-                return false;
-
-            if (!identity.IsAuthenticated)
-                return false;
-
-            IEnumerable<Claim> claims = identity.Claims;
-            var username = claims.Where(p => p.Type == "userName").FirstOrDefault()?.Value;
-            var Id = claims.Where(p => p.Type == "Id").FirstOrDefault()?.Value;
-
-
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(Id))
-                return false;
-
-            // check keyUser
-            if (!await cacheData.IsKeyExists(keyUserQuanTri(Id, username))) return false;
-            return true;
-        }
+       
        
         public async Task<LoginResponesVM> RenewToken(TokenModel tokenDTO)
         {
@@ -227,7 +149,7 @@ namespace BILL.Serviece.Implements
             try
             {
                
-                if (await checkAccessToken(tokenDTO.AccessToken))
+                if (await AccessToken.checkAccessToken(tokenDTO.AccessToken))
                 {
                     // task 4: check refresktoken exist in DB
                     Token storedToken = _context.tokens.FirstOrDefault(x => x.RefreshToken == tokenDTO.RefreshToken);
@@ -249,7 +171,7 @@ namespace BILL.Serviece.Implements
                                 _context.Update(storedToken);
                                 await _context.SaveChangesAsync();
                                 var tokenValidate = await GenerateToken(loginRequestVM);
-
+                                if(tokenValidate!=null)
                                 return new LoginResponesVM { Successful = true, Mess = "Successful", Data = tokenValidate };
                             }
                         }

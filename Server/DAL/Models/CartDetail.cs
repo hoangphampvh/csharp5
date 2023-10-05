@@ -15,5 +15,10 @@ namespace ASMC5.Models
         public int Status { get; set; }
         public Guid ProductID { get; set; }
         public virtual Product Product { get; set; }
+
+        [ForeignKey(nameof(PaymentID))]
+        public string PaymentID { get; set; }
+        public virtual Payment Payment { get; set; }
+
     }
 }

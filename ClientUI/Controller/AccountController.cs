@@ -11,19 +11,20 @@ using Newtonsoft.Json;
 using System.Security.Principal;
 using BILL.ViewModel.Cart;
 using System.Text;
+using ASMC5.Models;
 
 namespace ASMC5.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly SignInManager<UserVM> _signInManager;
-        private readonly UserManager<UserVM> _userManager;
+        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly HttpContext _httpContext;
         private readonly HttpClient _httpClient;
         public const string key = "_tokenAuthorization";
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
-        public AccountController(SignInManager<UserVM> signInManager, UserManager<UserVM> userManager, IHttpContextAccessor httpContextAccessor, HttpClient httpClient)
+        public AccountController(SignInManager<User> signInManager, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor, HttpClient httpClient)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -52,7 +53,7 @@ namespace ASMC5.Controllers
             return Challenge(properties, "Google");
         }
         //[HttpGet("login/OnGetCallbackAsync")]
-        UserVM user = new UserVM(); 
+        User user = new User(); 
         public async Task<IActionResult> CallbackGoogle()
         {
             var authenticateResult = await HttpContext.AuthenticateAsync("Google");
@@ -60,7 +61,7 @@ namespace ASMC5.Controllers
             {
                 var accessToken = authenticateResult.Properties.GetTokens().FirstOrDefault(token => token.Name == "access_token")?.Value;
                 // var userInfo =await GoogleLoginAsync(token);
-                var newUser = new UserVM
+                var newUser = new User
                 {
                     Id = Guid.NewGuid(),
                     UserName = string.Join("", authenticateResult.Principal.FindFirstValue(ClaimTypes.Name).Replace(" ", "").Split()),
@@ -121,7 +122,7 @@ namespace ASMC5.Controllers
                 return true;
             }return false;
         }
-        public async Task<ClaimsIdentity> getRoleAndClaims(UserVM user)
+        public async Task<ClaimsIdentity> getRoleAndClaims(User user)
         {
             var roles = await _userManager.GetRolesAsync(user);
             if (roles.Count == 0)

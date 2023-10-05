@@ -149,8 +149,8 @@
         var result = await DialogService.Show<CreateofUpdateExcel>(tilteString, parameters, dialogOptions).Result;
         if (!result.Canceled)
         {
-            var success = result.Data as bool?;
-            if (success == true)
+            var success = result.Data as int?;
+            if (success == 1)
             {
                 Snackbar.Add(snackbarMessage + " thành công!", Severity.Success);
 

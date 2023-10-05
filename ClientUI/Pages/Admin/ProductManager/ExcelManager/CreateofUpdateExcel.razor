@@ -159,7 +159,7 @@
 
     #region Propreties
 
-    bool success;
+    int success;
     private IBrowserFile? SelectedFile;
     private string? SelectedFileName = "...\\no-thumbnail.jpg";
     private ProductVM productVM = new ProductVM()
@@ -192,14 +192,14 @@
         if(product != null && stt !=0)
         {
             product = productVM;
-            success = true;
+            success = 1;
 
         }
         else
         {
             productVM.STT = Lst.Count() + 1;
             Lst.Add(productVM);
-            success = true;
+            success = 1;
 
         }
         

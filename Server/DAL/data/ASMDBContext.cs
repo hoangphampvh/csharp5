@@ -18,6 +18,12 @@ namespace ASMC5.data
         }
 
         public DbSet<Bill> Bills { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<PaymentDestination> PaymentDestinations { get; set; }
+        public DbSet<PaymentNotification> PaymentNotifications { get; set; }
+        public DbSet<PaymentTransaction> PaymentTransactions { get; set; }
+        public DbSet<PaymentSignature> PaymentSignatures { get; set; }
+        public DbSet<Merchant> Merchants { get; set; }
         public DbSet<BillDetail> billDetails { get; set; }
         public DbSet<Cart> carts { get; set; }
         public DbSet<CartDetail> cartDetails { get; set; }

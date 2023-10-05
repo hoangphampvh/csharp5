@@ -1,0 +1,14 @@
+D:\New folder\CSHAP5\Server\DAL\bin\Release\net6.0\DAL.deps.json
+D:\New folder\CSHAP5\Server\DAL\bin\Release\net6.0\DAL.runtimeconfig.json
+D:\New folder\CSHAP5\Server\DAL\bin\Release\net6.0\DAL.dll
+D:\New folder\CSHAP5\Server\DAL\bin\Release\net6.0\DAL.pdb
+D:\New folder\CSHAP5\Server\DAL\obj\Release\net6.0\DAL.csproj.AssemblyReference.cache
+D:\New folder\CSHAP5\Server\DAL\obj\Release\net6.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\New folder\CSHAP5\Server\DAL\obj\Release\net6.0\DAL.AssemblyInfoInputs.cache
+D:\New folder\CSHAP5\Server\DAL\obj\Release\net6.0\DAL.AssemblyInfo.cs
+D:\New folder\CSHAP5\Server\DAL\obj\Release\net6.0\DAL.csproj.CoreCompileInputs.cache
+D:\New folder\CSHAP5\Server\DAL\obj\Release\net6.0\DAL.dll
+D:\New folder\CSHAP5\Server\DAL\obj\Release\net6.0\refint\DAL.dll
+D:\New folder\CSHAP5\Server\DAL\obj\Release\net6.0\DAL.pdb
+D:\New folder\CSHAP5\Server\DAL\obj\Release\net6.0\DAL.genruntimeconfig.cache
+D:\New folder\CSHAP5\Server\DAL\obj\Release\net6.0\ref\DAL.dll

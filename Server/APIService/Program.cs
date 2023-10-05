@@ -3,8 +3,12 @@ using ASMC5.Models;
 using BILL.CacheRedisData;
 using BILL.Serviece.Implements;
 using BILL.Serviece.Interfaces;
+using BLL.Serviece.Implements.PaymentService;
+using BLL.Serviece.Implements.PaymentService.VnPay.Config;
 using BLL.Serviece.Interfaces;
+using BLL.Serviece.Interfaces.PaymentService;
 using BLL.ViewModel.ModelConfiguration.mailConfig;
+using Catel.Services;
 using MailKit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -34,6 +38,10 @@ builder.Services.AddTransient<IAccountService, AccountService>();
 builder.Services.AddTransient<ICurrentUserProvider, CurrentUserProvider>();
 builder.Services.AddTransient<IUploadFileService, UploadFileService>();
 builder.Services.AddTransient<ISendMailService, SendMailService>();
+builder.Services.AddTransient<IMerchantService, MerchantService>();
+builder.Services.AddTransient<IPaymentDestination, PaymentDestinationService>();
+builder.Services.AddTransient<IPaymentService, PaymentService>();
+builder.Services.Configure<VnpayConfig>(builder.Configuration.GetSection("Vnpay"));
 // Add Identity
 builder.Services.AddIdentity<User, Position>()
                 .AddEntityFrameworkStores<ASMDBContext>()
